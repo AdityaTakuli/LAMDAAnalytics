@@ -62,7 +62,7 @@ const ArchitectureSection = () => (
       <div className="architecture-flow">
         <div className="flow-stage">
           <div className="flow-card">
-            <div className="flow-icon">📊</div>
+            <div className="flow-icon">Data</div>
             <h3>Data Sources</h3>
             <p>RSS Feeds, SERP API, Social Media, Weather Data, Geographic Intelligence</p>
           </div>
@@ -72,7 +72,7 @@ const ArchitectureSection = () => (
         
         <div className="flow-stage">
           <div className="flow-card">
-            <div className="flow-icon">🤖</div>
+            <div className="flow-icon">AI</div>
             <h3>Multi-Agent Processing</h3>
             <p>8 Specialized agents for data collection, analysis, and feature engineering</p>
           </div>
@@ -82,7 +82,7 @@ const ArchitectureSection = () => (
         
         <div className="flow-stage">
           <div className="flow-card">
-            <div className="flow-icon">🧠</div>
+            <div className="flow-icon">Brain</div>
             <h3>Risk Analysis</h3>
             <p>Advanced analytics, predictive modeling with comprehensive risk assessment</p>
           </div>
@@ -92,7 +92,7 @@ const ArchitectureSection = () => (
         
         <div className="flow-stage">
           <div className="flow-card">
-            <div className="flow-icon">📱</div>
+            <div className="flow-icon">Web</div>
             <h3>Web Interface</h3>
             <p>FastAPI backend with comprehensive API endpoints and data visualization</p>
           </div>
@@ -108,56 +108,56 @@ const AgentGrid = () => {
       id: "Agent 0",
       title: "Registry Normalizer",
       description: "Builds canonical supplier registry with Google Maps geocoding and location intelligence",
-      icon: "🎯",
+      icon: "Target",
       status: "active"
     },
     {
       id: "Agent 1", 
       title: "Social/X Fetcher",
       description: "Fetches X/Twitter posts for suppliers and news outlets with sentiment analysis",
-      icon: "📱",
+      icon: "Social",
       status: "processing"
     },
     {
       id: "Agent 2",
       title: "News Fetcher", 
       description: "Collects news from RSS feeds and SERP API for comprehensive media monitoring",
-      icon: "📰",
+      icon: "News",
       status: "active"
     },
     {
       id: "Agent 3",
       title: "Deep Crawl Extraction",
       description: "Deep crawls URLs with crawl4ai and extracts structured events from content",
-      icon: "🕷️",
+      icon: "Crawl",
       status: "standby"
     },
     {
       id: "Agent 4",
       title: "Weather Anomalies",
       description: "Detects weather anomalies for each location using meteorological data",
-      icon: "🌦️",
+      icon: "Weather",
       status: "active"
     },
     {
       id: "Agent 5",
       title: "Feature Builder",
       description: "Builds advanced features from all data sources with comprehensive analytics",
-      icon: "⚙️",
+      icon: "Build",
       status: "processing"
     },
     {
       id: "Agent 6",
       title: "Features Builder",
       description: "Additional feature engineering and data validation for analysis pipeline",
-      icon: "🔧",
+      icon: "Engineer",
       status: "active"
     },
     {
       id: "Agent 7",
       title: "Export CSV",
       description: "Validates and exports final CSV for analysis pipeline with structured schema",
-      icon: "📊",
+      icon: "Export",
       status: "ready"
     }
   ];
@@ -237,7 +237,7 @@ const KeyFeatures = () => (
       
       <div className="motivation-grid">
         <div className="motivation-card">
-          <span className="motivation-icon">🚀</span>
+          <span className="motivation-icon">Rocket</span>
           <h3>Real-Time Risk Detection</h3>
           <p>
             Advanced risk identification with rapid response capabilities, 
@@ -246,7 +246,7 @@ const KeyFeatures = () => (
         </div>
         
         <div className="motivation-card">
-          <span className="motivation-icon">🧠</span>
+          <span className="motivation-icon">Brain</span>
           <h3>Multi-Agent Intelligence</h3>
           <p>
             8 specialized AI agents working in coordination, each optimized for 
@@ -255,7 +255,7 @@ const KeyFeatures = () => (
         </div>
         
         <div className="motivation-card">
-          <span className="motivation-icon">🌐</span>
+          <span className="motivation-icon">Global</span>
           <h3>Global Network Coverage</h3>
           <p>
             Comprehensive monitoring of suppliers across all continents 
@@ -264,7 +264,7 @@ const KeyFeatures = () => (
         </div>
         
         <div className="motivation-card">
-          <span className="motivation-icon">💰</span>
+          <span className="motivation-icon">Cost</span>
           <h3>Cost-Effective Solution</h3>
           <p>
             Significant cost reduction compared to traditional enterprise solutions 
@@ -273,7 +273,7 @@ const KeyFeatures = () => (
         </div>
         
         <div className="motivation-card">
-          <span className="motivation-icon">🔒</span>
+          <span className="motivation-icon">Security</span>
           <h3>Enterprise Security</h3>
           <p>
             Robust security architecture ensuring data protection 
@@ -282,7 +282,7 @@ const KeyFeatures = () => (
         </div>
         
         <div className="motivation-card">
-          <span className="motivation-icon">📈</span>
+          <span className="motivation-icon">Analytics</span>
           <h3>Predictive Analytics</h3>
           <p>
             Advanced analytical models with high accuracy in predicting supply chain 
@@ -363,7 +363,7 @@ const ProjectOverview = () => (
       
       <div className="project-card">
         <div className="project-description">
-          <h3>🚀 Supply Chain Intelligence Revolution</h3>
+          <h3>Supply Chain Intelligence Revolution</h3>
           <p>
             LAMDA represents a breakthrough in supply chain risk management, combining 
             8 specialized AI agents with production-ready infrastructure. Our system 

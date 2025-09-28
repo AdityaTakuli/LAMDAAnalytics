@@ -130,10 +130,10 @@ pip install -r requirements.txt
 
 # Set up API keys in backend/.env
 # Google Maps API Configuration
-GOOGLE_MAPS_API_KEY=AIzaSyBeju-TfwFR3pTNuffnCgVxnyiu8AvYIow
-SERP_API_KEY=33c27e947fc888db75873dae1fbf0d27a1084769c0bbd8c46ce14cd27c04d575
-WEATHER_API_KEY=12cdd7b6c0a14759939174503251909
-GEMINI_API_KEY=AIzaSyCKsh8435QFEG4AWYbmglqt5iTLtmT5Mf0
+GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+SERP_API_KEY=your_serp_api_key_here
+WEATHER_API_KEY=your_weather_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 ### **Test the Complete Pipeline**:

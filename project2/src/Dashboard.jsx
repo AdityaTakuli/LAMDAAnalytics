@@ -164,7 +164,17 @@ const Dashboard = () => {
   };
 
   // Use dynamic risk factors from API or fallback to static data
-  const riskFactors = analysisData?.risk_factors || [
+  const riskFactors = analysisData?.concise ? analysisData.concise.map((factor, index) => ({
+    id: index + 1,
+    name: factor.name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+    level: factor.level,
+    impact: factor.percent,
+    icon: factor.name.includes('weather') ? Cloud : 
+          factor.name.includes('strike') ? Users :
+          factor.name.includes('political') ? Building :
+          factor.name.includes('sanctions') ? Globe : AlertTriangle,
+    description: factor.impact
+  })) : [
     { 
       id: 1, 
       name: 'Weather Disruption', 
@@ -200,7 +210,32 @@ const Dashboard = () => {
   ];
 
   // Use dynamic routes from API or fallback to static data
-  const routes = analysisData?.recommended_routes || [
+  const routes = analysisData ? [
+    {
+      id: 1,
+      name: 'Primary Route',
+      risk: analysisData.tgn_result.risk_label,
+      duration: '12 days',
+      cost: '$2,450',
+      reliability: Math.round((1 - analysisData.tgn_result.risk_score) * 100)
+    },
+    {
+      id: 2,
+      name: 'Alternative Route A',
+      risk: analysisData.tgn_result.risk_score > 0.5 ? 'High' : 'Medium',
+      duration: '15 days',
+      cost: '$2,180',
+      reliability: Math.round((1 - analysisData.tgn_result.risk_score) * 100) - 5
+    },
+    {
+      id: 3,
+      name: 'Alternative Route B',
+      risk: analysisData.tgn_result.risk_score > 0.3 ? 'High' : 'Medium',
+      duration: '10 days',
+      cost: '$3,200',
+      reliability: Math.round((1 - analysisData.tgn_result.risk_score) * 100) - 10
+    }
+  ] : [
     {
       id: 1,
       name: 'Primary Route',
@@ -494,16 +529,16 @@ const Dashboard = () => {
               <div className="analytics-panel__stats">
                 <div className="stat-item">
                   <div className="stat-item__value">
-                    {analysisData ? `${analysisData.risk_score}/100` : '72/100'}
+                    {analysisData ? `${Math.round(analysisData.tgn_result.risk_score * 100)}/100` : '72/100'}
                   </div>
                   <div className="stat-item__label">Risk Score</div>
                   <div className={`stat-item__status stat-item__status--${
                     analysisData ? 
-                      (analysisData.risk_level.toLowerCase() === 'low' ? 'success' : 
-                       analysisData.risk_level.toLowerCase() === 'medium' ? 'warning' : 'danger') : 
+                      (analysisData.tgn_result.risk_label.toLowerCase() === 'low' ? 'success' : 
+                       analysisData.tgn_result.risk_label.toLowerCase() === 'medium' ? 'warning' : 'danger') : 
                       'warning'
                   }`}>
-                    {analysisData ? analysisData.risk_level : 'Medium Risk'}
+                    {analysisData ? analysisData.tgn_result.risk_label : 'Medium Risk'}
                   </div>
                 </div>
                 <div className="stat-item">
@@ -536,8 +571,8 @@ const Dashboard = () => {
             <div className="metrics-grid">
               <MetricCard 
                 title="Overall Risk Score"
-                value={analysisData ? `${analysisData.risk_score}/100` : "72/100"}
-                subtitle={analysisData ? `${analysisData.risk_level} Risk Level` : "Medium Risk Level"}
+                value={analysisData ? `${Math.round(analysisData.tgn_result.risk_score * 100)}/100` : "72/100"}
+                subtitle={analysisData ? `${analysisData.tgn_result.risk_label} Risk Level` : "Medium Risk Level"}
                 icon={Shield}
                 trend="+5%"
               />
@@ -580,39 +615,67 @@ const Dashboard = () => {
                 <div className="analysis-section">
                   <h3 className="analysis-section__title">Risk Distribution</h3>
                   <div className="analysis-section__items">
-                    {riskFactors.map(factor => (
-                      <div key={factor.id} className="analysis-item">
-                        <div className="analysis-item__header">
-                          <span className="analysis-item__name">{factor.name}</span>
-                          <span className={`analysis-item__impact risk-level--${factor.level.toLowerCase()}`}>
-                            {factor.impact}%
-                          </span>
+                    {analysisData?.comprehensive?.risk_distribution ? 
+                      analysisData.comprehensive.risk_distribution.map((factor, index) => (
+                        <div key={index} className="analysis-item">
+                          <div className="analysis-item__header">
+                            <span className="analysis-item__name">{factor.name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+                            <span className={`analysis-item__impact risk-level--${factor.level.toLowerCase()}`}>
+                              {factor.percent}%
+                            </span>
+                          </div>
+                          <div className="analysis-item__progress">
+                            <div 
+                              className={`analysis-item__progress-bar risk-level--${factor.level.toLowerCase()}`}
+                              style={{ width: `${factor.percent}%` }}
+                            />
+                          </div>
                         </div>
-                        <div className="analysis-item__progress">
-                          <div 
-                            className={`analysis-item__progress-bar risk-level--${factor.level.toLowerCase()}`}
-                            style={{ width: `${factor.impact}%` }}
-                          />
+                      )) :
+                      riskFactors.map(factor => (
+                        <div key={factor.id} className="analysis-item">
+                          <div className="analysis-item__header">
+                            <span className="analysis-item__name">{factor.name}</span>
+                            <span className={`analysis-item__impact risk-level--${factor.level.toLowerCase()}`}>
+                              {factor.impact}%
+                            </span>
+                          </div>
+                          <div className="analysis-item__progress">
+                            <div 
+                              className={`analysis-item__progress-bar risk-level--${factor.level.toLowerCase()}`}
+                              style={{ width: `${factor.impact}%` }}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))
+                    }
                   </div>
                 </div>
                 <div className="analysis-section">
                   <h3 className="analysis-section__title">Mitigation Strategies</h3>
                   <div className="analysis-section__items">
-                    <div className="strategy-item">
-                      <h4 className="strategy-item__title">Weather Risk Mitigation</h4>
-                      <p className="strategy-item__description">Deploy alternative routes during severe weather conditions and maintain buffer inventory.</p>
-                    </div>
-                    <div className="strategy-item">
-                      <h4 className="strategy-item__title">Labor Strike Contingency</h4>
-                      <p className="strategy-item__description">Establish partnerships with alternative ports and logistics providers.</p>
-                    </div>
-                    <div className="strategy-item">
-                      <h4 className="strategy-item__title">Sanctions Compliance</h4>
-                      <p className="strategy-item__description">Regular monitoring of international trade regulations and pre-approved alternative suppliers.</p>
-                    </div>
+                    {analysisData?.comprehensive?.mitigation_strategies ? 
+                      Object.entries(analysisData.comprehensive.mitigation_strategies).map(([title, description], index) => (
+                        <div key={index} className="strategy-item">
+                          <h4 className="strategy-item__title">{title}</h4>
+                          <p className="strategy-item__description">{description}</p>
+                        </div>
+                      )) :
+                      [
+                        <div key="weather" className="strategy-item">
+                          <h4 className="strategy-item__title">Weather Risk Mitigation</h4>
+                          <p className="strategy-item__description">Deploy alternative routes during severe weather conditions and maintain buffer inventory.</p>
+                        </div>,
+                        <div key="labor" className="strategy-item">
+                          <h4 className="strategy-item__title">Labor Strike Contingency</h4>
+                          <p className="strategy-item__description">Establish partnerships with alternative ports and logistics providers.</p>
+                        </div>,
+                        <div key="sanctions" className="strategy-item">
+                          <h4 className="strategy-item__title">Sanctions Compliance</h4>
+                          <p className="strategy-item__description">Regular monitoring of international trade regulations and pre-approved alternative suppliers.</p>
+                        </div>
+                      ]
+                    }
                   </div>
                 </div>
               </div>

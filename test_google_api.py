@@ -18,8 +18,8 @@ def test_gemini_api():
     print("GOOGLE GEMINI API TEST")
     print("=" * 60)
     
-    print(f"API Key: {settings.gemini_api_key[:20]}...")
-    print(f"Project Number: 642567917478")
+    print(f"API Key: {'*' * 20}... (hidden for security)")
+    print(f"Project Number: [HIDDEN]")
     print()
     
     try:
