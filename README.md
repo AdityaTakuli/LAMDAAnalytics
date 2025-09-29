@@ -296,7 +296,7 @@ This project is part of the LAMDA Analytics system for supply chain risk managem
 For support or questions:
 * API Documentation: `http://127.0.0.1:8007/docs` (when backend is running)
 * GitHub Issues: [Create an issue](https://github.com/iareARiES/LAMDAAnalytics/issues)
-* Email: [Contact the team]
+* Email: mayan25sharma@gmail.com, devanshbhel@gmail.com
 
 ---
 
