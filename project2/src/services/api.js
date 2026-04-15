@@ -1,5 +1,5 @@
 // API service for communicating with FastAPI backend
-const API_BASE_URL = 'http://127.0.0.1:8007';
+const API_BASE_URL = 'http://127.0.0.1:8000';
 
 class ApiService {
   constructor() {
