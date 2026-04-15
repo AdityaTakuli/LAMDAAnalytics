@@ -2,10 +2,12 @@ from pydantic_settings import BaseSettings
 from pydantic import Field
 
 class Settings(BaseSettings):
-    google_maps_api_key: str = Field(..., alias="GOOGLE_MAPS_API_KEY")
+    mappls_api_key: str = Field(..., alias="MAPPLS_API_KEY")
+    mappls_client_id: str = Field("", alias="MAPPLS_CLIENT_ID")
+    mappls_client_secret: str = Field("", alias="MAPPLS_CLIENT_SECRET")
     serp_api_key: str = Field(..., alias="SERP_API_KEY")
     weather_api_key: str = Field(..., alias="WEATHER_API_KEY")
-    gemini_api_key: str = Field(..., alias="GEMINI_API_KEY")
+    groq_api_key: str = Field(..., alias="GROQ_API_KEY")
 
     weather_provider: str = Field("openweather", alias="WEATHER_PROVIDER")
     http_timeout_seconds: int = Field(30, alias="HTTP_TIMEOUT_SECONDS")
