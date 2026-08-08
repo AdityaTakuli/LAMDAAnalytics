@@ -1,5 +1,7 @@
 # API Documentation
 
+Backend analysis is executed by a **LangGraph** multi-agent `StateGraph` (see `ORCHESTRATOR_README.md`). The HTTP contract below is unchanged.
+
 ## Base URL
 ```
 http://127.0.0.1:8007
@@ -21,7 +23,7 @@ Check if the API is running and healthy.
 {
   "status": "healthy",
   "timestamp": "2025-09-28T04:29:19.555688Z",
-  "version": "2.0.0"
+  "version": "3.0.0"
 }
 ```
 
@@ -63,7 +65,7 @@ Get analytics overview data for the dashboard.
 
 **POST** `/analyze`
 
-Run the complete AI agent pipeline analysis.
+Run the complete LangGraph multi-agent network analysis (geocode → parallel feature agents → normalize → TGN → report).
 
 **Request Body:**
 ```json

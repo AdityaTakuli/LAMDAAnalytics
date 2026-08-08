@@ -1,11 +1,13 @@
 # Deployment Guide
 
+Backend analysis runs on a **LangGraph** agent network (`backend/orchestrator/graph/`). Ensure `langgraph` and `langchain-core` are installed via `backend/requirements.txt`.
+
 ## Quick Start
 
 ### Prerequisites
-- Python 3.13+
+- Python 3.12+
 - Node.js 16+
-- API Keys for external services
+- API Keys for external services (`MAPPLS_API_KEY`, `SERP_API_KEY`, `WEATHER_API_KEY`, `GROQ_API_KEY`)
 
 ### 1. Clone and Setup
 
@@ -18,6 +20,8 @@ cd LAMDAAnalytics
 
 ```bash
 cd backend
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 
 # Configure API keys
@@ -394,7 +398,7 @@ async def health_check():
     return {
         "status": "healthy",
         "timestamp": datetime.utcnow().isoformat(),
-        "version": "2.0.0",
+        "version": "3.0.0",
         "services": {
             "database": "healthy",
             "external_apis": "healthy",
@@ -587,9 +591,13 @@ logging.basicConfig(level=logging.DEBUG)
 @app.get("/debug/agents")
 async def debug_agents():
     return {
-        "trade_agent": "healthy",
-        "news_agent": "healthy",
-        "weather_agent": "healthy"
+        "framework": "langgraph",
+        "graph": "analysis_graph",
+        "nodes": [
+            "geocode", "trade", "news", "weather",
+            "political", "gscpi", "normalize", "tgn", "report"
+        ],
+        "status": "healthy"
     }
 ```
 

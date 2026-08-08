@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple test to demonstrate the AI agent pipeline
+Simple test for the LangGraph multi-agent network (live APIs).
 """
 
 import asyncio
@@ -14,19 +14,19 @@ from backend.orchestrator.utils.schema import AnalyzeRequest
 from backend.orchestrator.orchestrator import run_analysis
 
 async def test_ai_pipeline():
-    """Test the complete AI agent pipeline"""
+    """Test the LangGraph agent network end-to-end"""
     print("=" * 60)
-    print("AI AGENT PIPELINE TEST")
+    print("LANGGRAPH AGENT NETWORK TEST")
     print("=" * 60)
-    print("This demonstrates the complete orchestrator with:")
-    print("1. Trade Agent -> Gemini AI analysis")
-    print("2. News Agent -> SERP API -> Web scraping -> Gemini sentiment")
-    print("3. Weather Agent -> Weather API -> Anomaly detection")
-    print("4. Political Agent -> Gemini geopolitical risk")
-    print("5. GSCPI Agent -> Gemini global supply chain pressure")
-    print("6. Normalizer Agent -> Feature normalization")
-    print("7. TGN Model -> Trained AI risk prediction")
-    print("8. Reporter Agent -> Gemini report generation")
+    print("Graph: geocode -> [trade|news|weather|political|gscpi] -> normalize -> tgn -> report")
+    print("1. Trade Agent -> LLM analysis")
+    print("2. News Agent -> SERP -> scrape -> LLM sentiment")
+    print("3. Weather Agent -> Weather API -> anomaly")
+    print("4. Political Agent -> LLM geopolitical risk")
+    print("5. GSCPI Agent -> LLM global supply chain pressure")
+    print("6. Normalizer -> feature normalization")
+    print("7. TGN -> risk prediction")
+    print("8. Reporter -> report generation")
     print("=" * 60)
     
     # Create test request

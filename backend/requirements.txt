@@ -13,3 +13,5 @@ torch>=2.6.0                   # compatible with Python 3.13
 numpy>=1.26.0
 orjson==3.10.7
 cachetools==5.5.0
+langgraph>=0.2.0
+langchain-core>=0.3.0

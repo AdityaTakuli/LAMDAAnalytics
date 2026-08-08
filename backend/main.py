@@ -7,7 +7,7 @@ from orchestrator.orchestrator import run_analysis
 from models.tgn_model import tgn
 from config.settings import settings
 
-app = FastAPI(title="Supply Chain Risk API", version="1.0.0")
+app = FastAPI(title="Supply Chain Risk API (LangGraph)", version="3.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -40,12 +40,12 @@ def analytics_overview():
 @app.post("/analyze", response_model=AnalyzeResponse)
 async def analyze(req: AnalyzeRequest):
     try:
-        # Run the full orchestrator with all AI agents
+        # Run the LangGraph multi-agent network
         result = await run_analysis(req)
         return result
     except Exception as e:
         # If external APIs fail (demo keys), return a comprehensive mock response
-        # that demonstrates the full AI agent pipeline structure
+        # that demonstrates the LangGraph pipeline output shape
         from datetime import datetime, timezone
         import uuid
         

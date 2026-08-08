@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Simple test script to verify the orchestrator implementation
-Run this from the project root: python test_orchestrator.py
+Verify the LangGraph orchestrator entry point.
+Run from project root: python test_orchestrator.py
 """
 
 import asyncio
@@ -15,8 +15,8 @@ from backend.orchestrator.utils.schema import AnalyzeRequest
 from backend.orchestrator.orchestrator import run_analysis
 
 async def test_orchestrator():
-    """Test the orchestrator with a simple request"""
-    print("Testing Supply Chain Risk Orchestrator...")
+    """Test LangGraph run_analysis with a simple request"""
+    print("Testing LangGraph Supply Chain Risk Network...")
     
     # Create a test request
     request = AnalyzeRequest(

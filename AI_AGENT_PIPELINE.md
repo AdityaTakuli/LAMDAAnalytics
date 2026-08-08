@@ -1,148 +1,109 @@
-# 🤖 AI Agent Pipeline - Complete Orchestrator Flow
+# AI Agent Pipeline — LangGraph Network
 
-This document explains the complete AI agent pipeline that fetches real data, processes it through multiple AI systems, and generates comprehensive risk analysis.
+This document describes the LangGraph multi-agent network that fetches real data, extracts features, scores risk with TGN, and produces reports.
 
-## 🔄 Complete Pipeline Flow
+## Pipeline Flow
 
 ```
-Input Request → 7 AI Agents → Gemini Analysis → TGN Model → Gemini Report → Final Output
+Input Request
+    → LangGraph StateGraph
+        → geocode
+        → [trade | news | weather | political | gscpi]  (parallel)
+        → normalize → tgn → report
+    → AnalyzeResponse
 ```
 
-## 📋 Step-by-Step Process
+## Topology
 
-### 1. 🔍 **Trade Agent** (`trade_agent.py`)
-- **Purpose**: Analyzes trade flows and inventory patterns
-- **Data Sources**: Gemini AI (fallback for trade data)
-- **Gemini Analysis**: 
-  - Estimates inventory days based on component type and route
-  - Calculates past delay patterns
-  - Generates trade edge data (exporter→importer flows)
-- **Output**: `TradeFeatures` with inventory_days, past_delay_days, trade edges
+```
+START → geocode
+          ├─ trade ──────┐
+          ├─ news ───────┤
+          ├─ weather ────┼→ normalize → tgn → report → END
+          ├─ political ──┤
+          └─ gscpi ──────┘
+```
 
-### 2. 📰 **News Agent** (`news_agent.py`)
-- **Purpose**: Monitors news for supply chain disruptions
-- **Data Sources**: SERP API → Web scraping → Gemini analysis
-- **Process**:
-  1. **SERP API**: Searches for disruption-related news using multiple query templates
-  2. **Web Scraping**: Fetches full article content using BeautifulSoup
-  3. **Gemini Analysis**: Analyzes text for:
-     - News volume in last 7 days
-     - Negative sentiment fraction in last 3 days
-     - Strike/unrest detection flags
-- **Output**: `NewsFeatures` with news_vol_7d, neg_tone_frac_3d, strike_flag_7d
+Defined in `backend/orchestrator/graph/network.py`.  
+Invoked from `backend/orchestrator/orchestrator.py` via `analysis_graph.ainvoke(...)`.
 
-### 3. 🌤️ **Weather Agent** (`weather_agent.py`)
-- **Purpose**: Detects weather anomalies affecting logistics
-- **Data Sources**: OpenWeather API or WeatherAPI
-- **Process**:
-  1. **Geocoding**: Converts location names to coordinates
-  2. **Weather API**: Fetches 7-day weather forecast
-  3. **Anomaly Detection**: Statistical analysis of temperature deviations
-- **Output**: `WeatherFeatures` with weather_anomaly_7d flag
+## Step-by-Step Nodes
 
-### 4. 🏛️ **Political Agent** (`political_agent.py`)
-- **Purpose**: Assesses geopolitical and sanctions risk
-- **Data Sources**: Gemini AI analysis
-- **Gemini Analysis**:
-  - Evaluates current sanctions affecting the route
-  - Assesses political risk score (0-1)
-  - Provides contextual notes on geopolitical factors
-- **Output**: `PoliticalFeatures` with sanction_flag, political_risk_score, notes
+### 1. Geocode (`graph/nodes.py` → `utils/geocoding.py`)
+Resolves seller and import locations to coordinates for weather.
 
-### 5. 🌍 **GSCPI Agent** (`gscpi_agent.py`)
-- **Purpose**: Tracks global supply chain pressure
-- **Data Sources**: Gemini AI (fetches NY Fed GSCPI data)
-- **Gemini Analysis**:
-  - Retrieves latest Global Supply Chain Pressure Index
-  - Provides timestamp and risk level
-- **Output**: `GSCPIFeatures` with global_risk score and timestamp
+### 2. Trade Agent (`agents/trade_agent.py`)
+- LLM estimates inventory days, past delays, and trade edges
+- Output: `TradeFeatures`
 
-### 6. ⚖️ **Normalizer Agent** (`normalizer_agent.py`)
-- **Purpose**: Normalizes features for ML model compatibility
-- **Process**:
-  1. **Feature Assembly**: Combines all agent outputs into raw feature vector
-  2. **Z-Score Normalization**: Converts to standardized scores
-  3. **Sigmoid Squashing**: Maps to [0,1] range for ML compatibility
-  4. **Persistent Scaling**: Saves rolling statistics for run-to-run consistency
-- **Output**: `NormalizedFeatureVector` with standardized features
+### 3. News Agent (`agents/news_agent.py`)
+- SERP search → scrape pages → LLM sentiment / disruption features
+- Output: `NewsFeatures` (`news_vol_7d`, `neg_tone_frac_3d`, `strike_flag_7d`)
 
-### 7. 🤖 **TGN Model** (`tgn_model.py`)
-- **Purpose**: Trained AI model for risk prediction
-- **Process**:
-  1. **Model Loading**: Attempts to load `tgn_model.pth`
-  2. **Feature Mapping**: Converts normalized features to model input format
-  3. **Inference**: Runs forward pass through trained neural network
-  4. **Fallback**: Uses weighted blending if model unavailable
-- **Output**: Risk score (0-1) and component contributions
+### 4. Weather Agent (`agents/weather_agent.py`)
+- Weather API forecast + statistical anomaly detection
+- Output: `WeatherFeatures` (`weather_anomaly_7d`)
 
-### 8. 📊 **Reporter Agent** (`reporter_agent.py`)
-- **Purpose**: Generates human-readable reports
-- **Process**:
-  1. **Risk Labeling**: Converts scores to High/Medium/Low labels
-  2. **Contribution Analysis**: Maps component contributions to percentages
-  3. **Impact Descriptions**: Provides contextual impact explanations
-  4. **Mitigation Strategies**: Generates actionable recommendations
-- **Output**: `RiskFactorReport` and `ComprehensiveReport`
+### 5. Political Agent (`agents/political_agent.py`)
+- LLM sanctions / geopolitical risk
+- Output: `PoliticalFeatures`
 
-## 🔄 **Async Orchestration** (`orchestrator.py`)
+### 6. GSCPI Agent (`agents/gscpi_agent.py`)
+- LLM estimate of NY Fed Global Supply Chain Pressure Index
+- Output: `GSCPIFeatures`
 
-The orchestrator coordinates all agents using async/await patterns:
+### 7. Normalizer (`agents/normalizer_agent.py`)
+- Assembles raw features, z-score + sigmoid to [0,1]
+- Output: `NormalizedFeatureVector`
+
+### 8. TGN (`models/tgn_model.py`)
+- Loads `tgn_model.pth` when present; otherwise weighted blend
+- Output: risk score + per-feature contributions
+
+### 9. Reporter (`agents/reporter_agent.py`)
+- Labels, percentages, impact text, mitigation strategies
+- Output: concise + comprehensive reports → `AnalyzeResponse`
+
+## LangGraph Orchestration
 
 ```python
-# Fan-out: Run all agents in parallel
-tasks = [
-    fetch_trade_features(...),
-    analyze_news(...),
-    weather_features(...),
-    political_features(...),
-    gscpi_features(...)
-]
-trade, news, weather, pol, gscpi = await asyncio.gather(*tasks)
+from orchestrator.graph import analysis_graph
 
-# Fan-in: Combine results
-norm = normalize_all(trade, news, weather, pol, gscpi)
-risk_score, contrib = tgn.predict(norm.features)
-reports = generate_reports(contrib)
+final_state = await analysis_graph.ainvoke({
+    "request": analyze_request,
+    "request_id": request_id,
+    "created_at": now.isoformat(),
+    "errors": [],
+})
+response = final_state["response"]
 ```
 
-## 🎯 **Key AI Integration Points**
+Parallelism comes from multiple edges out of `geocode`. Fan-in at `normalize` waits for all five feature nodes.
 
-### **Gemini AI Usage**:
-1. **Trade Analysis**: Estimates trade flows and inventory patterns
-2. **News Sentiment**: Analyzes scraped news for disruption signals
-3. **Political Risk**: Assesses geopolitical factors and sanctions
-4. **Global Pressure**: Fetches and interprets GSCPI data
-5. **Report Generation**: Simplifies technical outputs for business users
+## Running
 
-### **TGN Model Integration**:
-- **Input**: Normalized feature vector from all agents
-- **Processing**: Neural network inference for risk prediction
-- **Output**: Risk score and component contributions
-- **Fallback**: Weighted blending when model unavailable
+### Prerequisites
 
-## 🚀 **Running the Full Pipeline**
-
-### **Prerequisites**:
 ```bash
-# Install dependencies
 cd backend
-pip install -r requirements.txt
-
-# Set up API keys in backend/.env
-# Google Maps API Configuration
-GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
-SERP_API_KEY=your_serp_api_key_here
-WEATHER_API_KEY=your_weather_api_key_here
-GEMINI_API_KEY=your_gemini_api_key_here
+pip install -r requirements.txt   # includes langgraph, langchain-core
+cp .env.example .env              # MAPPLS / SERP / WEATHER / GROQ keys
 ```
 
-### **Test the Complete Pipeline**:
-```bash
-# Run full orchestrator test
-python test_full_orchestrator.py
+### Tests
 
-# Or test via API
-curl -X POST http://127.0.0.1:8002/analyze \
+```bash
+# Mocked LangGraph smoke test (recommended first)
+PYTHONPATH=. python test_langgraph_network.py
+
+# Live end-to-end (needs valid API keys)
+python ../test_full_orchestrator.py
+```
+
+### API
+
+```bash
+curl -X POST http://127.0.0.1:8007/analyze \
   -H "Content-Type: application/json" \
   -d '{
     "component_type": "Semiconductor",
@@ -152,13 +113,13 @@ curl -X POST http://127.0.0.1:8002/analyze \
   }'
 ```
 
-## 📊 **Expected Output Structure**
+## Expected Output
 
 ```json
 {
   "request_id": "uuid",
-  "created_at": "2025-01-01T00:00:00Z",
-  "inputs": { /* original request */ },
+  "created_at": "2026-08-09T00:00:00Z",
+  "inputs": { },
   "features": {
     "inventory_days": 0.65,
     "past_delay_days": 0.42,
@@ -171,22 +132,26 @@ curl -X POST http://127.0.0.1:8002/analyze \
   "tgn_result": {
     "risk_score": 0.45,
     "risk_label": "Medium",
-    "risk_components": { /* TGN model contributions */ }
+    "risk_components": { }
   },
-  "concise": [ /* Gemini-simplified risk factors */ ],
+  "concise": [ ],
   "comprehensive": {
-    "risk_distribution": [ /* detailed breakdown */ ],
-    "mitigation_strategies": { /* actionable recommendations */ }
+    "risk_distribution": [ ],
+    "mitigation_strategies": { }
   }
 }
 ```
 
-## 🔧 **Performance Characteristics**
+## Performance
 
-- **Total Runtime**: 30-60 seconds (depending on API response times)
-- **Parallel Processing**: All agents run concurrently
-- **Caching**: 15-minute TTL for news and weather data
-- **Error Handling**: Graceful degradation when APIs fail
-- **Scalability**: Designed for high-throughput production use
+- Feature agents run concurrently inside LangGraph
+- Graph-level timeout: `AGENT_TIMEOUT_SECONDS` (default 40s)
+- News/weather TTL caching
+- Graceful degradation when APIs fail
 
-This pipeline represents a complete AI-driven supply chain risk analysis system that combines real-time data fetching, multiple AI models, and comprehensive reporting.
+## Extending the Graph
+
+1. Add agent function under `orchestrator/agents/`
+2. Wrap it in `orchestrator/graph/nodes.py`
+3. Wire edges in `orchestrator/graph/network.py`
+4. Update `AnalysisState` and normalizer/scoring as needed
