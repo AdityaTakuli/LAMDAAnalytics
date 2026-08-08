@@ -1,12 +1,15 @@
 from __future__ import annotations
 import os
-import torch
-import numpy as np
 from typing import Dict, Tuple
 import sys
-import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from orchestrator.utils.scoring import weighted_risk
+
+try:
+    import numpy as np
+except ImportError:  # pragma: no cover
+    np = None
+
 
 class TGNWrapper:
     """
@@ -19,6 +22,7 @@ class TGNWrapper:
         self.loaded = False
         if os.path.exists(self.model_path):
             try:
+                import torch
                 self.model = torch.load(self.model_path, map_location="cpu")
                 self.model.eval()
                 self.loaded = True
@@ -34,7 +38,10 @@ class TGNWrapper:
         # If you have a real PyTorch forward path, map features to tensor here.
         # Fallback: weighted blend
         risk, contrib = weighted_risk(norm_features)
-        risk = float(np.clip(risk, 0.0, 1.0))
+        if np is not None:
+            risk = float(np.clip(risk, 0.0, 1.0))
+        else:
+            risk = float(max(0.0, min(1.0, risk)))
         return risk, contrib
 
 tgn = TGNWrapper()

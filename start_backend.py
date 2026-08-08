@@ -11,10 +11,15 @@ from pathlib import Path
 def check_dependencies():
     """Check if required dependencies are installed"""
     try:
-        import torch
         import fastapi
         import uvicorn
-        print("✓ All dependencies are installed")
+        import langgraph
+        print("✓ Core dependencies installed (fastapi, uvicorn, langgraph)")
+        try:
+            import torch
+            print("✓ torch available (TGN .pth load enabled)")
+        except ImportError:
+            print("ℹ torch not installed — TGN will use weighted-score fallback")
         return True
     except ImportError as e:
         print(f"✗ Missing dependency: {e}")

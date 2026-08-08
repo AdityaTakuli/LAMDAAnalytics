@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-Full Orchestrator Test - Demonstrates the complete AI agent pipeline:
-1. All 7 agents fetch real data from external APIs
-2. Data is passed to Gemini for analysis and feature extraction
-3. Features are normalized and passed to the trained AI model (TGN)
-4. TGN outputs are analyzed and simplified by Gemini
-5. Final comprehensive report is generated
+Full LangGraph orchestrator test — complete multi-agent network:
+1. Geocode → parallel Trade / News / Weather / Political / GSCPI nodes
+2. Normalize features
+3. TGN risk prediction (or weighted fallback)
+4. Reporter concise + comprehensive output
 
-Run this from the project root: python test_full_orchestrator.py
+Run from project root: python test_full_orchestrator.py
 """
 
 import asyncio
@@ -22,18 +21,19 @@ from backend.orchestrator.utils.schema import AnalyzeRequest
 from backend.orchestrator.orchestrator import run_analysis
 
 async def test_full_orchestrator():
-    """Test the complete AI agent orchestrator pipeline"""
-    print("🚀 FULL AI AGENT ORCHESTRATOR TEST")
+    """Test the complete LangGraph multi-agent network"""
+    print("FULL LANGGRAPH AGENT NETWORK TEST")
     print("=" * 60)
-    print("This test runs the complete pipeline:")
-    print("1. 🔍 Trade Agent → Gemini analysis of trade flows")
-    print("2. 📰 News Agent → SERP API → Web scraping → Gemini sentiment analysis")
-    print("3. 🌤️  Weather Agent → Weather API → Anomaly detection")
-    print("4. 🏛️  Political Agent → Gemini geopolitical risk assessment")
-    print("5. 🌍 GSCPI Agent → Gemini global supply chain pressure analysis")
-    print("6. ⚖️  Normalizer Agent → Feature normalization and scaling")
-    print("7. 🤖 TGN Model → Trained AI risk prediction")
-    print("8. 📊 Reporter Agent → Gemini report generation and simplification")
+    print("This test runs the LangGraph StateGraph:")
+    print("1. Geocode")
+    print("2. Trade Agent -> LLM trade flows")
+    print("3. News Agent -> SERP -> scrape -> LLM sentiment")
+    print("4. Weather Agent -> Weather API -> anomaly")
+    print("5. Political Agent -> LLM geopolitical risk")
+    print("6. GSCPI Agent -> LLM global pressure")
+    print("7. Normalizer -> feature scaling")
+    print("8. TGN -> risk prediction")
+    print("9. Reporter -> concise + comprehensive reports")
     print("=" * 60)
     
     # Create a comprehensive test request
