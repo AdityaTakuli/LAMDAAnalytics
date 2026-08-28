@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import shutil
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
@@ -73,6 +74,30 @@ def _load_inputs(config: dict, synthetic: bool) -> tuple[pd.DataFrame, pd.DataFr
     nodes = read_table(base / nested(config, "outputs", "nodes", default="processed/nodes_monthly.csv"))
     edges = read_table(base / nested(config, "outputs", "edges", default="processed/edges_monthly.csv"))
     return nodes, edges
+
+
+def _results_dir(config: dict) -> Path:
+    base = Path(__file__).resolve().parent
+    configured = nested(config, "outputs", "results_dir")
+    if configured:
+        path = Path(configured)
+        return path if path.is_absolute() else base / path
+    metrics = Path(
+        nested(config, "outputs", "training_metrics", default="processed/training_metrics.json")
+    )
+    return (metrics if metrics.is_absolute() else base / metrics).parent
+
+
+def _prediction_scores(
+    predictions: dict[str, np.ndarray], node_ids: list[str]
+) -> dict[str, dict[str, float]]:
+    return {
+        month: {
+            node_id: float(score)
+            for node_id, score in zip(node_ids, values.tolist())
+        }
+        for month, values in predictions.items()
+    }
 
 
 def _splits(months: list[str], config: dict) -> dict[str, list[str]]:
@@ -323,6 +348,8 @@ def train(config: dict, synthetic: bool = False) -> dict[str, Any]:
     seed = int(nested(config, "training", "seed", default=7))
     np.random.seed(seed)
     torch.manual_seed(seed)
+    results_dir = _results_dir(config)
+    results_dir.mkdir(parents=True, exist_ok=True)
     nodes, edges = _load_inputs(config, synthetic)
     months = sorted(nodes["month"].astype(str).unique().tolist())
     split = _splits(months, config)
@@ -353,8 +380,21 @@ def train(config: dict, synthetic: bool = False) -> dict[str, Any]:
         "months": months,
         "split": split,
         "normalizer_fit_partition": "train",
+        "results_dir": str(results_dir),
+        "input_tables": {
+            "nodes": str(
+                Path(__file__).resolve().parent
+                / nested(config, "outputs", "nodes", default="processed/nodes_monthly.csv")
+            ),
+            "edges": str(
+                Path(__file__).resolve().parent
+                / nested(config, "outputs", "edges", default="processed/edges_monthly.csv")
+            ),
+        },
+        "synthetic": synthetic,
         "results": [],
     }
+    score_artifacts: dict[str, Any] = {}
 
     for tau in tau_values:
         label_col = f"label_tau_{tau:.2f}"
@@ -369,6 +409,7 @@ def train(config: dict, synthetic: bool = False) -> dict[str, Any]:
             "positive_weight": positive_weight,
             "models": {},
         }
+        tau_scores: dict[str, Any] = {}
         train_prevalence = float(prevalence["train"]["prevalence"] or 0.0)
         for name in ("constant_prevalence", "hand_weighted_linear"):
             tau_result["models"][name] = {
@@ -424,6 +465,10 @@ def train(config: dict, synthetic: bool = False) -> dict[str, Any]:
             ),
             "epoch_losses": gcn_epoch_losses,
             "note": "Snapshot GCN; no temporal memory and no cross-month state.",
+        }
+        tau_scores["gcn"] = {
+            "validation": _prediction_scores(validation_predictions, node_ids),
+            "test": _prediction_scores(test_predictions, node_ids),
         }
         gcn_checkpoint = Path(__file__).resolve().parent / nested(
             config, "outputs", "checkpoints_dir", default="checkpoints"
@@ -485,6 +530,10 @@ def train(config: dict, synthetic: bool = False) -> dict[str, Any]:
                 "test": _evaluate_predictions(nodes, split["test"], node_ids, test_predictions, label_col),
                 "epoch_losses": epoch_losses,
             }
+            tau_scores[model_name] = {
+                "validation": _prediction_scores(validation_predictions, node_ids),
+                "test": _prediction_scores(test_predictions, node_ids),
+            }
             checkpoint = Path(__file__).resolve().parent / nested(
                 config, "outputs", "checkpoints_dir", default="checkpoints"
             ) / f"{model_name}_tau_{tau:.2f}.pt"
@@ -506,12 +555,24 @@ def train(config: dict, synthetic: bool = False) -> dict[str, Any]:
                 checkpoint,
             )
             tau_result["models"][model_name]["checkpoint"] = str(checkpoint)
+        score_artifacts[f"{tau:.2f}"] = tau_scores
         results["results"].append(tau_result)
 
-    output = Path(__file__).resolve().parent / nested(
-        config, "outputs", "training_metrics", default="processed/training_metrics.json"
-    )
+    output = results_dir / "training_metrics.json"
     write_json(results, output)
+    write_json(
+        {
+            "node_order": node_ids,
+            "scores": score_artifacts,
+            "score_semantics": "sigmoid risk scores; validation/test keys retain chronological month and node identity",
+        },
+        results_dir / "prediction_scores.json",
+    )
+    graph_source = Path(__file__).resolve().parent / nested(
+        config, "outputs", "graph", default="processed/graph.json"
+    )
+    if graph_source.exists():
+        shutil.copy2(graph_source, results_dir / "graph.json")
     print(f"\nWrote {output}")
     return results
 

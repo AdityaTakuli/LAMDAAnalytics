@@ -12,23 +12,13 @@ Both profiles write to separate directories under `dataset/data/`.
 
 ## Study design
 
-India is the fixed focal reporter. The other countries are selected from
-India's observed ECGB import partners by configured-period trade value,
-retaining the top 19 partners for a 20-country graph. The trade basket
-is:
+India is the fixed focal country. The existing 20-country universe is
+preserved from the legacy India import pull. The 2024 bilateral coverage-fix
+profile uses these semiconductor HS-4 codes:
 
 ```text
-8517  smartphones and telecom equipment
-8471  computers and computing equipment
-8528  televisions, monitors, and displays
-8516  electrical household appliances
-8507  batteries and accumulators
-9403  furniture
-6109  t-shirts and vests
-6203  men's and boys' apparel
-6204  women's and girls' apparel
-9503  toys
-3304  cosmetics and beauty products
+8541  semiconductor devices
+8542  electronic integrated circuits
 ```
 
 The graph is country-level. It does not claim to observe Amazon, Walmart, or
@@ -90,6 +80,39 @@ python train.py --config config.yaml
 `data/one_year_2024/processed/country_universe.csv`. Run it before GDELT and
 weather so both can restrict their data to the selected countries.
 
+### 2024 bilateral Comtrade coverage fix
+
+The original one-year artifact is preserved before replacing the processed
+Comtrade table:
+
+```text
+data/one_year_2024/processed/comtrade_coverage_fix_backup/
+```
+
+The coverage-fix command uses the existing `country_universe.csv` exactly as
+its reporter and partner universe. It requests only 2024 monthly imports for
+HS 8541 and HS 8542, with one resumable cached response per reporter-month:
+
+```bash
+python ingest_comtrade_bilateral.py --config config.yaml
+```
+
+Responses are cached under
+`data/one_year_2024/cache/comtrade/bilateral/`. The command retries transient
+HTTP/network failures with exponential backoff, respects
+`request_delay_seconds`, records a manifest and failures, and never converts a
+missing API cell into zero trade. It rebuilds `comtrade.csv`, the causal fused
+country-month tables, and `graph.json` only after all requests succeed. It
+also writes the reporter-partner-month coverage grid and target coverage
+diagnostics under:
+
+```text
+data/one_year_2024/results/comtrade_coverage_fix/
+```
+
+This is a 2024-only coverage operation. It does not train GCN, TGN,
+TGN-no-memory, or logistic regression.
+
 ## Stage 2: expand to four years
 
 After reviewing the one-year pull, run the separate expansion profile:
@@ -130,8 +153,8 @@ python ingest_gdelt.py --config config_4year.yaml
 
 ## Sources
 
-1. **UN Comtrade** — India monthly imports, all partners initially, ECGB
-   HS-4 codes, with trade value, volume, and vintage metadata.
+1. **UN Comtrade** — selected-country bilateral monthly imports for HS 8541
+   and HS 8542, with trade value, quantity/weight, and vintage metadata.
 2. **GDELT Event Database** — official daily event exports, actor countries,
    CAMEO event codes, tone, URLs, and a deterministic labor-unrest proxy.
    The configured GDELT window is January 2020–December 2024, independent of
@@ -276,6 +299,12 @@ TGN
 TGN-no-memory
 ```
 
+For the real one-year run, training artifacts are isolated under
+`data/one_year_2024/results/`: model checkpoints, `training_metrics.json`,
+`prediction_scores.json`, and a copy of the serialized graph. Raw source
+caches, event files, and processed source tables remain in their original
+locations for later multi-year expansion.
+
 ## Training
 
 The four-year profile uses:
@@ -293,6 +322,40 @@ conclusive. Prefer ROC-AUC, average precision, precision, recall, and lead
 time over accuracy. Historical GDELT and a deployed SERP/scrape news agent
 also have train/serve distribution differences that must be checked on a
 common held-out period.
+
+### Isolated 2024 country-month experiment
+
+After the real 2024 graph has been built, run the separate experiment without
+overwriting the prior training artifacts:
+
+```bash
+python country_month_experiment.py --config config.yaml
+```
+
+It evaluates the existing one-month-ahead inbound-flow contraction label at
+the configured default `tau` (not selected from model performance), using the
+chronological split January–July train, August–September validation, and
+October–November test. December is excluded because its next-month target is
+outside the 2024 dataset. The runner preserves all 20 country nodes per
+snapshot, but only evaluates target-valid country-month rows. With the current
+India-reporter Comtrade pull, partner nodes have no observed inbound target and
+are therefore not treated as negative examples.
+
+Artifacts are written to
+`data/one_year_2024/results/country_month_experiment/`:
+
+```text
+diagnostics/       label distributions, split statistics, leakage audit
+predictions/       per-country-month model scores
+metrics/           per-model JSON and comparison.csv
+checkpoints/       GCN, TGN, and TGN-no-memory checkpoints
+graphs/            target, loss, comparison, and score plots
+```
+
+When a partition contains one class, discrimination metrics are recorded as
+`N/A`; accuracy and balanced accuracy are descriptive only. This command uses
+the existing processed 2024 tables and makes no network calls or synthetic
+data.
 
 ## Offline smoke test
 
@@ -313,6 +376,7 @@ dataset/
 ├── config.yaml
 ├── config_4year.yaml
 ├── ingest_comtrade.py
+├── ingest_comtrade_bilateral.py
 ├── ingest_cset.py                 # legacy, not used by e-commerce graph
 ├── ingest_gdelt.py
 ├── ingest_weather.py
