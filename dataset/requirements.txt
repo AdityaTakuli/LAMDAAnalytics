@@ -1,0 +1,17 @@
+# Core data and configuration
+numpy>=1.26
+pandas>=2.1
+PyYAML>=6.0
+python-dotenv>=1.0
+requests>=2.31
+openpyxl>=3.1
+xlrd>=2.0
+pyarrow>=14.0
+
+# Source adapters
+comtradeapicall>=1.3.2
+google-cloud-bigquery>=3.20
+
+# Graph and model training
+scikit-learn>=1.4
+torch>=2.2
