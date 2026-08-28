@@ -73,7 +73,7 @@ sources:
       - {name: "Brazil", node_id: "country_br", comtrade_code: "76", iso3: "BRA", latitude: -14.2350, longitude: -51.9253, aliases: []}
   gscpi:
     overview_url: "https://www.newyorkfed.org/research/policy/gscpi#/overview"
-    excel_url: ""
+    excel_url: "https://www.newyorkfed.org/medialibrary/research/interactives/gscpi/downloads/gscpi_data.xlsx"
     cache_dir: "data/four_year_2021_2024/cache/gscpi"
 
 outputs:

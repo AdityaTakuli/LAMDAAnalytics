@@ -441,9 +441,6 @@ def fuse(config: dict, synthetic: bool = False) -> tuple[Path, Path]:
         trade = _empty_or_read(
             base / nested(config, "outputs", "comtrade", default="processed/comtrade.csv"), []
         )
-        gdelt = _empty_or_read(
-            base / nested(config, "outputs", "gdelt", default="processed/gdelt_events.csv"), []
-        )
         gdelt_monthly = _empty_or_read(
             base
             / nested(
@@ -453,6 +450,20 @@ def fuse(config: dict, synthetic: bool = False) -> tuple[Path, Path]:
                 default="processed/gdelt_monthly_features.csv",
             ),
             [],
+        )
+        # GDELT event-level CSVs can be several gigabytes.  The ingestion
+        # stage already materializes causal daily/month-end features, so avoid
+        # loading the raw event table when that compact table is available.
+        gdelt = (
+            pd.DataFrame()
+            if not gdelt_monthly.empty
+            else _empty_or_read(
+                base
+                / nested(
+                    config, "outputs", "gdelt", default="processed/gdelt_events.csv"
+                ),
+                [],
+            )
         )
         weather = _empty_or_read(
             base / nested(config, "outputs", "weather", default="processed/weather_daily.csv"), []

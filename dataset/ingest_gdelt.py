@@ -773,6 +773,13 @@ def ingest(
             total_pending,
             workers,
         )
+        for position, (current, _, _, _) in enumerate(pending, start=1):
+            LOGGER.info(
+                "[GDELT] Downloading %s/%s: %s",
+                position,
+                total_pending,
+                current.isoformat(),
+            )
         with ThreadPoolExecutor(max_workers=workers, thread_name_prefix="gdelt-download") as pool:
             futures = {
                 pool.submit(_download_task, current, url, zip_path, config, force): (

@@ -11,17 +11,31 @@ analysis:
     iso3: "IND"
   country_count: 20
 
+country_month_experiment:
+  train_months: 7
+  validation_months: 2
+  test_months: 2
+
 # Values ending in _env are environment-variable names, not secrets.
 sources:
   comtrade:
     subscription_key_env: COMTRADE_SUBSCRIPTION_KEY
     secondary_key_env: COMTRADE_SECONDARY_KEY
-    reporter_code: "699"       # India; partners remain all initially
+    reporter_code: "699"       # legacy single-reporter compatibility
+    reporter_codes: [699, 156, 704, 842, 458, 702, 490, 764, 484, 410, 50, 392, 276, 344, 203, 251, 372, 380, 826, 608]
+    partner_codes: [699, 156, 704, 842, 458, 702, 490, 764, 484, 410, 50, 392, 276, 344, 203, 251, 372, 380, 826, 608]
     flow_code: "M"              # imports; used for inbound labels
     classification: "HS"
-    hs_codes: [8517, 8471, 8528, 8516, 8507, 9403, 6109, 6203, 6204, 9503, 3304]
+    hs_codes: [8541, 8542]
     max_records: 250000
     cache_dir: "data/one_year_2024/cache/comtrade"
+    bilateral_cache_dir: "data/one_year_2024/cache/comtrade/bilateral"
+    api_url: "https://comtradeapi.un.org/data/v1/get/C/M/HS"
+    public_api_url: "https://comtradeapi.un.org/public/v1/preview/C/M/HS"
+    max_retries: 4
+    timeout_seconds: 120
+    backoff_seconds: 2
+    request_delay_seconds: 1.0
   gdelt:
     mode: "raw"                 # official GDELT daily Event Database exports
     start_date: "2024-01-01"
@@ -73,7 +87,7 @@ sources:
       - {name: "Brazil", node_id: "country_br", comtrade_code: "76", iso3: "BRA", latitude: -14.2350, longitude: -51.9253, aliases: []}
   gscpi:
     overview_url: "https://www.newyorkfed.org/research/policy/gscpi#/overview"
-    excel_url: ""
+    excel_url: "https://www.newyorkfed.org/medialibrary/research/interactives/gscpi/downloads/gscpi_data.xlsx"
     cache_dir: "data/one_year_2024/cache/gscpi"
 
 outputs:
@@ -89,8 +103,11 @@ outputs:
   nodes: "data/one_year_2024/processed/nodes_monthly.csv"
   edges: "data/one_year_2024/processed/edges_monthly.csv"
   graph: "data/one_year_2024/processed/graph.json"
-  training_metrics: "data/one_year_2024/processed/training_metrics.json"
-  checkpoints_dir: "data/one_year_2024/checkpoints"
+  results_dir: "data/one_year_2024/results"
+  country_month_experiment: "data/one_year_2024/results/country_month_experiment"
+  comtrade_coverage_fix: "data/one_year_2024/results/comtrade_coverage_fix"
+  training_metrics: "data/one_year_2024/results/training_metrics.json"
+  checkpoints_dir: "data/one_year_2024/results/checkpoints"
 
 model:
   memory_dim: 32
