@@ -1,0 +1,21 @@
+rank,country_name,comtrade_code,iso3,trade_value_usd,selection_reason
+1,India,699,IND,69952036592.726,fixed_focal_country
+2,China,156,CHN,24366894918.403,top_partner_by_configured_period_import_value
+3,Vietnam,704,VNM,1888037820.215,top_partner_by_configured_period_import_value
+4,United States,842,USA,1251152845.663,top_partner_by_configured_period_import_value
+5,Malaysia,458,MYS,1197898143.052,top_partner_by_configured_period_import_value
+6,Singapore,702,SGP,833131119.676,top_partner_by_configured_period_import_value
+7,Taiwan,490,TWN,715850863.13,top_partner_by_configured_period_import_value
+8,Thailand,764,THA,699374549.968,top_partner_by_configured_period_import_value
+9,Mexico,484,MEX,654405018.951,top_partner_by_configured_period_import_value
+10,South Korea,410,KOR,623023672.636,top_partner_by_configured_period_import_value
+11,50,50,,371589877.76,top_partner_by_configured_period_import_value
+12,Japan,392,JPN,335583708.632,top_partner_by_configured_period_import_value
+13,Germany,276,DEU,238106030.953,top_partner_by_configured_period_import_value
+14,344,344,,196570493.791,top_partner_by_configured_period_import_value
+15,203,203,,157629772.868,top_partner_by_configured_period_import_value
+16,France,251,FRA,136000533.587,top_partner_by_configured_period_import_value
+17,372,372,,116043876.081,top_partner_by_configured_period_import_value
+18,380,380,,115402280.906,top_partner_by_configured_period_import_value
+19,United Kingdom,826,GBR,110936724.827,top_partner_by_configured_period_import_value
+20,Philippines,608,PHL,107242929.532,top_partner_by_configured_period_import_value
