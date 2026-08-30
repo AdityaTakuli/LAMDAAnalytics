@@ -1,0 +1,66 @@
+# Acquisition-only profile for the three years preceding the isolated 2024
+# work. It downloads 2021-01-01 through 2023-12-31 into a new directory.
+analysis:
+  start_date: "2021-01-01"
+  end_date: "2023-12-31"
+
+sources:
+  comtrade:
+    subscription_key_env: COMTRADE_SUBSCRIPTION_KEY
+    secondary_key_env: COMTRADE_SECONDARY_KEY
+    reporter_codes: [699, 156, 704, 842, 458, 702, 490, 764, 484, 410, 50, 392, 276, 344, 203, 251, 372, 380, 826, 608]
+    partner_codes: [699, 156, 704, 842, 458, 702, 490, 764, 484, 410, 50, 392, 276, 344, 203, 251, 372, 380, 826, 608]
+    flow_code: "M"
+    classification: "HS"
+    hs_codes: [8541, 8542]
+    max_records: 250000
+    api_url: "https://comtradeapi.un.org/data/v1/get/C/M/HS"
+    public_api_url: "https://comtradeapi.un.org/public/v1/preview/C/M/HS"
+    max_retries: 4
+    timeout_seconds: 120
+    backoff_seconds: 2
+    request_delay_seconds: 1.0
+    cache_dir: "data/three_year_2021_2023/cache/comtrade"
+    bilateral_cache_dir: "data/three_year_2021_2023/cache/comtrade/bilateral"
+  gdelt:
+    url_template: "https://data.gdeltproject.org/events/{date}.export.CSV.zip"
+    cache_dir: "data/three_year_2021_2023/cache/gdelt"
+    max_retries: 3
+    timeout_seconds: 180
+    backoff_seconds: 2
+    request_delay_seconds: 0.2
+    download_workers: 8
+  weather:
+    provider: "nasa_power"
+    cache_dir: "data/three_year_2021_2023/cache/weather"
+    max_retries: 4
+    timeout_seconds: 120
+    backoff_seconds: 2
+    locations:
+      - {name: "India", node_id: "country_in", comtrade_code: "699", iso3: "IND", latitude: 20.5937, longitude: 78.9629}
+      - {name: "China", node_id: "country_cn", comtrade_code: "156", iso3: "CHN", latitude: 35.8617, longitude: 104.1954}
+      - {name: "Vietnam", node_id: "country_vn", comtrade_code: "704", iso3: "VNM", latitude: 14.0583, longitude: 108.2772}
+      - {name: "United States", node_id: "country_us", comtrade_code: "842", iso3: "USA", latitude: 39.8283, longitude: -98.5795}
+      - {name: "Malaysia", node_id: "country_my", comtrade_code: "458", iso3: "MYS", latitude: 4.2105, longitude: 101.9758}
+      - {name: "Singapore", node_id: "country_sg", comtrade_code: "702", iso3: "SGP", latitude: 1.3521, longitude: 103.8198}
+      - {name: "Taiwan", node_id: "country_tw", comtrade_code: "490", iso3: "TWN", latitude: 23.6978, longitude: 120.9605}
+      - {name: "Thailand", node_id: "country_th", comtrade_code: "764", iso3: "THA", latitude: 15.8700, longitude: 100.9925}
+      - {name: "Mexico", node_id: "country_mx", comtrade_code: "484", iso3: "MEX", latitude: 23.6345, longitude: -102.5528}
+      - {name: "South Korea", node_id: "country_kr", comtrade_code: "410", iso3: "KOR", latitude: 35.9078, longitude: 127.7669}
+      - {name: "Bangladesh", node_id: "country_50", comtrade_code: "50", iso3: "BGD", latitude: 23.6850, longitude: 90.3563}
+      - {name: "Japan", node_id: "country_jp", comtrade_code: "392", iso3: "JPN", latitude: 36.2048, longitude: 138.2529}
+      - {name: "Germany", node_id: "country_de", comtrade_code: "276", iso3: "DEU", latitude: 51.1657, longitude: 10.4515}
+      - {name: "Hong Kong", node_id: "country_344", comtrade_code: "344", iso3: "HKG", latitude: 22.3193, longitude: 114.1694}
+      - {name: "Czechia", node_id: "country_203", comtrade_code: "203", iso3: "CZE", latitude: 49.8175, longitude: 15.4730}
+      - {name: "France", node_id: "country_fr", comtrade_code: "251", iso3: "FRA", latitude: 46.2276, longitude: 2.2137}
+      - {name: "Ireland", node_id: "country_372", comtrade_code: "372", iso3: "IRL", latitude: 53.1424, longitude: -7.6921}
+      - {name: "Italy", node_id: "country_380", comtrade_code: "380", iso3: "ITA", latitude: 41.8719, longitude: 12.5674}
+      - {name: "United Kingdom", node_id: "country_gb", comtrade_code: "826", iso3: "GBR", latitude: 55.3781, longitude: -3.4360}
+      - {name: "Philippines", node_id: "country_ph", comtrade_code: "608", iso3: "PHL", latitude: 12.8797, longitude: 121.7740}
+  gscpi:
+    excel_url: "https://www.newyorkfed.org/medialibrary/research/interactives/gscpi/downloads/gscpi_data.xlsx"
+    cache_dir: "data/three_year_2021_2023/cache/gscpi"
+
+outputs:
+  root: "data/three_year_2021_2023"
+  download_manifest: "data/three_year_2021_2023/download_manifest.json"
