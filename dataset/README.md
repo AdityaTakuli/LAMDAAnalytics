@@ -195,28 +195,35 @@ redownloaded as a year-specific source.
 
 #### Current three-year acquisition status
 
-The acquisition has been retried sequentially with:
+The missing Comtrade requests are retried one year at a time with:
 
 ```bash
-python download_comtrade_year.py \
-  --config config_three_year_download.yaml \
-  --year 2021 --year 2022 --year 2023
+python download_comtrade_year.py --config config_three_year_download.yaml --year 2021
+python download_comtrade_year.py --config config_three_year_download.yaml --year 2022
+python download_comtrade_year.py --config config_three_year_download.yaml --year 2023
 ```
 
 The current status is **incomplete**:
 
-* 2021: 168 of 240 Comtrade reporter-month requests succeeded; 72 failed.
+* 2021: 240 of 240 Comtrade reporter-month requests succeeded after a later
+  retry.
 * 2022: 168 of 240 succeeded; 72 failed.
 * 2023: 164 of 240 succeeded; 76 failed.
-* Total Comtrade: 500 of 720 succeeded; 220 failed with HTTP 403.
+* Total Comtrade: 572 of 720 succeeded; 148 remain failed.
+* The 2022 failures and most 2023 failures are HTTP 403; four 2023 retries
+  also encountered temporary DNS failures.
 * GDELT: 1,093 of 1,095 daily files succeeded; 2022-11-10 and 2023-03-23
   returned HTTP 404 because the official daily exports are unavailable.
 * Weather: all 20 configured location files succeeded.
 * GSCPI: the published workbook succeeded.
 
-The 403 responses are authorization, entitlement, or quota failures. Splitting
-the requests by year did not remove them. The year-specific manifests record
-the result independently:
+The exact cause of an HTTP 403 must be confirmed in the Comtrade account
+dashboard, but the observed pattern strongly suggests a request/quota limit:
+the initial run stopped after roughly 500 successful calls, and later
+year-specific retries succeeded after the quota window changed. A 403 is a
+rejected request, not an observed zero-trade value. Splitting requests by
+year is useful for resumability, but it cannot bypass an account quota. The
+year-specific manifests are the current source of truth:
 
 ```text
 data/three_year_2021_2023/comtrade_2021_manifest.json
@@ -225,10 +232,12 @@ data/three_year_2021_2023/comtrade_2023_manifest.json
 ```
 
 Do not describe this directory as a complete 2021–2023 dataset until the
-Comtrade credentials/quota are fixed and all 720 requests have either
-succeeded or been scientifically excluded. The two GDELT 404 dates should
-remain documented as unavailable source files rather than fabricated empty
-files.
+Comtrade credentials/quota are fixed and all required requests have either
+succeeded or been scientifically excluded. The original aggregate
+`download_manifest.json` is an initial three-year snapshot and may still show
+the earlier 500/220 result; inspect the three year-specific manifests after a
+retry. The two GDELT 404 dates should remain documented as unavailable source
+files rather than fabricated empty files.
 
 #### Three-year directory and file structure
 
@@ -286,6 +295,10 @@ NASA POWER daily JSON observations for the configured country centroids. The
 GSCPI cache contains the direct NY Fed Excel workbook. These files are raw
 inputs and should be parsed into separate processed tables before modeling.
 
+The acquisition directory is intentionally not yet an ML-ready dataset:
+`processed/`, `results/`, and graph artifacts are absent there. This prevents a
+partial Comtrade cache from silently becoming a model's training set.
+
 #### How the team should use this data for ML
 
 Do not train directly from the raw JSON, ZIP, or Excel files. The intended
@@ -334,6 +347,29 @@ month cannot use a next-month target unless January 2025 is acquired. The
 split must be applied by calendar month, with no random shuffling. Fit
 standardization, imputation rules, edge scaling, and any feature selection on
 the training period only.
+
+The ML team should not start the combined 2021–2024 experiment from the
+current partial cache. Missing Comtrade reporter-month responses are unknown
+labels/features, not negative examples. First complete the required cache,
+run a separate processing profile, audit coverage and class balance, and only
+then expose the resulting `nodes_monthly.csv`, `edges_monthly.csv`, and
+`graph.json` to `train.py`. The existing 2024 monthly and daily experiments
+remain separate and are not replaced by this acquisition.
+
+Recommended handoff checklist:
+
+```text
+[ ] Comtrade manifests show the required reporter-month requests complete
+[ ] Failed GDELT dates are retained in the provenance report
+[ ] Country codes are mapped consistently to the 20-country universe
+[ ] No failed API request is filled with zero
+[ ] Processed rows and bilateral edges pass coverage checks
+[ ] Label-valid rows have a positive historical baseline and a known future value
+[ ] Train/validation/test months are chronological and disjoint
+[ ] Scalers and feature selection are fit on training months only
+[ ] Training contains both positive and negative classes
+[ ] Baselines are run before GCN/TGN comparisons
+```
 
 The model inputs should remain country-level:
 
