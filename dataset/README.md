@@ -113,6 +113,45 @@ data/one_year_2024/results/comtrade_coverage_fix/
 This is a 2024-only coverage operation. It does not train GCN, TGN,
 TGN-no-memory, or logistic regression.
 
+## Independent daily diagnostic profile
+
+`config_daily.yaml` and `build_daily_pipeline.py` are a separate 2024-only
+profile. They write only to:
+
+```text
+dataset/data/one_year_2024_daily/
+```
+
+The daily profile reuses the existing 2024 GDELT daily features and NASA
+POWER daily observations. It carries monthly Comtrade structural features and
+NY Fed GSCPI values within their calendar month, while marking their original
+frequency and the explicit `month_start` availability assumption. Existing
+monthly Comtrade edges are used as monthly edge templates for each daily
+snapshot; no daily trade values or daily topology changes are fabricated.
+
+Run the diagnostic stage with:
+
+```bash
+python build_daily_pipeline.py --config config_daily.yaml
+```
+
+The command creates 366 daily snapshots and 20 country-day rows per date,
+then writes target diagnostics and a leakage audit. The current public 2024
+sources do not contain an independent daily disruption ground truth, so the
+command stops before model training. It creates no daily checkpoints,
+predictions, or metrics. Daily outputs never overwrite the monthly profile.
+
+The isolated daily-training gate can be run separately:
+
+```bash
+python train_daily.py --config config_daily_training.yaml
+```
+
+It writes only to `data/one_year_2024_daily_training/`. It records the
+chronological Jan–Jun / Jul–Sep / Oct–Dec 30 split and copies the diagnostic
+evidence, but currently blocks GCN/TGN training because the daily target is
+not scientifically established.
+
 ## Stage 2: expand to four years
 
 After reviewing the one-year pull, run the separate expansion profile:
@@ -136,6 +175,211 @@ dataset/data/four_year_2021_2024/
 
 This is a fresh four-year pull, not an in-place mutation of the one-year
 directory. The per-source caches and derived outputs remain isolated.
+
+### Acquisition-only 2021–2023 download
+
+To acquire only the three additional years without touching either 2024
+profile, use:
+
+```bash
+python download_three_years.py --config config_three_year_download.yaml
+```
+
+This writes raw GDELT ZIPs, NASA POWER JSON responses, bilateral Comtrade
+JSON responses, and the NY Fed workbook only under
+`data/three_year_2021_2023/`. It does not fuse tables, build graphs, or train
+models. The resumable manifest at
+`data/three_year_2021_2023/download_manifest.json` records successful,
+unavailable, and authorization-failed requests. CSET is static and is not
+redownloaded as a year-specific source.
+
+#### Current three-year acquisition status
+
+The acquisition has been retried sequentially with:
+
+```bash
+python download_comtrade_year.py \
+  --config config_three_year_download.yaml \
+  --year 2021 --year 2022 --year 2023
+```
+
+The current status is **incomplete**:
+
+* 2021: 168 of 240 Comtrade reporter-month requests succeeded; 72 failed.
+* 2022: 168 of 240 succeeded; 72 failed.
+* 2023: 164 of 240 succeeded; 76 failed.
+* Total Comtrade: 500 of 720 succeeded; 220 failed with HTTP 403.
+* GDELT: 1,093 of 1,095 daily files succeeded; 2022-11-10 and 2023-03-23
+  returned HTTP 404 because the official daily exports are unavailable.
+* Weather: all 20 configured location files succeeded.
+* GSCPI: the published workbook succeeded.
+
+The 403 responses are authorization, entitlement, or quota failures. Splitting
+the requests by year did not remove them. The year-specific manifests record
+the result independently:
+
+```text
+data/three_year_2021_2023/comtrade_2021_manifest.json
+data/three_year_2021_2023/comtrade_2022_manifest.json
+data/three_year_2021_2023/comtrade_2023_manifest.json
+```
+
+Do not describe this directory as a complete 2021–2023 dataset until the
+Comtrade credentials/quota are fixed and all 720 requests have either
+succeeded or been scientifically excluded. The two GDELT 404 dates should
+remain documented as unavailable source files rather than fabricated empty
+files.
+
+#### Three-year directory and file structure
+
+The acquisition-only profile does not create processed tables. Its layout is:
+
+```text
+data/three_year_2021_2023/
+├── download_manifest.json
+├── comtrade_2021_manifest.json
+├── comtrade_2022_manifest.json
+├── comtrade_2023_manifest.json
+└── cache/
+    ├── comtrade/
+    │   └── bilateral/
+    │       └── reporter_<code>_<YYYYMM>.json
+    ├── gdelt/
+    │   └── <YYYYMMDD>.export.CSV.zip
+    ├── weather/
+    │   └── <location>.json
+    └── gscpi/
+        └── gscpi_data.xlsx
+```
+
+There are 20 configured reporters, 20 configured partners, and 12 months per
+year. The Comtrade request unit is **one reporter and one month**, with all
+20 partners and HS 8541/8542 requested in that response:
+
+```text
+3 years × 12 months × 20 reporters = 720 requests
+```
+
+The `reporter_<code>_<YYYYMM>.json` wrapper contains:
+
+```text
+request.reporter_code
+request.partner_codes
+request.period
+request.flow_code = "M"
+request.commodity_codes = ["8541", "8542"]
+response.count
+response.data[]
+response.error
+downloaded_at
+```
+
+Each `response.data[]` row is an official Comtrade observation. Important
+fields include `reporterCode`, `reporterISO`, `partnerCode`, `partnerISO`,
+`flowCode`, `period`, `cmdCode`, `primaryValue`, `netWgt`, and `qty`.
+The exact field set is supplied by Comtrade and can vary by response. A
+successful response with an empty `data` list is an observed no-record
+response; a failed request is **unknown**, not zero trade.
+
+The GDELT cache contains official daily ZIP exports. The weather cache contains
+NASA POWER daily JSON observations for the configured country centroids. The
+GSCPI cache contains the direct NY Fed Excel workbook. These files are raw
+inputs and should be parsed into separate processed tables before modeling.
+
+#### How the team should use this data for ML
+
+Do not train directly from the raw JSON, ZIP, or Excel files. The intended
+workflow is:
+
+```text
+raw cache
+  -> source validation and country-code mapping
+  -> processed source tables
+  -> causal country-month fusion
+  -> temporal graph snapshots
+  -> target construction
+  -> chronological train/validation/test split
+  -> model training and evaluation
+```
+
+The recommended supervised unit is one **country-month** row. For each month
+`T`, keep the feature timestamp at or before the month end and predict the
+next-month inbound Comtrade contraction:
+
+```text
+X(country, T) -> y(country, T+1)
+
+future_value = inbound_flow_usd(country, T+1)
+baseline = median(inbound_flow_usd(country, T-11) ... inbound_flow_usd(country, T))
+contraction = (future_value - baseline) / baseline
+label = 1 when contraction < -tau
+```
+
+Use a fixed, pre-specified `tau` such as 0.30, or report the planned
+0.30/0.35/0.40 sensitivity sweep. Do not select `tau` using test
+performance. Rows with missing future Comtrade data, missing baseline, or a
+non-positive baseline must have `label_valid = 0`; they must not be silently
+converted to negative examples.
+
+For a completed combined 2021–2024 study, a defensible first split is:
+
+```text
+Train:      2021-01 through 2022-12
+Validation: 2023-01 through 2023-12
+Test:       2024-01 through 2024-12
+```
+
+The first 12 months cannot use a 12-month historical baseline, and the final
+month cannot use a next-month target unless January 2025 is acquired. The
+split must be applied by calendar month, with no random shuffling. Fit
+standardization, imputation rules, edge scaling, and any feature selection on
+the training period only.
+
+The model inputs should remain country-level:
+
+* Comtrade-derived structural features: inbound flow, trade-value changes,
+  `inventory_days_proxy`, and `trade_delay_proxy`.
+* GDELT daily features aligned causally to the month end:
+  `news_vol_7d`, `neg_tone_frac_3d`, and `strike_flag_7d`.
+* Weather daily observations aggregated using only observations available by
+  the feature timestamp, including `weather_anomaly_7d`.
+* NY Fed GSCPI monthly value aligned to its publication/availability date as
+  `global_risk`.
+* Bilateral Comtrade import edges for the country graph.
+
+Do not claim these features measure Amazon, Walmart, or Flipkart inventory or
+delivery systems. They are public country-level trade and external-risk
+proxies. Do not create firm-level edges from country-level trade, and do not
+use `strike_flag` as the label because that would make the target tautological.
+
+Before training, generate and inspect:
+
+```text
+processed/nodes_monthly.csv
+processed/edges_monthly.csv
+processed/graph.json
+processed/label_summary.json
+results/diagnostics/leakage_audit.json
+```
+
+The label summary must report total rows, valid rows, positive rows, negative
+rows, prevalence, and missingness by country and month. If the training split
+contains only one class, stop and report that limitation; do not rebalance by
+fabricating labels or by changing the threshold after seeing model results.
+
+For a first implementation, use the existing `train.py` as the reference
+runner and compare the constant-prevalence baseline, logistic regression,
+GCN, TGN, and TGN-no-memory under identical splits. Report accuracy,
+balanced accuracy, precision, recall, F1, ROC-AUC, PR-AUC, positive/negative
+counts, and prevalence. Mark undefined one-class metrics as `N/A`. Reset TGN
+memory only at the beginning of a chronological replay, never before every
+individual month or evaluation row.
+
+To complete the missing Comtrade data, configure valid keys in `.env`, verify
+their API product and remaining quota with Comtrade, then rerun the
+year-by-year command above. After the cache is complete, build a separate
+multi-year processing profile; do not overwrite
+`data/one_year_2024/` or `data/one_year_2024_daily/`.
 
 For the GDELT-only smoke test, run:
 
@@ -381,6 +625,9 @@ dataset/
 ├── ingest_gdelt.py
 ├── ingest_weather.py
 ├── ingest_gscpi.py
+├── config_three_year_download.yaml
+├── download_three_years.py
+├── download_comtrade_year.py
 ├── fuse_dataset.py
 ├── build_graph.py
 ├── model_gcn.py
@@ -390,5 +637,8 @@ dataset/
 ├── requirements.txt
 └── data/
     ├── one_year_2024/
+    ├── one_year_2024_daily/
+    ├── one_year_2024_daily_training/
+    ├── three_year_2021_2023/
     └── four_year_2021_2024/
 ```

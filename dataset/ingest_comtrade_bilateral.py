@@ -257,6 +257,13 @@ def _coverage_grid(
     partners: list[str],
     months: list[str],
 ) -> pd.DataFrame:
+    frame = frame.copy()
+    for column in ("reporter_code", "partner_code", "month"):
+        if column in frame:
+            frame[column] = frame[column].astype(str)
+    reporters = [str(value) for value in reporters]
+    partners = [str(value) for value in partners]
+    months = [str(value) for value in months]
     if frame.empty:
         observed = pd.DataFrame(
             columns=["reporter_code", "partner_code", "month", "observed_records"]
@@ -283,6 +290,14 @@ def _coverage_grid(
 
 def _country_label(code: str) -> str:
     return COUNTRY_NAMES.get(str(code), f"Comtrade code {code}")
+
+
+def _node_label(node_id: str, config: dict[str, Any]) -> str:
+    for location in nested(config, "sources", "weather", "locations", default=[]):
+        expected = location.get("node_id") or stable_id("country", location["name"])
+        if str(expected) == str(node_id):
+            return str(location["name"])
+    return _country_label(str(node_id).rsplit("_", 1)[-1])
 
 
 def _target_statistics(
@@ -313,12 +328,14 @@ def _target_statistics(
     target_rows = frame[
         ["host_country_id", "month", "target_valid", "contraction", "label"]
     ].copy()
-    target_rows["country"] = target_rows["host_country_id"].astype(str)
     target_rows = target_rows.rename(columns={"host_country_id": "country_id"})
+    target_rows["country"] = target_rows["country_id"].map(
+        lambda value: _node_label(str(value), config)
+    )
     target_rows.to_csv(destination / "target_coverage.csv", index=False)
 
     valid_frame = frame[valid].copy()
-    by_country = (
+    by_country_observed = (
         valid_frame.groupby("host_country_id", as_index=False)
         .agg(
             valid_targets=("target_valid", "size"),
@@ -327,15 +344,20 @@ def _target_statistics(
         )
         .rename(columns={"host_country_id": "country_id"})
     )
-    by_country["positive_targets"] = by_country["positive_targets"].astype(int)
+    by_country = pd.DataFrame(
+        {"country_id": sorted(frame["host_country_id"].astype(str).unique())}
+    ).merge(by_country_observed, on="country_id", how="left")
+    by_country["valid_targets"] = by_country["valid_targets"].fillna(0).astype(int)
+    by_country["positive_targets"] = by_country["positive_targets"].fillna(0).astype(int)
     by_country["negative_targets"] = (
         by_country["valid_targets"] - by_country["positive_targets"]
     )
     by_country["prevalence"] = (
-        by_country["positive_targets"] / by_country["valid_targets"]
+        by_country["positive_targets"]
+        / by_country["valid_targets"].replace(0, np.nan)
     )
     by_country["country"] = by_country["country_id"].map(
-        lambda value: _country_label(str(value).rsplit("_", 1)[-1])
+        lambda value: _node_label(str(value), config)
     )
     by_country = by_country[
         [
@@ -376,6 +398,17 @@ def _target_statistics(
         str(month): stats(group["contraction"])
         for month, group in valid_frame.groupby("month")
     }
+    tau_counts = {}
+    for configured_tau in nested(config, "analysis", "taus", default=[0.30, 0.35, 0.40]):
+        configured_tau = float(configured_tau)
+        positives = int(valid_frame["contraction"].lt(-configured_tau).sum())
+        tau_counts[f"{configured_tau:.2f}"] = {
+            "positive": positives,
+            "negative": int(len(valid_frame) - positives),
+            "prevalence": float(positives / len(valid_frame))
+            if len(valid_frame)
+            else None,
+        }
     target_summary = {
         "total_country_month_rows": int(len(frame)),
         "valid_target_rows": int(valid.sum()),
@@ -385,6 +418,7 @@ def _target_statistics(
         "prevalence": float(label[valid].mean()) if valid.any() else None,
         "horizon_months": horizon,
         "tau": tau,
+        "counts_by_tau": tau_counts,
         "continuous_target_overall": stats(valid_frame["contraction"]),
         "continuous_target_by_country": by_country_stats,
         "continuous_target_by_month": by_month_stats,
@@ -464,6 +498,11 @@ def run(config: dict[str, Any], force: bool = False) -> Path:
             )
     destination.mkdir(parents=True, exist_ok=True)
     backup = _preserve_existing(config)
+    config_copy = dict(config)
+    config_copy.pop("_config_path", None)
+    (destination / "config_used.yaml").write_text(
+        yaml.safe_dump(config_copy, sort_keys=False), encoding="utf-8"
+    )
     universe = _selected_universe(config)
     reporters = universe["comtrade_code"].astype(str).tolist()
     partners = reporters.copy()
@@ -542,6 +581,15 @@ def run(config: dict[str, Any], force: bool = False) -> Path:
     )
     monthly["missing_cells"] = monthly["expected_cells"] - monthly["observed_cells"]
     monthly.to_csv(destination / "monthly_coverage.csv", index=False)
+    pair_coverage = coverage.groupby(
+        ["reporter_code", "partner_code"], as_index=False
+    )["observed"].any()
+    reporter_month_coverage = coverage.groupby(
+        ["reporter_code", "month"], as_index=False
+    )["observed"].any()
+    partner_month_coverage = coverage.groupby(
+        ["partner_code", "month"], as_index=False
+    )["observed"].any()
 
     raw_records = int(len(frame))
     summary = {
@@ -559,6 +607,21 @@ def run(config: dict[str, Any], force: bool = False) -> Path:
         else [],
         "unique_reporter_count": int(frame["reporter_code"].nunique()) if not frame.empty else 0,
         "unique_partner_count": int(frame["partner_code"].nunique()) if not frame.empty else 0,
+        "missing_requested_reporters": sorted(
+            set(reporters)
+            - set(frame["reporter_code"].astype(str).unique().tolist())
+        )
+        if not frame.empty
+        else reporters,
+        "missing_requested_partners": sorted(
+            set(partners)
+            - set(frame["partner_code"].astype(str).unique().tolist())
+        )
+        if not frame.empty
+        else partners,
+        "missing_reporter_partner_pairs": int((~pair_coverage["observed"]).sum()),
+        "missing_reporter_months": int((~reporter_month_coverage["observed"]).sum()),
+        "missing_partner_months": int((~partner_month_coverage["observed"]).sum()),
         "reporter_partner_pairs": int(
             frame[["reporter_code", "partner_code"]].drop_duplicates().shape[0]
         )

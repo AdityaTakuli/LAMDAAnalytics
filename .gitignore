@@ -309,6 +309,13 @@ docker-compose.override.yml
 .cache/
 cache/
 
+# Local dataset downloads and generated artifacts
+# Raw responses and derived tables can be many gigabytes and are documented
+# in dataset/README.md instead of being committed to GitHub.
+dataset/data/
+dataset/cache/
+dataset/.venv/
+
 # Temporary files
 *.tmp
 *.temp
