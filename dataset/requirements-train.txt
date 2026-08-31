@@ -1,0 +1,24 @@
+# Dependencies for model training only (train_models.py, check_training_env.py).
+#
+# This file deliberately does NOT pin torch. A CUDA build must come from the
+# PyTorch index, and the correct index differs per CUDA runtime, so torch is
+# installed in a separate step. See dataset/TRAINING.md.
+#
+#   Linux / Windows with CUDA 12.4:
+#     pip install torch --index-url https://download.pytorch.org/whl/cu124
+#   CPU only:
+#     pip install torch --index-url https://download.pytorch.org/whl/cpu
+#
+# Then:
+#     pip install -r requirements-train.txt
+
+numpy>=1.26
+pandas>=2.1
+PyYAML>=6.0
+scikit-learn>=1.4
+matplotlib>=3.8
+
+# Optional but recommended: parquet input support and .env loading. Both have
+# graceful fallbacks, so training still runs without them.
+pyarrow>=14.0
+python-dotenv>=1.0

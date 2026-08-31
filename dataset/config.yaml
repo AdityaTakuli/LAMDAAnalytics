@@ -108,6 +108,7 @@ outputs:
   comtrade_coverage_fix: "data/one_year_2024/results/comtrade_coverage_fix"
   training_metrics: "data/one_year_2024/results/training_metrics.json"
   checkpoints_dir: "data/one_year_2024/results/checkpoints"
+  model_training_dir: "data/one_year_2024/results/model_training"
 
 model:
   memory_dim: 32
@@ -126,3 +127,36 @@ training:
   learning_rate: 0.001
   seed: 7
 
+# Settings read by train_models.py only. Adding this block does not change any
+# existing stage; every other script ignores it.
+model_training:
+  # The 2024 binary label has 2 positives at tau=0.30 and none at 0.35/0.40, so
+  # a binary benchmark is not supportable here. The continuous contraction
+  # target is the defensible default; run --task classification explicitly if
+  # you want the degenerate case for a plumbing check.
+  task: "regression"
+  tau: 0.35
+  # The 2024 profile is only twelve months long, so a full twelve-month
+  # baseline median is impossible. min_periods=1 reproduces the labels already
+  # stored in data/one_year_2024/processed/nodes_monthly.csv. Raise it to 12
+  # once a longer history is available.
+  baseline_window: 12
+  baseline_min_periods: 1
+  models: ["gcn", "tgn", "tgn_no_memory"]
+  # December 2024 is absent from every partition because its next-month target
+  # would fall outside the dataset.
+  split:
+    mode: "date_ranges"
+    train:      ["2024-01", "2024-07"]
+    validation: ["2024-08", "2024-09"]
+    test:       ["2024-10", "2024-11"]
+  epochs: 30
+  learning_rate: 0.005
+  weight_decay: 0.0
+  grad_clip: 5.0
+  patience: 8
+  decision_threshold: 0.5
+  regression_loss: "huber"
+  huber_beta: 0.1
+  device: "auto"
+  seed: 7
