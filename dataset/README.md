@@ -294,6 +294,62 @@ The acquisition directory is intentionally not itself an ML-ready dataset:
 `processed/`, `results/`, and graph artifacts are absent there. This prevents a
 raw cache from silently becoming a model's training set.
 
+#### Completed isolated four-year profile
+
+The raw caches are now transformed into a separate profile without modifying
+the 2024 monthly or daily directories:
+
+```bash
+python build_four_year_profile.py --config config_three_year_download.yaml
+```
+
+The profile is stored under:
+
+```text
+data/four_year_2021_2024/
+├── config_used.yaml
+├── cache/gdelt/                 # links to existing official daily ZIPs
+├── processed/
+│   ├── comtrade.csv             # 31,305 bilateral observations
+│   ├── weather_daily.csv        # 29,220 rows: 20 locations × 1,461 days
+│   ├── gscpi_monthly.csv        # normalized NY Fed series
+│   ├── gdelt_events.csv
+│   ├── gdelt_features.csv
+│   ├── gdelt_monthly_features.csv
+│   ├── nodes_monthly.csv        # 960 rows: 20 countries × 48 months
+│   ├── edges_monthly.csv
+│   └── graph.json               # 48 temporal snapshots
+└── results/
+    ├── data_analysis/
+    └── profile_build_summary.json
+```
+
+All four-year processing gates now pass for source and feature construction.
+The two unavailable GDELT dates (`2022-11-10` and `2023-03-23`) remain explicit
+in the provenance and are not fabricated as event data. Processing completed
+without training any model.
+
+Re-run the read-only readiness analysis with:
+
+```bash
+python analyze_four_year_data.py --config config_three_year_download.yaml
+```
+
+The latest analysis reports:
+
+```text
+Acquisition gate:          PASS
+Feature gate:              PASS
+Continuous-target gate:    PASS
+Binary classification gate: FAIL
+```
+
+The binary gate fails for a real statistical reason: only 15 of 626 valid
+targets are positive at `tau=0.35`, including 2 positives in the
+2021–2022 training split. The profile is therefore appropriate for a
+continuous contraction-regression pilot after leakage review, not for a
+reliable binary GCN/TGN benchmark. No labels are fabricated or rebalanced.
+
 #### How the team should use this data for ML
 
 Do not train directly from the raw JSON, ZIP, or Excel files. The intended
@@ -343,13 +399,19 @@ split must be applied by calendar month, with no random shuffling. Fit
 standardization, imputation rules, edge scaling, and any feature selection on
 the training period only.
 
-The ML team should not start the combined 2021–2024 experiment directly from
-the raw cache. First run a separate processing profile, audit coverage and
-class balance, and only then expose the resulting `nodes_monthly.csv`,
-`edges_monthly.csv`, and `graph.json` to `train.py`. The existing 2024 monthly
-and daily experiments remain separate and are not replaced by this
-acquisition. The two unavailable GDELT dates must remain in the provenance
-and missingness audit.
+The combined 2021–2024 processed profile is available, but the ML team must
+review the coverage, leakage, and class-balance audit before exposing
+`nodes_monthly.csv`, `edges_monthly.csv`, and `graph.json` to `train.py`. The
+existing 2024 monthly and daily experiments remain separate and are not
+replaced by this acquisition. The two unavailable GDELT dates must remain in
+the provenance and missingness audit.
+
+The binary target is not suitable for a final deep-model benchmark at the
+current default `tau=0.35`: there are 15 positives among 626 valid targets,
+including only 2 positives in training. This is a real class-distribution
+finding, not a missing-data bug. Do not manufacture positives or rebalance
+before the split. Prefer a continuous contraction-regression pilot, or obtain
+research approval for a scientifically justified target redesign.
 
 Recommended handoff checklist:
 
@@ -546,7 +608,10 @@ y[T] = 1 if (V[T+h] - median(V[T+h-12:T+h-1])) /
 
 The horizon is one month and `tau` is swept over `0.30`, `0.35`, and `0.40`.
 Strike and weather are features only. Rows without a valid future value or
-positive baseline are unlabeled.
+positive baseline are unlabeled. The fused four-year nodes also retain
+`future_inbound_flow_usd`, `baseline_inbound_flow_usd`, `contraction`, and
+`target_valid` so a continuous contraction-regression experiment does not
+depend on an arbitrarily rare binary threshold.
 
 ## GCN versus TGN
 
@@ -659,6 +724,8 @@ dataset/
 ├── config_three_year_download.yaml
 ├── download_three_years.py
 ├── download_comtrade_year.py
+├── analyze_four_year_data.py
+├── build_four_year_profile.py
 ├── fuse_dataset.py
 ├── build_graph.py
 ├── model_gcn.py
