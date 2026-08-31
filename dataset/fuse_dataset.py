@@ -259,13 +259,19 @@ def _labels(
     # Eq. 7 baseline is V[T+h-12:T+h-1]. For h=1 this is the
     # twelve-month window ending at the current step T.
     history = grouped["inbound_flow_usd"].transform(
-        lambda series: series.shift(-(horizon - 1)).rolling(12, min_periods=1).median()
+        lambda series: series.shift(-(horizon - 1)).rolling(12, min_periods=12).median()
     )
     contraction = (future - history) / history.replace(0, np.nan)
+    result["future_inbound_flow_usd"] = future
+    result["baseline_inbound_flow_usd"] = history
+    result["contraction"] = contraction
+    result["target_valid"] = (
+        future.notna() & history.notna() & history.gt(0) & contraction.notna()
+    )
     for tau in taus:
         name = f"label_tau_{tau:.2f}"
         result[name] = np.where(
-            future.notna() & history.notna() & (history > 0),
+            result["target_valid"],
             (contraction < -tau).astype("float"),
             np.nan,
         )
