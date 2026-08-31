@@ -731,8 +731,26 @@ dataset/
 ├── model_gcn.py
 ├── model_tgn.py
 ├── train.py
+├── country_month_experiment.py
 ├── common.py
 ├── requirements.txt
+├── train_models.py                # model training entry point (CPU or CUDA)
+├── check_training_env.py          # preflight: packages, GPU, data readiness
+├── requirements-train.txt         # training-only dependencies
+├── TRAINING.md                    # full training guide (Linux / Windows / CUDA)
+├── training/                      # training package used by the two entry points
+│   ├── paths.py                   # path resolution and import bootstrap
+│   ├── runtime.py                 # device selection, seeding, environment report
+│   ├── data.py                    # loading, validation, targets, splits, tensors
+│   ├── models.py                  # model factory and checkpoint loading
+│   ├── engine.py                  # chronological train and replay loops
+│   ├── metrics.py                 # metrics with explicit N/A handling
+│   ├── baselines.py               # constant, linear, logistic, ridge references
+│   ├── report.py                  # artifacts, plots, leakage audit
+│   ├── pipeline.py                # end-to-end orchestration
+│   └── selftest.py                # synthetic end-to-end verification
+├── tests/
+│   └── test_training.py           # 26 tests for the training scripts
 └── data/
     ├── one_year_2024/
     ├── one_year_2024_daily/
@@ -740,3 +758,156 @@ dataset/
     ├── three_year_2021_2023/
     └── four_year_2021_2024/
 ```
+
+## Model training scripts
+
+`train.py` and `country_month_experiment.py` above remain the original
+single-profile runners and are unchanged. `train_models.py` is the training
+entry point for reproducing the models on another machine: it is device-aware
+(CPU or CUDA, Linux or Windows), validates its inputs before it trains, and
+writes a self-describing run directory.
+
+**`dataset/TRAINING.md` is the complete guide.** The steps below are the short
+path; read `TRAINING.md` for every option, the artifact layout, how to read the
+metrics honestly, and troubleshooting.
+
+Nothing in this stage calls an external API. It reads only the fused tables
+that `fuse_dataset.py` and `build_graph.py` already produced.
+
+### What it trains
+
+Six models under one chronological split: the snapshot `gcn`, the `tgn`, the
+`tgn_no_memory` ablation, and the non-graph baselines
+(`constant_prevalence` / `train_median`, `hand_weighted_linear`,
+`logistic_regression` / `ridge_regression`).
+
+Two targets are available. `--task regression` predicts the continuous
+`contraction` and is the default, because the binary label is too rare here to
+support a benchmark: 2 positives at `tau=0.30` and none at `0.35` or `0.40` in
+the 2024 profile, and 15 of 626 valid targets in the four-year profile.
+`--task classification` predicts `label(tau)` and is refused when the training
+partition contains a single class, with a message explaining the alternatives.
+That refusal is the same finding `analyze_four_year_data.py` already reports as
+`Binary classification gate: FAIL`; it is enforced rather than left to the
+reader.
+
+Rows without an observed future value or a positive baseline are excluded from
+training and evaluation. They are never converted into negative examples, and
+no label is synthesised or rebalanced.
+
+### Steps — Linux with CUDA
+
+Confirm the GPU driver first; the `CUDA Version` in this output is the highest
+runtime the driver supports.
+
+```bash
+nvidia-smi
+```
+
+Then, from `dataset/`:
+
+```bash
+cd dataset
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+
+# Match the wheel to the driver: cu121, cu124, or cu126
+pip install torch --index-url https://download.pytorch.org/whl/cu124
+pip install -r requirements-train.txt
+
+python check_training_env.py --device cuda      # must report CUDA available: True
+python train_models.py --self-test --device cuda # must end with SELF-TEST PASSED
+
+python train_models.py --config config.yaml --device cuda
+python train_models.py --config config_4year.yaml --device cuda
+```
+
+### Steps — Windows with CUDA
+
+Use PowerShell. The only differences from Linux are the activation line and the
+path separator.
+
+```powershell
+nvidia-smi
+
+cd dataset
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+
+pip install torch --index-url https://download.pytorch.org/whl/cu124
+pip install -r requirements-train.txt
+
+python check_training_env.py --device cuda
+python train_models.py --self-test --device cuda
+
+python train_models.py --config config.yaml --device cuda
+python train_models.py --config config_4year.yaml --device cuda
+```
+
+If PowerShell refuses to run the activation script, allow it once with
+`Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned`.
+
+### Steps — CPU only
+
+Identical, with the CPU wheel. A full 2024 run takes about fifteen seconds on a
+laptop; at twenty country nodes per snapshot a GPU is not faster, and the CUDA
+path exists so the same scripts scale to larger graphs unchanged.
+
+```bash
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements-train.txt
+python check_training_env.py
+python train_models.py --config config.yaml --device cpu
+```
+
+### Useful variations
+
+```bash
+python train_models.py --config config.yaml --dry-run      # validate and print the plan, write nothing
+python train_models.py --config config.yaml --task both --overwrite
+python train_models.py --config config.yaml --models tgn,tgn_no_memory --epochs 100 --patience 15
+python train_models.py --config config_4year.yaml \
+    --train-range 2021-01:2022-06 --validation-range 2022-07:2023-06 --test-range 2023-07:2024-11
+python tests/test_training.py                              # 26 tests, no test runner required
+```
+
+`--device cuda` fails loudly when no GPU is usable rather than falling back, so
+a run that reports GPU timings really used one. `--device auto` prefers CUDA and
+falls back to CPU, naming the reason.
+
+### Where the results go
+
+`<results_dir>/model_training/<task>/`, so for the 2024 profile in regression
+mode: `data/one_year_2024/results/model_training/regression/`. Existing
+artifacts are never overwritten without `--overwrite`, and the monthly, daily,
+and four-year profiles stay isolated from each other.
+
+```text
+run_summary.json          options, environment, split, and every metric — start here
+metrics/comparison.csv    one row per (model, split)
+predictions/<model>.csv   model, split, month, node_id, target, score
+checkpoints/<model>.pt    weights plus kwargs, features, normaliser, and split
+diagnostics/              leakage audit, target and class balance, label cross-check, split
+plots/                    target distribution, loss curves, comparison, prediction scatter
+```
+
+Report `rmse` / `mae` / `spearman_r` against `train_median` for regression, and
+`average_precision` then `roc_auc` for classification. A metric written as
+`null` with a `note` is mathematically undefined for that partition, not zero —
+that happens whenever a partition holds a single class. With 119 training rows
+and 34 test rows in the 2024 profile, differences of a few points are noise.
+
+### Reproducibility
+
+Every run records `config_used.yaml`, the resolved options, the exact months in
+each partition, package versions, and the GPU model. `--seed` and
+`--deterministic` make a CPU run bitwise reproducible. On CUDA the guarantee is
+weaker and the run says so: the GCN's mean aggregation uses `index_add_`, which
+has no deterministic CUDA kernel, so the flag is applied in warn-only mode and
+the limitation is recorded in `run_summary.json`.
+
+Feature standardisation, edge scaling, class weights, and every baseline are
+fitted on training months only. Model selection uses validation only. The test
+partition is scored exactly once, with the selected weights.

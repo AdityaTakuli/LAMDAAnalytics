@@ -91,6 +91,7 @@ outputs:
   graph: "data/four_year_2021_2024/processed/graph.json"
   training_metrics: "data/four_year_2021_2024/processed/training_metrics.json"
   checkpoints_dir: "data/four_year_2021_2024/checkpoints"
+  model_training_dir: "data/four_year_2021_2024/results/model_training"
 
 model:
   memory_dim: 32
@@ -107,4 +108,39 @@ training:
   test_months: 12
   epochs: 10
   learning_rate: 0.001
+  seed: 7
+
+# Settings read by train_models.py only. Adding this block does not change any
+# existing stage; every other script ignores it.
+model_training:
+  # analyze_four_year_data.py reports the binary gate as FAIL at tau=0.35
+  # (15 positives among 626 valid targets, 2 of them in training). Regression on
+  # the continuous contraction is therefore the default. Classification stays
+  # available with --task classification and is reported with N/A metrics
+  # wherever a partition is single-class.
+  task: "regression"
+  tau: 0.35
+  # Four years of history make a full twelve-month baseline median possible, so
+  # the strict rule is used here. As a consequence the first eleven months of
+  # 2021 have no baseline and are dropped from the training partition; the run
+  # records that exclusion in diagnostics/split.json.
+  baseline_window: 12
+  baseline_min_periods: 12
+  models: ["gcn", "tgn", "tgn_no_memory"]
+  # December 2024 is absent from the test partition because its next-month
+  # target would require January 2025.
+  split:
+    mode: "date_ranges"
+    train:      ["2021-01", "2022-12"]
+    validation: ["2023-01", "2023-12"]
+    test:       ["2024-01", "2024-12"]
+  epochs: 40
+  learning_rate: 0.003
+  weight_decay: 0.0
+  grad_clip: 5.0
+  patience: 10
+  decision_threshold: 0.5
+  regression_loss: "huber"
+  huber_beta: 0.1
+  device: "auto"
   seed: 7
