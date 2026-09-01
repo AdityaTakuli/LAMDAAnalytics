@@ -109,7 +109,7 @@ def check_data(config_path: str) -> dict[str, object]:
             horizon=int((config.get("analysis") or {}).get("horizon_months", 1)),
             baseline_window=int(settings.get("baseline_window", 12)),
             baseline_min_periods=int(settings.get("baseline_min_periods", 1)),
-            taus=[float(value) for value in (config.get("analysis") or {}).get("taus", [0.30, 0.35, 0.40])],
+            taus=[float(value) for value in (config.get("analysis") or {}).get("taus", [0.20, 0.30, 0.35, 0.40])],
         )
         supervised = data_module.supervised_months(frame, validation["months"])
         result.update(

@@ -1,0 +1,14 @@
+{
+  "panels": {
+    "png": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/Research Paper/figures/results_country_month_panels.png",
+    "pdf": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/Research Paper/figures/results_country_month_panels.pdf"
+  },
+  "setup": {
+    "png": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/Research Paper/figures/results_setup_comparison.png",
+    "pdf": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/Research Paper/figures/results_setup_comparison.pdf"
+  },
+  "sensitivity": {
+    "png": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/Research Paper/figures/results_prefix_sensitivity.png",
+    "pdf": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/Research Paper/figures/results_prefix_sensitivity.pdf"
+  }
+}

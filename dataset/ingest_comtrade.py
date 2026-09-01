@@ -134,52 +134,118 @@ def standardize(frame: pd.DataFrame, period: str, vintage: str) -> pd.DataFrame:
     return result.reset_index(drop=True)
 
 
+def _norm_comtrade_code(value: object) -> str:
+    text = str(value).strip()
+    if text.lower() in {"", "nan", "none"}:
+        return ""
+    if text.endswith(".0") and text[:-2].isdigit():
+        text = text[:-2]
+    return text
+
+
 def select_country_universe(frame: pd.DataFrame, config: dict) -> pd.DataFrame:
-    """Keep India fixed and select remaining countries by observed import value."""
+    """Keep India fixed and select countries with reporter-level inbound data."""
     focal = nested(config, "analysis", "focal_country", default={})
     country_count = int(nested(config, "analysis", "country_count", default=20))
-    if frame.empty or "partner_code" not in frame:
-        partners = pd.DataFrame(columns=["comtrade_code", "trade_value_usd"])
+    focal_code = _norm_comtrade_code(focal.get("comtrade_code", "699"))
+
+    if frame.empty or "partner_code" not in frame or "reporter_code" not in frame:
+        reporters = pd.DataFrame(columns=["comtrade_code", "trade_value_usd"])
+        partner_rank = pd.DataFrame(columns=["comtrade_code", "trade_value_usd"])
     else:
-        partners = (
-            frame[~frame["partner_code"].astype(str).isin({"0", "0.0", "nan", "None"})]
+        working = frame.copy()
+        working["reporter_code"] = working["reporter_code"].map(_norm_comtrade_code)
+        working["partner_code"] = working["partner_code"].map(_norm_comtrade_code)
+        reporter_codes = {
+            code for code in working["reporter_code"].dropna().astype(str) if code
+        }
+        reporters = (
+            working.groupby("reporter_code", as_index=False)["trade_value_usd"]
+            .sum()
+            .rename(columns={"reporter_code": "comtrade_code"})
+            .sort_values("trade_value_usd", ascending=False)
+        )
+        focal_imports = working[working["reporter_code"] == focal_code]
+        partner_rank = (
+            focal_imports[~focal_imports["partner_code"].isin({"0", ""})]
             .groupby("partner_code", as_index=False)["trade_value_usd"]
             .sum()
             .rename(columns={"partner_code": "comtrade_code"})
             .sort_values("trade_value_usd", ascending=False)
         )
-    focal_code = str(focal.get("comtrade_code", "699"))
-    partners = partners[partners["comtrade_code"].astype(str) != focal_code].head(max(country_count - 1, 0))
+        partner_rank = partner_rank[
+            partner_rank["comtrade_code"].isin(reporter_codes)
+            & (partner_rank["comtrade_code"] != focal_code)
+        ]
+
     records = [
         {
             "rank": 1,
             "country_name": focal.get("name", "India"),
             "comtrade_code": focal_code,
             "iso3": focal.get("iso3", "IND"),
-            "trade_value_usd": float(frame["trade_value_usd"].sum()) if not frame.empty else 0.0,
+            "trade_value_usd": float(
+                reporters.loc[reporters["comtrade_code"] == focal_code, "trade_value_usd"].sum()
+            )
+            if not reporters.empty
+            else float(frame["trade_value_usd"].sum()) if not frame.empty else 0.0,
             "selection_reason": "fixed_focal_country",
         }
     ]
-    for rank, (_, row) in enumerate(partners.iterrows(), start=2):
-        code = str(row["comtrade_code"])
+    selected_codes = {focal_code}
+    for _, row in partner_rank.iterrows():
+        if len(records) >= country_count:
+            break
+        code = _norm_comtrade_code(row["comtrade_code"])
+        if not code or code in selected_codes:
+            continue
         location = next(
             (
                 item
                 for item in nested(config, "sources", "weather", "locations", default=[])
-                if str(item.get("comtrade_code", "")) == code
+                if _norm_comtrade_code(item.get("comtrade_code", "")) == code
             ),
             {},
         )
         records.append(
             {
-                "rank": rank,
+                "rank": len(records) + 1,
                 "country_name": location.get("name", code),
                 "comtrade_code": code,
                 "iso3": location.get("iso3", ""),
                 "trade_value_usd": float(row["trade_value_usd"]),
-                "selection_reason": "top_partner_by_configured_period_import_value",
+                "selection_reason": "top_partner_with_reporter_data",
             }
         )
+        selected_codes.add(code)
+
+    if len(records) < country_count and not reporters.empty:
+        for _, row in reporters.iterrows():
+            if len(records) >= country_count:
+                break
+            code = _norm_comtrade_code(row["comtrade_code"])
+            if not code or code in selected_codes:
+                continue
+            location = next(
+                (
+                    item
+                    for item in nested(config, "sources", "weather", "locations", default=[])
+                    if _norm_comtrade_code(item.get("comtrade_code", "")) == code
+                ),
+                {},
+            )
+            records.append(
+                {
+                    "rank": len(records) + 1,
+                    "country_name": location.get("name", code),
+                    "comtrade_code": code,
+                    "iso3": location.get("iso3", ""),
+                    "trade_value_usd": float(row["trade_value_usd"]),
+                    "selection_reason": "reporter_backfill",
+                }
+            )
+            selected_codes.add(code)
+
     return pd.DataFrame(records)
 
 

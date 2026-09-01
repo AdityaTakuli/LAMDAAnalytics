@@ -4,8 +4,11 @@ analysis:
   end_date: "2024-12-31"
   monthly_step: "MS"
   horizon_months: 1
-  taus: [0.30, 0.35, 0.40]
+  taus: [0.20, 0.30, 0.35, 0.40]
   default_tau: 0.35
+  # Country-month positives at tau=0.35 are too rare for a defensible binary split
+  # (3 train / 15 total with the standard 12-month baseline). Use 0.20 for classification.
+  classification_tau: 0.20
   focal_country:
     name: "India"
     comtrade_code: "699"
@@ -42,6 +45,7 @@ sources:
     negative_tone_threshold: -2.0
     countries: [IND, CHN, VNM, TWN, KOR, JPN, MYS, SGP, THA, IDN, PHL, USA, DEU, NLD, GBR, ARE, AUS, MEX, BRA, FRA]
     labor_unrest_event_roots: ["14"]
+    labor_unrest_event_base_codes: ["143", "144"]
     supply_chain_event_roots: ["14", "16", "17", "18", "19"]
   weather:
     provider: "nasa_power"
@@ -110,7 +114,11 @@ training:
 
 model_training:
   task: "regression"
-  tau: 0.35
+  tau: 0.20
+  pair:
+    run_name: pair_pooled
+    task: classification
+    models: [gcn, tgn, tgn_no_memory]
   baseline_window: 12
   baseline_min_periods: 12
   models: ["gcn", "tgn", "tgn_no_memory"]

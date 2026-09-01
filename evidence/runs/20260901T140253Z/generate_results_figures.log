@@ -1,0 +1,4 @@
+Wrote figures to /home/aditya/Desktop/ARiES/LAMDAAnalytics/Research Paper/figures
+  panels: results_country_month_panels.pdf
+  setup: results_setup_comparison.pdf
+  sensitivity: results_prefix_sensitivity.pdf

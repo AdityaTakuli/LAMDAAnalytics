@@ -77,11 +77,17 @@ def _noaa(
     return json.loads(raw_path.read_text(encoding="utf-8"))
 
 
+def _observation_available_at(observed_date: pd.Timestamp, provider: str) -> str:
+    """Return when a daily observation is treated as knowable for causal fusion."""
+    lag_days = 2 if provider == "nasa_power" else 1
+    return (observed_date + pd.Timedelta(days=lag_days)).isoformat()
+
+
 def _rows(
     location: dict[str, Any],
     payload: dict,
     provider: str,
-    available_at: str,
+    download_vintage: str,
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     if provider == "nasa_power":
@@ -93,18 +99,20 @@ def _rows(
                 continue
             if numeric <= -900:
                 continue
+            observed = pd.to_datetime(day, format="%Y%m%d", utc=True)
+            available_at = _observation_available_at(observed, provider)
             rows.append(
                 {
                     "node_id": location.get("node_id") or stable_id("country", location["name"]),
                     "location_name": location["name"],
                     "latitude": location["latitude"],
                     "longitude": location["longitude"],
-                    "observed_date": pd.to_datetime(day, format="%Y%m%d", utc=True).isoformat(),
+                    "observed_date": observed.isoformat(),
                     "temperature_c": numeric,
                     "provider": provider,
                     "published_at": available_at,
                     "available_at": available_at,
-                    "vintage_date": available_at,
+                    "vintage_date": download_vintage,
                     "source": "nasa_power",
                 }
             )
@@ -115,18 +123,20 @@ def _rows(
                 continue
             # NOAA TAVG is tenths of a degree Celsius for GHCND.
             numeric = float(value) / 10.0 if abs(float(value)) > 100 else float(value)
+            observed = pd.Timestamp(item["date"], tz="UTC")
+            available_at = _observation_available_at(observed, provider)
             rows.append(
                 {
                     "node_id": location.get("node_id") or stable_id("country", location["name"]),
                     "location_name": location["name"],
                     "latitude": location["latitude"],
                     "longitude": location["longitude"],
-                    "observed_date": pd.Timestamp(item["date"], tz="UTC").isoformat(),
+                    "observed_date": observed.isoformat(),
                     "temperature_c": numeric,
                     "provider": provider,
                     "published_at": available_at,
                     "available_at": available_at,
-                    "vintage_date": available_at,
+                    "vintage_date": download_vintage,
                     "source": "noaa_cdo",
                 }
             )
@@ -167,7 +177,7 @@ def ingest(config: dict, force: bool = False) -> Path:
             payload = _noaa(location, start, end, raw_path, config, force)
         else:
             payload = _nasa(location, start, end, raw_path, force)
-        all_rows.extend(_rows(location, payload, provider, available_at))
+        all_rows.extend(_rows(location, payload, provider, download_vintage))
     frame = pd.DataFrame(all_rows)
     return write_table(frame, destination)
 

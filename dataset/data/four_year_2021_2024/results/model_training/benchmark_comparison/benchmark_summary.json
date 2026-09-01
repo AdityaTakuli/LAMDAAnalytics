@@ -1,0 +1,21 @@
+{
+  "runs": {
+    "country_month": {
+      "regression": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/country_month/regression",
+      "classification": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/country_month/classification"
+    },
+    "pair_pooled": {
+      "regression": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/pair_pooled/regression",
+      "classification": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/pair_pooled/classification"
+    }
+  },
+  "report": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/BENCHMARK_REPORT.md",
+  "plots": [
+    "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/plots/test_regression_rmse.png",
+    "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/plots/test_regression_r2.png",
+    "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/plots/test_classification_average_precision.png",
+    "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/plots/test_classification_roc_auc.png",
+    "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/plots/overview_regression_r2.png",
+    "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/benchmark_comparison/plots/overview_classification_average_precision.png"
+  ]
+}

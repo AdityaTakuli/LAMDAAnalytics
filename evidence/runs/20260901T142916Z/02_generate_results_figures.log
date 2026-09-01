@@ -1,0 +1,13 @@
+=== 02 generate_results_figures.py ===
+utc=2026-09-01T14:29:23.250412+00:00
+git=60bfd147fdfeec5c3673593e3efbd507547e6037
+python=/home/aditya/Desktop/ARiES/LAMDAAnalytics/backend/.venv/bin/python
+cwd=/home/aditya/Desktop/ARiES/LAMDAAnalytics
+---
+exit=0
+elapsed_s=4.031
+--- stdout/stderr ---
+Wrote figures to /home/aditya/Desktop/ARiES/LAMDAAnalytics/Research Paper/figures
+  panels: results_country_month_panels.pdf
+  setup: results_setup_comparison.pdf
+  sensitivity: results_prefix_sensitivity.pdf

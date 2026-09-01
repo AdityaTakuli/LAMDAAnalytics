@@ -1,0 +1,39 @@
+localhost:~/Desktop/ARiES/LAMDAAnalytics$ python -m evidence.analyze_client \
+  --url http://127.0.0.1:8007/analyze \
+  --payload evidence/payloads/analyze_example.json
+utc=2026-09-01T15:02:56Z
+url=http://127.0.0.1:8007/analyze
+--- request ---
+{
+  "component_type": "Semiconductor",
+  "seller_location": "Hsinchu, Taiwan",
+  "import_location": "Los Angeles, USA",
+  "seller_name": "TSMC",
+  "additional_factors": {}
+}
+--- response ---
+http_code=200
+time_total_s=2.746
+INFO: body does not match hardcoded mock fallback
+
+lane  Semiconductor  TSMC
+      Hsinchu, Taiwan  ->  Los Angeles, USA
+id    659dc276-37db-4ad6-8e56-967510045e2a
+
+features
+  inventory_days         0.5335
+  past_delay_days        0.8337
+  news_vol_7d            0.3008
+  neg_tone_frac_3d       0.3008
+  strike_flag_7d         0.5000
+  weather_anomaly_7d     0.5000
+  global_risk            0.6040
+
+tgn_result  risk_score=0.519  Medium
+  past_delay_days        0.167
+  inventory_days         0.107
+  strike_flag_7d         0.075
+  weather_anomaly_7d     0.050
+  neg_tone_frac_3d       0.045
+  news_vol_7d            0.045
+  global_risk            0.030

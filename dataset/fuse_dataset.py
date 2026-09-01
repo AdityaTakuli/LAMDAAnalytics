@@ -314,7 +314,18 @@ def build_fused_tables(
         freq="MS",
     )]
 
-    country_ids = selected or (set(inbound["country_id"]) if not inbound.empty else set())
+    selected = selected or (set(inbound["country_id"]) if not inbound.empty else set())
+    if not inbound.empty:
+        positive_inbound = (
+            inbound.groupby("country_id")["inbound_value"]
+            .sum()
+            .loc[lambda series: series.gt(0)]
+            .index.astype(str)
+        )
+        dropped = sorted(set(selected) - set(positive_inbound))
+        if dropped:
+            selected = {country_id for country_id in selected if country_id in set(positive_inbound)}
+    country_ids = selected
 
     records: list[dict[str, Any]] = []
     for month in steps:

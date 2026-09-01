@@ -1,0 +1,156 @@
+=== timed POST /analyze (curl + python -m evidence.analyze_client) ===
+utc=2026-09-01T14:34:49Z
+git=60bfd147fdfeec5c3673593e3efbd507547e6037
+base=http://127.0.0.1:8007
+payload=/home/aditya/Desktop/ARiES/LAMDAAnalytics/evidence/payloads/analyze_example.json
+--- curl ---
+{"request_id":"6e10e8d2-2c81-420f-9861-59aa52f0daed","created_at":"2026-09-01T14:34:55.906047Z","inputs":{"component_type":"Semiconductor","seller_location":"Hsinchu, Taiwan","import_location":"Los Angeles, USA","seller_name":"TSMC","additional_factors":{}},"features":{"inventory_days":0.65,"past_delay_days":0.42,"news_vol_7d":0.78,"neg_tone_frac_3d":0.23,"strike_flag_7d":0.0,"weather_anomaly_7d":0.15,"global_risk":0.31},"tgn_result":{"risk_score":0.45,"risk_label":"Medium","risk_components":{"inventory_days":0.13,"past_delay_days":0.08,"news_vol_7d":0.12,"neg_tone_frac_3d":0.03,"strike_flag_7d":0.0,"weather_anomaly_7d":0.02,"global_risk":0.02}},"concise":[{"name":"news_vol_7d","level":"High","percent":26.7,"impact":"High volume of disruption mentions detected by News Agent via SERP API"},{"name":"inventory_days","level":"Medium","percent":22.2,"impact":"Inventory coverage analysis by Trade Agent via Gemini AI"},{"name":"past_delay_days","level":"Medium","percent":13.3,"impact":"Historical delay patterns analyzed by Trade Agent"},{"name":"neg_tone_frac_3d","level":"Low","percent":8.9,"impact":"Negative sentiment detected by News Agent via Gemini analysis"},{"name":"weather_anomaly_7d","level":"Low","percent":5.6,"impact":"Weather anomalies detected by Weather Agent via OpenWeather API"},{"name":"global_risk","level":"Low","percent":5.6,"impact":"Global supply chain pressure from GSCPI Agent via Gemini"},{"name":"strike_flag_7d","level":"Low","percent":0.0,"impact":"Labor unrest monitoring by News Agent"}],"comprehensive":{"risk_distribution":[{"name":"news_vol_7d","level":"High","percent":26.7,"impact":"News Agent: SERP API → Web scraping → Gemini sentiment analysis"},{"name":"inventory_days","level":"Medium","percent":22.2,"impact":"Trade Agent: Gemini AI trade flow analysis"},{"name":"past_delay_days","level":"Medium","percent":13.3,"impact":"Trade Agent: Historical pattern analysis"},{"name":"neg_tone_frac_3d","level":"Low","percent":8.9,"impact":"News Agent: Real-time sentiment monitoring"},{"name":"weather_anomaly_7d","level":"Low","percent":5.6,"impact":"Weather Agent: OpenWeather API anomaly detection"},{"name":"global_risk","level":"Low","percent":5.6,"impact":"GSCPI Agent: Global supply chain pressure index"},{"name":"strike_flag_7d","level":"Low","percent":0.0,"impact":"News Agent: Labor unrest detection"}],"mitigation_strategies":{"News-Based Risk Mitigation":"Monitor disruption mentions via SERP API and News Agent. Set up alerts for negative sentiment spikes.","Trade Flow Optimization":"Use Trade Agent insights to optimize inventory levels and identify alternative suppliers.","Weather Risk Management":"Implement Weather Agent monitoring for route planning and buffer inventory during anomalies.","Political Risk Assessment":"Leverage Political Agent for sanctions monitoring and geopolitical risk evaluation.","Global Pressure Response":"Use GSCPI Agent to anticipate global supply chain disruptions and adjust sourcing strategies."}}}
+http_code=200
+time_total_s=5.982295
+
+--- python -m evidence.analyze_client ---
+utc=2026-09-01T14:34:56.006723+00:00
+url=http://127.0.0.1:8007/analyze
+payload=/home/aditya/Desktop/ARiES/LAMDAAnalytics/evidence/payloads/analyze_example.json
+timeout_s=55.0
+--- request ---
+{
+  "component_type": "Semiconductor",
+  "seller_location": "Hsinchu, Taiwan",
+  "import_location": "Los Angeles, USA",
+  "seller_name": "TSMC",
+  "additional_factors": {}
+}
+--- response ---
+http_code=200
+time_total_s=0.625
+{
+  "request_id": "dc2e140e-f348-41d2-a30b-b68fc4c1d1c4",
+  "created_at": "2026-09-01T14:34:56.630122Z",
+  "inputs": {
+    "component_type": "Semiconductor",
+    "seller_location": "Hsinchu, Taiwan",
+    "import_location": "Los Angeles, USA",
+    "seller_name": "TSMC",
+    "additional_factors": {}
+  },
+  "features": {
+    "inventory_days": 0.65,
+    "past_delay_days": 0.42,
+    "news_vol_7d": 0.78,
+    "neg_tone_frac_3d": 0.23,
+    "strike_flag_7d": 0.0,
+    "weather_anomaly_7d": 0.15,
+    "global_risk": 0.31
+  },
+  "tgn_result": {
+    "risk_score": 0.45,
+    "risk_label": "Medium",
+    "risk_components": {
+      "inventory_days": 0.13,
+      "past_delay_days": 0.08,
+      "news_vol_7d": 0.12,
+      "neg_tone_frac_3d": 0.03,
+      "strike_flag_7d": 0.0,
+      "weather_anomaly_7d": 0.02,
+      "global_risk": 0.02
+    }
+  },
+  "concise": [
+    {
+      "name": "news_vol_7d",
+      "level": "High",
+      "percent": 26.7,
+      "impact": "High volume of disruption mentions detected by News Agent via SERP API"
+    },
+    {
+      "name": "inventory_days",
+      "level": "Medium",
+      "percent": 22.2,
+      "impact": "Inventory coverage analysis by Trade Agent via Gemini AI"
+    },
+    {
+      "name": "past_delay_days",
+      "level": "Medium",
+      "percent": 13.3,
+      "impact": "Historical delay patterns analyzed by Trade Agent"
+    },
+    {
+      "name": "neg_tone_frac_3d",
+      "level": "Low",
+      "percent": 8.9,
+      "impact": "Negative sentiment detected by News Agent via Gemini analysis"
+    },
+    {
+      "name": "weather_anomaly_7d",
+      "level": "Low",
+      "percent": 5.6,
+      "impact": "Weather anomalies detected by Weather Agent via OpenWeather API"
+    },
+    {
+      "name": "global_risk",
+      "level": "Low",
+      "percent": 5.6,
+      "impact": "Global supply chain pressure from GSCPI Agent via Gemini"
+    },
+    {
+      "name": "strike_flag_7d",
+      "level": "Low",
+      "percent": 0.0,
+      "impact": "Labor unrest monitoring by News Agent"
+    }
+  ],
+  "comprehensive": {
+    "risk_distribution": [
+      {
+        "name": "news_vol_7d",
+        "level": "High",
+        "percent": 26.7,
+        "impact": "News Agent: SERP API \u2192 Web scraping \u2192 Gemini sentiment analysis"
+      },
+      {
+        "name": "inventory_days",
+        "level": "Medium",
+        "percent": 22.2,
+        "impact": "Trade Agent: Gemini AI trade flow analysis"
+      },
+      {
+        "name": "past_delay_days",
+        "level": "Medium",
+        "percent": 13.3,
+        "impact": "Trade Agent: Historical pattern analysis"
+      },
+      {
+        "name": "neg_tone_frac_3d",
+        "level": "Low",
+        "percent": 8.9,
+        "impact": "News Agent: Real-time sentiment monitoring"
+      },
+      {
+        "name": "weather_anomaly_7d",
+        "level": "Low",
+        "percent": 5.6,
+        "impact": "Weather Agent: OpenWeather API anomaly detection"
+      },
+      {
+        "name": "global_risk",
+        "level": "Low",
+        "percent": 5.6,
+        "impact": "GSCPI Agent: Global supply chain pressure index"
+      },
+      {
+        "name": "strike_flag_7d",
+        "level": "Low",
+        "percent": 0.0,
+        "impact": "News Agent: Labor unrest detection"
+      }
+    ],
+    "mitigation_strategies": {
+      "News-Based Risk Mitigation": "Monitor disruption mentions via SERP API and News Agent. Set up alerts for negative sentiment spikes.",
+      "Trade Flow Optimization": "Use Trade Agent insights to optimize inventory levels and identify alternative suppliers.",
+      "Weather Risk Management": "Implement Weather Agent monitoring for route planning and buffer inventory during anomalies.",
+      "Political Risk Assessment": "Leverage Political Agent for sanctions monitoring and geopolitical risk evaluation.",
+      "Global Pressure Response": "Use GSCPI Agent to anticipate global supply chain disruptions and adjust sourcing strategies."
+    }
+  }
+}

@@ -12,7 +12,7 @@ from datetime import date, timedelta
 import json
 from pathlib import Path
 import re
-from typing import Any
+from typing import Any, Sequence
 
 import numpy as np
 import pandas as pd
@@ -182,7 +182,13 @@ def _comtrade_analysis(
     return summary, inbound
 
 
-def _target_analysis(inbound: pd.DataFrame, codes: list[str]) -> dict[str, Any]:
+def _target_analysis(
+    inbound: pd.DataFrame,
+    codes: list[str],
+    *,
+    taus: Sequence[float] = (0.20, 0.30, 0.35, 0.40),
+    classification_tau: float = 0.20,
+) -> dict[str, Any]:
     index = pd.MultiIndex.from_product([codes, MONTHS], names=["country_code", "month"])
     values = inbound.set_index(["country_code", "month"])["inbound_value_usd"].reindex(index)
     values = values.fillna(0.0).rename("inbound_value_usd").reset_index()
@@ -202,13 +208,15 @@ def _target_analysis(inbound: pd.DataFrame, codes: list[str]) -> dict[str, Any]:
     )
     valid = values[values["target_valid"]].copy()
     by_tau: dict[str, Any] = {}
-    for tau in (0.30, 0.35, 0.40):
+    for tau in taus:
         positives = int(valid["contraction"].lt(-tau).sum())
         by_tau[f"{tau:.2f}"] = {
             "positive": positives,
             "negative": int(len(valid) - positives),
             "prevalence": float(positives / len(valid)) if len(valid) else None,
         }
+    gate_tau = float(classification_tau)
+    gate_key = f"{gate_tau:.2f}"
     splits = {
         "train_2021_2022": values[values["month"].str[:4].isin(["2021", "2022"])],
         "validation_2023": values[values["month"].str[:4].eq("2023")],
@@ -217,13 +225,13 @@ def _target_analysis(inbound: pd.DataFrame, codes: list[str]) -> dict[str, Any]:
     split_summary: dict[str, Any] = {}
     for name, split in splits.items():
         split_valid = split[split["target_valid"]]
-        positives = int(split_valid["contraction"].lt(-0.35).sum())
+        positives = int(split_valid["contraction"].lt(-gate_tau).sum())
         split_summary[name] = {
             "rows": int(len(split)),
             "target_valid": int(len(split_valid)),
-            "positive_tau_0.35": positives,
-            "negative_tau_0.35": int(len(split_valid) - positives),
-            "prevalence_tau_0.35": float(positives / len(split_valid))
+            f"positive_tau_{gate_key}": positives,
+            f"negative_tau_{gate_key}": int(len(split_valid) - positives),
+            f"prevalence_tau_{gate_key}": float(positives / len(split_valid))
             if len(split_valid)
             else None,
         }
@@ -245,9 +253,10 @@ def _target_analysis(inbound: pd.DataFrame, codes: list[str]) -> dict[str, Any]:
             "max": float(valid["contraction"].max()) if len(valid) else None,
         },
         "counts_by_tau": by_tau,
+        "classification_tau": gate_tau,
         "chronological_split": split_summary,
-        "has_both_classes_in_every_split_tau_0.35": all(
-            item["positive_tau_0.35"] > 0 and item["negative_tau_0.35"] > 0
+        "has_both_classes_in_every_split": all(
+            item[f"positive_tau_{gate_key}"] > 0 and item[f"negative_tau_{gate_key}"] > 0
             for item in split_summary.values()
             if item["target_valid"]
         ),
@@ -367,6 +376,9 @@ def _write_report(destination: Path, report: dict[str, Any]) -> None:
         json.dumps(report, indent=2, default=str), encoding="utf-8"
     )
     readiness = report["training_readiness"]
+    target = report["target"]
+    gate_tau = target["classification_tau"]
+    gate_key = f"{gate_tau:.2f}"
     lines = [
         "# 2021–2024 data analysis",
         "",
@@ -381,9 +393,9 @@ def _write_report(destination: Path, report: dict[str, Any]) -> None:
         f"- Feature gate: **{readiness['feature_gate']}** "
         "(four-year processed artifacts and complete 2024 weather coverage required).",
         f"- Label gate: **{readiness['label_gate']}** "
-        "(both classes in each split and at least 10 training positives required).",
+        f"(both classes in each split and at least 10 training positives at tau={gate_key}).",
         f"- Continuous-target gate: **{readiness['continuous_target_gate']}** "
-        f"({report['target']['valid_target_rows']} valid non-constant contraction "
+        f"({target['valid_target_rows']} valid non-constant contraction "
         "targets support regression).",
         "",
         "## Acquisition findings",
@@ -407,25 +419,38 @@ def _write_report(destination: Path, report: dict[str, Any]) -> None:
         "",
         "## Target and split findings",
         "",
-        f"- Country-month rows: {report['target']['country_month_rows']}.",
-        f"- Valid one-month-ahead targets: {report['target']['valid_target_rows']}.",
+        f"- Country-month rows: {target['country_month_rows']}.",
+        f"- Valid one-month-ahead targets: {target['valid_target_rows']}.",
         f"- Country-months with zero inbound value: "
-        f"{report['target']['zero_inbound_country_months']}.",
-        f"- Tau 0.35 counts: {json.dumps(report['target']['counts_by_tau']['0.35'])}.",
+        f"{target['zero_inbound_country_months']}.",
+        f"- Classification tau: {gate_key} (severe contraction; tau=0.35 has only "
+        f"{target['counts_by_tau'].get('0.35', {}).get('positive', 'n/a')} positives overall).",
+        f"- Tau {gate_key} counts: {json.dumps(target['counts_by_tau'][gate_key])}.",
     ]
-    for split, values in report["target"]["chronological_split"].items():
+    for split, values in target["chronological_split"].items():
         lines.append(
             f"- {split}: {values['target_valid']} valid targets, "
-            f"{values['positive_tau_0.35']} positive, {values['negative_tau_0.35']} negative."
+            f"{values[f'positive_tau_{gate_key}']} positive, "
+            f"{values[f'negative_tau_{gate_key}']} negative."
         )
+    if readiness["label_gate"] == "PASS":
+        next_step = (
+            "Both regression and binary classification benchmarks are supported. "
+            "Train with `python train_models.py --config config.yaml --task classification`."
+        )
+    elif readiness["continuous_target_gate"] == "PASS":
+        next_step = (
+            "Use the processed profile for a continuous contraction-regression pilot; "
+            "binary classification remains blocked at the configured tau."
+        )
+    else:
+        next_step = "Resolve the failing gates before training."
     lines.extend(
         [
             "",
             "## Required next step",
             "",
-            "The binary classification gate remains blocked by class scarcity. "
-            "Use the processed profile for a continuous contraction-regression pilot; "
-            "do not train from raw JSON, ZIP, or Excel files.",
+            next_step,
         ]
     )
     (destination / "analysis_report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -437,7 +462,17 @@ def run(config_path: str = "config.yaml") -> Path:
     manifests = _manifest_summary()
     frame, responses = _comtrade_records()
     comtrade, inbound = _comtrade_analysis(frame, codes, manifests, responses)
-    target = _target_analysis(inbound, codes)
+    analysis_cfg = config.get("analysis") or {}
+    taus = [float(value) for value in analysis_cfg.get("taus", [0.20, 0.30, 0.35, 0.40])]
+    classification_tau = float(
+        analysis_cfg.get("classification_tau", analysis_cfg.get("default_tau", 0.35))
+    )
+    target = _target_analysis(
+        inbound,
+        codes,
+        taus=taus,
+        classification_tau=classification_tau,
+    )
     gdelt = _gdelt_analysis()
     expected_locations = [
         str(location.get("name"))
@@ -456,10 +491,11 @@ def run(config_path: str = "config.yaml") -> Path:
         processed_root / "graph.json",
     ]
     processed_complete = all(path.exists() for path in processed_paths)
-    both_classes = target["has_both_classes_in_every_split_tau_0.35"]
+    both_classes = target["has_both_classes_in_every_split"]
     missing_weather = weather["processed_profile"].get("missing_expected_locations", [])
+    gate_key = f"{target['classification_tau']:.2f}"
     train_positives = target["chronological_split"]["train_2021_2022"][
-        "positive_tau_0.35"
+        f"positive_tau_{gate_key}"
     ]
     acquisition_gate = "PASS" if comtrade["all_requests_succeeded"] else "FAIL"
     feature_gate = (
@@ -486,16 +522,21 @@ def run(config_path: str = "config.yaml") -> Path:
         )
     if train_positives < 10:
         readiness_reasons.append(
-            f"the training split has only {train_positives} positive tau=0.35 targets"
+            f"the training split has only {train_positives} positive tau={gate_key} targets"
         )
     if not processed_complete:
         readiness_reasons.append("four-year processed tables and leakage audits do not exist")
     if readiness_reasons:
-        if feature_gate == "PASS" and continuous_target_gate == "PASS":
+        if feature_gate == "PASS" and continuous_target_gate == "PASS" and label_gate == "FAIL":
             decision = "READY FOR CONTINUOUS-TARGET PILOT; BINARY CLASSIFICATION BLOCKED"
             reason = (
                 "; ".join(readiness_reasons)
                 + "; use continuous contraction regression instead of a binary benchmark."
+            )
+        elif feature_gate == "PASS" and continuous_target_gate == "PASS" and label_gate == "PASS":
+            decision = "READY FOR TRAINING REVIEW"
+            reason = (
+                "Source coverage, target classes, and processed artifacts passed this profile."
             )
         else:
             decision = "NOT READY FOR FINAL TRAINING"
@@ -528,12 +569,21 @@ def run(config_path: str = "config.yaml") -> Path:
             "feature_gate": feature_gate,
             "label_gate": label_gate,
             "continuous_target_gate": continuous_target_gate,
-            "recommended_target": "continuous contraction regression",
+            "recommended_target": (
+                "regression and classification"
+                if label_gate == "PASS" and continuous_target_gate == "PASS"
+                else "continuous contraction regression"
+            ),
             "four_year_processed_root_exists": processed_root.exists(),
             "four_year_processed_artifacts_complete": processed_complete,
             "gdelt_has_known_missing_dates": bool(gdelt["missing_dates"]),
-            "target_has_both_classes_in_every_split_tau_0.35": both_classes,
-            "do_not_train_yet": True,
+            "target_has_both_classes_in_every_split": both_classes,
+            "classification_tau": target["classification_tau"],
+            "do_not_train_yet": not (
+                feature_gate == "PASS"
+                and continuous_target_gate == "PASS"
+                and acquisition_gate == "PASS"
+            ),
             "models_trained": False,
         },
     }

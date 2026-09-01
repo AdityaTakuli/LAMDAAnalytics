@@ -1,0 +1,155 @@
+=== timed POST /analyze (curl + python -m evidence.analyze_client) ===
+utc=2026-09-01T14:56:38Z
+git=60bfd147fdfeec5c3673593e3efbd507547e6037
+base=http://127.0.0.1:8007
+payload=/home/aditya/Desktop/ARiES/LAMDAAnalytics/evidence/payloads/analyze_example.json
+--- curl ---
+{"request_id":"a29f1786-1ff6-4b54-bb89-669407b8ba9a","created_at":"2026-09-01T14:56:38.652312Z","inputs":{"component_type":"Semiconductor","seller_location":"Hsinchu, Taiwan","import_location":"Los Angeles, USA","seller_name":"TSMC","additional_factors":{}},"features":{"inventory_days":0.5933820649162616,"past_delay_days":0.8756427967696353,"news_vol_7d":0.25558474734006914,"neg_tone_frac_3d":0.2555847473400692,"strike_flag_7d":0.5,"weather_anomaly_7d":0.5,"global_risk":0.8628423905868837},"tgn_result":{"risk_score":0.5386225160685444,"risk_label":"Medium","risk_components":{"inventory_days":0.11867641298325232,"past_delay_days":0.17512855935392707,"news_vol_7d":0.03833771210101037,"neg_tone_frac_3d":0.03833771210101038,"strike_flag_7d":0.075,"weather_anomaly_7d":0.05,"global_risk":0.043142119529344186}},"concise":[{"name":"past_delay_days","level":"Low","percent":17.51,"impact":"Historical delays suggest risk carryover"},{"name":"inventory_days","level":"Low","percent":11.87,"impact":"Inventory coverage may be tightening"},{"name":"strike_flag_7d","level":"Low","percent":7.5,"impact":"Labor unrest may affect ports/logistics"},{"name":"weather_anomaly_7d","level":"Low","percent":5.0,"impact":"Recent weather anomaly near route/plant"},{"name":"global_risk","level":"Low","percent":4.31,"impact":"Global chain pressure elevated"},{"name":"news_vol_7d","level":"Low","percent":3.83,"impact":"High volume of disruption mentions"},{"name":"neg_tone_frac_3d","level":"Low","percent":3.83,"impact":"Negative news sentiment trending"}],"comprehensive":{"risk_distribution":[{"name":"past_delay_days","level":"Low","percent":17.51,"impact":"Historical delays suggest risk carryover"},{"name":"inventory_days","level":"Low","percent":11.87,"impact":"Inventory coverage may be tightening"},{"name":"strike_flag_7d","level":"Low","percent":7.5,"impact":"Labor unrest may affect ports/logistics"},{"name":"weather_anomaly_7d","level":"Low","percent":5.0,"impact":"Recent weather anomaly near route/plant"},{"name":"global_risk","level":"Low","percent":4.31,"impact":"Global chain pressure elevated"},{"name":"news_vol_7d","level":"Low","percent":3.83,"impact":"High volume of disruption mentions"},{"name":"neg_tone_frac_3d","level":"Low","percent":3.83,"impact":"Negative news sentiment trending"}],"mitigation_strategies":{"Weather Risk Mitigation":"Plan alternate routes and maintain buffer inventory during severe weather.","Labor Strike Contingency":"Pre-negotiate slots with alternative ports and carriers.","Sanctions Compliance":"Continuously monitor regulations; pre-qualify alternate suppliers."}}}
+http_code=200
+time_total_s=10.633208
+
+--- python -m evidence.analyze_client ---
+utc=2026-09-01T14:56:49.399976+00:00
+url=http://127.0.0.1:8007/analyze
+payload=/home/aditya/Desktop/ARiES/LAMDAAnalytics/evidence/payloads/analyze_example.json
+timeout_s=120.0
+--- request ---
+{
+  "component_type": "Semiconductor",
+  "seller_location": "Hsinchu, Taiwan",
+  "import_location": "Los Angeles, USA",
+  "seller_name": "TSMC",
+  "additional_factors": {}
+}
+--- response ---
+http_code=200
+time_total_s=7.220
+INFO: body does not match hardcoded mock fallback
+{
+  "request_id": "abe7c6c7-15f9-4b88-81b9-c194ce5b4c55",
+  "created_at": "2026-09-01T14:56:49.474388Z",
+  "inputs": {
+    "component_type": "Semiconductor",
+    "seller_location": "Hsinchu, Taiwan",
+    "import_location": "Los Angeles, USA",
+    "seller_name": "TSMC",
+    "additional_factors": {}
+  },
+  "features": {
+    "inventory_days": 0.58747900083961,
+    "past_delay_days": 0.8144245036669688,
+    "news_vol_7d": 0.2818275531405582,
+    "neg_tone_frac_3d": 0.28182755314055824,
+    "strike_flag_7d": 0.5,
+    "weather_anomaly_7d": 0.5,
+    "global_risk": 0.10267503127455282
+  },
+  "tgn_result": {
+    "risk_score": 0.4950627184072109,
+    "risk_label": "Medium",
+    "risk_components": {
+      "inventory_days": 0.11749580016792201,
+      "past_delay_days": 0.1628849007333938,
+      "news_vol_7d": 0.042274132971083726,
+      "neg_tone_frac_3d": 0.04227413297108373,
+      "strike_flag_7d": 0.075,
+      "weather_anomaly_7d": 0.05,
+      "global_risk": 0.005133751563727642
+    }
+  },
+  "concise": [
+    {
+      "name": "past_delay_days",
+      "level": "Low",
+      "percent": 16.29,
+      "impact": "Historical delays suggest risk carryover"
+    },
+    {
+      "name": "inventory_days",
+      "level": "Low",
+      "percent": 11.75,
+      "impact": "Inventory coverage may be tightening"
+    },
+    {
+      "name": "strike_flag_7d",
+      "level": "Low",
+      "percent": 7.5,
+      "impact": "Labor unrest may affect ports/logistics"
+    },
+    {
+      "name": "weather_anomaly_7d",
+      "level": "Low",
+      "percent": 5.0,
+      "impact": "Recent weather anomaly near route/plant"
+    },
+    {
+      "name": "news_vol_7d",
+      "level": "Low",
+      "percent": 4.23,
+      "impact": "High volume of disruption mentions"
+    },
+    {
+      "name": "neg_tone_frac_3d",
+      "level": "Low",
+      "percent": 4.23,
+      "impact": "Negative news sentiment trending"
+    },
+    {
+      "name": "global_risk",
+      "level": "Low",
+      "percent": 0.51,
+      "impact": "Global chain pressure elevated"
+    }
+  ],
+  "comprehensive": {
+    "risk_distribution": [
+      {
+        "name": "past_delay_days",
+        "level": "Low",
+        "percent": 16.29,
+        "impact": "Historical delays suggest risk carryover"
+      },
+      {
+        "name": "inventory_days",
+        "level": "Low",
+        "percent": 11.75,
+        "impact": "Inventory coverage may be tightening"
+      },
+      {
+        "name": "strike_flag_7d",
+        "level": "Low",
+        "percent": 7.5,
+        "impact": "Labor unrest may affect ports/logistics"
+      },
+      {
+        "name": "weather_anomaly_7d",
+        "level": "Low",
+        "percent": 5.0,
+        "impact": "Recent weather anomaly near route/plant"
+      },
+      {
+        "name": "news_vol_7d",
+        "level": "Low",
+        "percent": 4.23,
+        "impact": "High volume of disruption mentions"
+      },
+      {
+        "name": "neg_tone_frac_3d",
+        "level": "Low",
+        "percent": 4.23,
+        "impact": "Negative news sentiment trending"
+      },
+      {
+        "name": "global_risk",
+        "level": "Low",
+        "percent": 0.51,
+        "impact": "Global chain pressure elevated"
+      }
+    ],
+    "mitigation_strategies": {
+      "Weather Risk Mitigation": "Plan alternate routes and maintain buffer inventory during severe weather.",
+      "Labor Strike Contingency": "Pre-negotiate slots with alternative ports and carriers.",
+      "Sanctions Compliance": "Continuously monitor regulations; pre-qualify alternate suppliers."
+    }
+  }
+}

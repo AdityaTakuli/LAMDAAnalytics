@@ -82,8 +82,13 @@ def normalize(path: Path, vintage: str) -> pd.DataFrame:
         .groupby("month", as_index=False)["global_risk"]
         .last()
     )
-    result["published_at"] = vintage
-    result["available_at"] = vintage
+    # GSCPI for month M is treated as knowable after month-end plus a short
+    # publication lag.  Using the download timestamp would exclude every row in
+    # causal fusion because available_at would be later than the study window.
+    month_end = pd.to_datetime(result["month"] + "-01", utc=True) + pd.offsets.MonthEnd(0)
+    available = month_end + pd.Timedelta(days=7)
+    result["published_at"] = available.map(lambda value: value.isoformat())
+    result["available_at"] = result["published_at"]
     result["vintage_date"] = vintage
     result["source"] = "nyfed_gscpi"
     return result[["month", "global_risk", "published_at", "available_at", "vintage_date", "source"]]

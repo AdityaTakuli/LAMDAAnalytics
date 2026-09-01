@@ -8,10 +8,11 @@ class Settings(BaseSettings):
     serp_api_key: str = Field(..., alias="SERP_API_KEY")
     weather_api_key: str = Field(..., alias="WEATHER_API_KEY")
     groq_api_key: str = Field(..., alias="GROQ_API_KEY")
+    groq_model: str = Field("openai/gpt-oss-120b", alias="GROQ_MODEL")
 
     weather_provider: str = Field("openweather", alias="WEATHER_PROVIDER")
     http_timeout_seconds: int = Field(30, alias="HTTP_TIMEOUT_SECONDS")
-    agent_timeout_seconds: int = Field(40, alias="AGENT_TIMEOUT_SECONDS")
+    agent_timeout_seconds: int = Field(90, alias="AGENT_TIMEOUT_SECONDS")
     scoring_state_path: str = Field("./data/scoring_state.json", alias="SCORING_STATE_PATH")
     log_level: str = Field("INFO", alias="LOG_LEVEL")
 

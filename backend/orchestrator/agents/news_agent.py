@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
-from ..utils.api_clients import serp_search, http_client, get_gemini
+import os
+from config.settings import settings
+from ..utils.api_clients import serp_search, http_client, get_gemini, secret_configured
 from ..utils.schema import NewsFeatures
 from ..utils.cache import get_cached, set_cached, news_cache
 
@@ -24,6 +26,14 @@ async def _fetch_pages(urls: list[str]) -> list[str]:
     return htmls
 
 async def analyze_news(component_type: str, seller_loc: str, import_loc: str, seller_name: str | None) -> NewsFeatures:
+    if os.environ.get("LAMDA_FORCE_NEWS_FAIL") == "1":
+        return NewsFeatures(
+            news_vol_7d=0,
+            neg_tone_frac_3d=0.0,
+            strike_flag_7d=0,
+            sources=["LAMDA_FORCE_NEWS_FAIL"],
+        )
+
     key = f"{component_type}|{seller_loc}|{import_loc}|{seller_name or ''}"
     cached = get_cached(news_cache, key)
     if cached:
@@ -35,15 +45,16 @@ async def analyze_news(component_type: str, seller_loc: str, import_loc: str, se
         queries.append(t.format(component=component_type, seller=seller_name or "", loc=import_loc))
 
     urls = []
-    for q in queries:
-        try:
-            res = await serp_search(q, num=6)
-            for item in res.get("organic_results", []):
-                link = item.get("link")
-                if link and link not in urls:
-                    urls.append(link)
-        except Exception:
-            continue
+    if secret_configured(settings.serp_api_key):
+        for q in queries:
+            try:
+                res = await serp_search(q, num=6)
+                for item in res.get("organic_results", []):
+                    link = item.get("link")
+                    if link and link not in urls:
+                        urls.append(link)
+            except Exception:
+                continue
 
     htmls = await _fetch_pages(urls)
     texts = []

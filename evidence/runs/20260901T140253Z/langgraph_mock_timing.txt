@@ -1,0 +1,5 @@
+PASS LangGraph network
+  risk_score=0.592
+  risk_label=Medium
+  features=['inventory_days', 'past_delay_days', 'news_vol_7d', 'neg_tone_frac_3d', 'strike_flag_7d', 'weather_anomaly_7d', 'global_risk']
+  nodes_ran=geocode+5 agents+normalize+tgn+report
