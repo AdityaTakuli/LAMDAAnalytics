@@ -92,7 +92,7 @@ def _atomic_write_json(payload: Any, path: Path) -> None:
 
 def _selected_universe(config: dict[str, Any]) -> pd.DataFrame:
     universe_path = _output_path(
-        config, "country_universe", "data/one_year_2024/processed/country_universe.csv"
+        config, "country_universe", "data/four_year_2021_2024/processed/country_universe.csv"
     )
     universe = read_table(universe_path)
     if universe.empty or "comtrade_code" not in universe:
@@ -466,7 +466,7 @@ bilateral import responses for the existing selected country universe.
 * HS codes: 8541, 8542
 * Flow: M (imports)
 * Months: {months[0]} through {months[-1]}
-* Cache: `data/one_year_2024/cache/comtrade/bilateral/`
+* Cache: `data/four_year_2021_2024/cache/comtrade/bilateral/`
 * Previous Comtrade/graph artifacts: `{backup}`
 * API failures: {len(failures)}
 * Missing API cells are preserved as missing, not converted to zero.
@@ -484,7 +484,7 @@ def run(config: dict[str, Any], force: bool = False) -> Path:
     destination = _output_path(
         config,
         "comtrade_coverage_fix",
-        "data/one_year_2024/results/comtrade_coverage_fix",
+        "data/four_year_2021_2024/results/comtrade_coverage_fix",
     )
     summary_marker = destination / "coverage_summary.json"
     if destination.exists() and not force and summary_marker.exists():
@@ -510,7 +510,7 @@ def run(config: dict[str, Any], force: bool = False) -> Path:
     month_labels = [f"{month[:4]}-{month[4:]}" for month in months]
     source = nested(config, "sources", "comtrade", default={})
     cache_dir_value = source.get(
-        "bilateral_cache_dir", "data/one_year_2024/cache/comtrade/bilateral"
+        "bilateral_cache_dir", "data/four_year_2021_2024/cache/comtrade/bilateral"
     )
     cache_dir = Path(cache_dir_value)
     cache_dir = cache_dir if cache_dir.is_absolute() else _base() / cache_dir

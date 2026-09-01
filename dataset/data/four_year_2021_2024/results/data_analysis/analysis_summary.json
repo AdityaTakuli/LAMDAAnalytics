@@ -1,0 +1,390 @@
+{
+  "analysis_scope": {
+    "years": [
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "country_count": 20,
+    "country_codes": [
+      "699",
+      "156",
+      "704",
+      "842",
+      "458",
+      "702",
+      "490",
+      "764",
+      "484",
+      "410",
+      "50",
+      "392",
+      "276",
+      "344",
+      "203",
+      "251",
+      "372",
+      "380",
+      "826",
+      "608"
+    ],
+    "monthly_snapshots": 48,
+    "analysis_timestamp_utc": "2026-08-31T12:01:02.842312+00:00"
+  },
+  "comtrade": {
+    "request_manifest": {
+      "2021": {
+        "manifest": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/three_year_2021_2023/comtrade_2021_manifest.json",
+        "requests": 240,
+        "status_counts": {
+          "success": 240
+        },
+        "failed_requests": 0
+      },
+      "2022": {
+        "manifest": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/three_year_2021_2023/comtrade_2022_manifest.json",
+        "requests": 240,
+        "status_counts": {
+          "success": 240
+        },
+        "failed_requests": 0
+      },
+      "2023": {
+        "manifest": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/three_year_2021_2023/comtrade_2023_manifest.json",
+        "requests": 240,
+        "status_counts": {
+          "success": 240
+        },
+        "failed_requests": 0
+      },
+      "2024": {
+        "manifest": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/one_year_2024/cache/comtrade/bilateral/manifest.json",
+        "requests": 240,
+        "status_counts": {
+          "success": 240
+        },
+        "failed_requests": 0
+      }
+    },
+    "response_files": {
+      "2021": {
+        "cache_dir": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/three_year_2021_2023/cache/comtrade/bilateral",
+        "response_files": 240,
+        "empty_successful_responses": 24
+      },
+      "2022": {
+        "cache_dir": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/three_year_2021_2023/cache/comtrade/bilateral",
+        "response_files": 240,
+        "empty_successful_responses": 24
+      },
+      "2023": {
+        "cache_dir": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/three_year_2021_2023/cache/comtrade/bilateral",
+        "response_files": 240,
+        "empty_successful_responses": 24
+      },
+      "2024": {
+        "cache_dir": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/one_year_2024/cache/comtrade/bilateral",
+        "response_files": 240,
+        "empty_successful_responses": 36
+      }
+    },
+    "expected_requests": 960,
+    "expected_reporter_partner_month_cells": 19200,
+    "records": 31305,
+    "observed_reporter_partner_month_cells": 15845,
+    "reporter_months_with_records": 852,
+    "observed_trade_cell_coverage_fraction": 0.8252604166666667,
+    "empty_successful_responses_total": 108,
+    "unique_reporters_in_records": [
+      "156",
+      "203",
+      "251",
+      "276",
+      "344",
+      "372",
+      "380",
+      "392",
+      "410",
+      "458",
+      "484",
+      "608",
+      "699",
+      "702",
+      "704",
+      "764",
+      "826",
+      "842"
+    ],
+    "unique_partners_in_records": [
+      "156",
+      "203",
+      "251",
+      "276",
+      "344",
+      "372",
+      "380",
+      "392",
+      "410",
+      "458",
+      "484",
+      "490",
+      "50",
+      "608",
+      "699",
+      "702",
+      "704",
+      "764",
+      "826",
+      "842"
+    ],
+    "months_in_records": [
+      "2021-01",
+      "2021-02",
+      "2021-03",
+      "2021-04",
+      "2021-05",
+      "2021-06",
+      "2021-07",
+      "2021-08",
+      "2021-09",
+      "2021-10",
+      "2021-11",
+      "2021-12",
+      "2022-01",
+      "2022-02",
+      "2022-03",
+      "2022-04",
+      "2022-05",
+      "2022-06",
+      "2022-07",
+      "2022-08",
+      "2022-09",
+      "2022-10",
+      "2022-11",
+      "2022-12",
+      "2023-01",
+      "2023-02",
+      "2023-03",
+      "2023-04",
+      "2023-05",
+      "2023-06",
+      "2023-07",
+      "2023-08",
+      "2023-09",
+      "2023-10",
+      "2023-11",
+      "2023-12",
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12"
+    ],
+    "hs_codes_in_records": [
+      "8541",
+      "8542"
+    ],
+    "flow_codes_in_records": [
+      "M"
+    ],
+    "duplicate_observation_keys": 0,
+    "negative_primary_value_rows": 0,
+    "missing_primary_value_rows": 0,
+    "zero_primary_value_rows": 0,
+    "all_requests_succeeded": true,
+    "total_expected_requests": 960,
+    "total_successful_requests": 960
+  },
+  "target": {
+    "country_month_rows": 960,
+    "expected_country_month_rows": 960,
+    "valid_target_rows": 643,
+    "invalid_target_rows": 317,
+    "target_month_range": [
+      "2021-12",
+      "2024-11"
+    ],
+    "zero_inbound_country_months": 108,
+    "contraction_statistics": {
+      "min": -1.0,
+      "median": -0.002789614551993425,
+      "mean": 0.0037222519784053526,
+      "std": 0.2075061723316435,
+      "max": 1.2402992956707204
+    },
+    "counts_by_tau": {
+      "0.30": {
+        "positive": 23,
+        "negative": 620,
+        "prevalence": 0.03576982892690513
+      },
+      "0.35": {
+        "positive": 15,
+        "negative": 628,
+        "prevalence": 0.02332814930015552
+      },
+      "0.40": {
+        "positive": 13,
+        "negative": 630,
+        "prevalence": 0.02021772939346812
+      }
+    },
+    "chronological_split": {
+      "train_2021_2022": {
+        "rows": 480,
+        "target_valid": 234,
+        "positive_tau_0.35": 3,
+        "negative_tau_0.35": 231,
+        "prevalence_tau_0.35": 0.01282051282051282
+      },
+      "validation_2023": {
+        "rows": 240,
+        "target_valid": 216,
+        "positive_tau_0.35": 5,
+        "negative_tau_0.35": 211,
+        "prevalence_tau_0.35": 0.023148148148148147
+      },
+      "test_2024": {
+        "rows": 240,
+        "target_valid": 193,
+        "positive_tau_0.35": 7,
+        "negative_tau_0.35": 186,
+        "prevalence_tau_0.35": 0.03626943005181347
+      }
+    },
+    "has_both_classes_in_every_split_tau_0.35": true
+  },
+  "gdelt": {
+    "cache_roots": [
+      "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/three_year_2021_2023/cache/gdelt",
+      "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/cache/gdelt",
+      "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/one_year_2024/cache/gdelt"
+    ],
+    "zip_files_seen": 1487,
+    "unique_daily_exports": 1459,
+    "expected_daily_exports": 1461,
+    "missing_dates": [
+      "20221110",
+      "20230323"
+    ],
+    "coverage_fraction": 0.998631074606434
+  },
+  "weather": {
+    "raw_json_files": 35,
+    "raw_location_day_counts": {
+      "location_china_d2eaf2aa1512_20210101_20231231": 1095,
+      "location_japan_fcf29f6cad32_20210101_20231231": 1095,
+      "location_mexico_41937b20fbe8_20210101_20231231": 1095,
+      "location_united_kingdom_9769121f10f7_20210101_20231231": 1095,
+      "location_malaysia_ff3ea3bec182_20210101_20231231": 1095,
+      "location_germany_17d53e0e6a68_20210101_20231231": 1095,
+      "location_hong_kong_2f488ffc82cc_20210101_20231231": 1095,
+      "location_south_korea_04653e650280_20210101_20231231": 1095,
+      "location_ireland_eb2131ece0ef_20210101_20231231": 1095,
+      "location_united_states_768685ca582a_20210101_20231231": 1095,
+      "location_italy_ad79ef0f076d_20210101_20231231": 1095,
+      "location_czechia_045e2f1d6c4d_20210101_20231231": 1095,
+      "location_india_967ce367d89d_20210101_20231231": 1095,
+      "location_thailand_a2b7c120c93a_20210101_20231231": 1095,
+      "location_philippines_8067364d44f5_20210101_20231231": 1095,
+      "location_vietnam_681101d8f9fa_20210101_20231231": 1095,
+      "location_france_e3772ac4b4db_20210101_20231231": 1095,
+      "location_singapore_20c0b7bdab70_20210101_20231231": 1095,
+      "location_bangladesh_fa6c3752cd00_20210101_20231231": 1095,
+      "location_taiwan_094d515b3608_20210101_20231231": 1095,
+      "location_vietnam_681101d8f9fa_20240101_20241231": 366,
+      "location_taiwan_094d515b3608_20240101_20241231": 366,
+      "location_thailand_a2b7c120c93a_20240101_20241231": 366,
+      "location_malaysia_ff3ea3bec182_20240101_20241231": 366,
+      "location_united_kingdom_9769121f10f7_20240101_20241231": 366,
+      "location_japan_fcf29f6cad32_20240101_20241231": 366,
+      "location_mexico_41937b20fbe8_20240101_20241231": 366,
+      "location_china_d2eaf2aa1512_20240101_20241231": 366,
+      "location_singapore_20c0b7bdab70_20240101_20241231": 366,
+      "location_france_e3772ac4b4db_20240101_20241231": 366,
+      "location_germany_17d53e0e6a68_20240101_20241231": 366,
+      "location_south_korea_04653e650280_20240101_20241231": 366,
+      "location_india_967ce367d89d_20240101_20241231": 366,
+      "location_united_states_768685ca582a_20240101_20241231": 366,
+      "location_philippines_8067364d44f5_20240101_20241231": 366
+    },
+    "raw_location_days_total": 27390,
+    "processed_profile": {
+      "path": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/processed/weather_daily.csv",
+      "exists": true,
+      "rows": 29220,
+      "countries": 20,
+      "locations": [
+        "Bangladesh",
+        "China",
+        "Czechia",
+        "France",
+        "Germany",
+        "Hong Kong",
+        "India",
+        "Ireland",
+        "Italy",
+        "Japan",
+        "Malaysia",
+        "Mexico",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Taiwan",
+        "Thailand",
+        "United Kingdom",
+        "United States",
+        "Vietnam"
+      ],
+      "missing_expected_locations": [],
+      "min_date": "2021-01-01T00:00:00+00:00",
+      "max_date": "2024-12-31T00:00:00+00:00"
+    }
+  },
+  "gscpi": {
+    "raw_workbook": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/three_year_2021_2023/cache/gscpi/gscpi.xlsx",
+    "raw_workbook_exists": true,
+    "processed_profile": {
+      "path": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/processed/gscpi_monthly.csv",
+      "exists": true,
+      "rows": 48,
+      "columns": [
+        "month",
+        "global_risk",
+        "published_at",
+        "available_at",
+        "vintage_date",
+        "source"
+      ],
+      "min_date": "2021-01",
+      "max_date": "2024-12"
+    },
+    "raw_sheet_names": [
+      "GSCPI Overview",
+      "GSCPI Monthly Data"
+    ]
+  },
+  "training_readiness": {
+    "decision": "READY FOR CONTINUOUS-TARGET PILOT; BINARY CLASSIFICATION BLOCKED",
+    "reason": "the training split has only 3 positive tau=0.35 targets; use continuous contraction regression instead of a binary benchmark.",
+    "acquisition_gate": "PASS",
+    "feature_gate": "PASS",
+    "label_gate": "FAIL",
+    "continuous_target_gate": "PASS",
+    "recommended_target": "continuous contraction regression",
+    "four_year_processed_root_exists": true,
+    "four_year_processed_artifacts_complete": true,
+    "gdelt_has_known_missing_dates": true,
+    "target_has_both_classes_in_every_split_tau_0.35": true,
+    "do_not_train_yet": true,
+    "models_trained": false
+  }
+}

@@ -38,12 +38,21 @@ class GraphConvolution(nn.Module):
 
 
 class SnapshotGCN(nn.Module):
-    """Two-layer GCN plus sigmoid node-risk decoder."""
+    """Two-layer GCN with binary or continuous node decoder."""
 
-    def __init__(self, feature_dim: int = 7, hidden_dim: int = 32, layers: int = 2):
+    def __init__(
+        self,
+        feature_dim: int = 7,
+        hidden_dim: int = 32,
+        layers: int = 2,
+        output_activation: str = "sigmoid",
+    ):
         super().__init__()
         if layers < 1:
             raise ValueError("GCN requires at least one graph-convolution layer")
+        if output_activation not in {"sigmoid", "linear"}:
+            raise ValueError("output_activation must be 'sigmoid' or 'linear'")
+        self.output_activation = output_activation
         modules = [GraphConvolution(feature_dim, hidden_dim)]
         modules.extend(GraphConvolution(hidden_dim, hidden_dim) for _ in range(layers - 1))
         self.convolutions = nn.ModuleList(modules)
@@ -56,7 +65,8 @@ class SnapshotGCN(nn.Module):
         hidden = features
         for layer in self.convolutions:
             hidden = torch.relu(layer(hidden, edge_index))
-        return torch.sigmoid(self.decoder(hidden)).squeeze(-1)
+        output = self.decoder(hidden).squeeze(-1)
+        return torch.sigmoid(output) if self.output_activation == "sigmoid" else output
 
 
 def undirected_edge_index(

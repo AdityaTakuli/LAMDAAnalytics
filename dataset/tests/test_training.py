@@ -116,7 +116,7 @@ def test_strict_baseline_requires_a_full_window():
 
 
 def test_stored_labels_reproduce_when_the_real_table_is_present():
-    nodes_path = DATASET_DIR / "data/one_year_2024/processed/nodes_monthly.csv"
+    nodes_path = DATASET_DIR / "data/four_year_2021_2024/processed/nodes_monthly.csv"
     if not nodes_path.exists():
         return  # the profile has not been built on this machine
     nodes = pd.read_csv(nodes_path)

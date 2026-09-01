@@ -1,4 +1,4 @@
-"""Temporal Graph Network model used by ``train.py``.
+"""Temporal Graph Network model used by ``train_models.py``.
 
 This is a compact PyTorch implementation of the requested TGN components:
 
@@ -7,7 +7,7 @@ This is a compact PyTorch implementation of the requested TGN components:
 * mean aggregation of messages touching each node in a chronological batch;
 * GRU memory updater;
 * attention over recent temporal neighbors;
-* MLP/sigmoid node-risk decoder.
+    * MLP node-risk decoder with binary or continuous output.
 
 The module also provides a deterministic linear composition fallback for
 serving when a learned checkpoint cannot be loaded.
@@ -109,8 +109,11 @@ class TemporalGraphNetwork(nn.Module):
         embedding_dim: int = 32,
         max_neighbors: int = 20,
         use_memory: bool = True,
+        output_activation: str = "sigmoid",
     ):
         super().__init__()
+        if output_activation not in {"sigmoid", "linear"}:
+            raise ValueError("output_activation must be 'sigmoid' or 'linear'")
         self.feature_dim = feature_dim
         self.memory_dim = memory_dim
         self.time_dim = time_dim
@@ -118,6 +121,7 @@ class TemporalGraphNetwork(nn.Module):
         self.embedding_dim = embedding_dim
         self.max_neighbors = max_neighbors
         self.use_memory = use_memory
+        self.output_activation = output_activation
 
         self.time_encoder = HarmonicTimeEncoder(time_dim)
         self.message_mlp = nn.Sequential(
@@ -236,7 +240,8 @@ class TemporalGraphNetwork(nn.Module):
     ) -> Tensor:
         self.process_events(events, node_features)
         embeddings = self.node_embeddings(node_features, current_time)
-        return torch.sigmoid(self.decoder(embeddings)).squeeze(-1)
+        output = self.decoder(embeddings).squeeze(-1)
+        return torch.sigmoid(output) if self.output_activation == "sigmoid" else output
 
 
 def load_model_or_fallback(

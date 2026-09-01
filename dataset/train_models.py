@@ -25,7 +25,7 @@ Continuous contraction regression on the 2024 profile::
 
 Binary classification on the four-year profile::
 
-    python train_models.py --config config_4year.yaml --task classification --device cuda
+    python train_models.py --config config.yaml --task classification --device cuda
 
 Exit codes
 ----------

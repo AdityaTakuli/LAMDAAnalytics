@@ -1,0 +1,4 @@
+{
+  "train_median": "constant prediction 0.068143 (median training contraction)",
+  "ridge_regression": "ridge regression (alpha=1.0) on train-standardised features"
+}
