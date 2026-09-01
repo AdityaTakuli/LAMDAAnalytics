@@ -12,6 +12,9 @@ classification
 regression
   ``train_median``          predicts the median training contraction
   ``ridge_regression``      a linear model on the same features
+  ``random_forest``         ensemble on the same features
+  ``lightgbm``              gradient boosting on the same features
+  ``lightgbm_lags``         gradient boosting with causal lag features
 """
 
 from __future__ import annotations
@@ -21,10 +24,12 @@ from typing import Any, Sequence
 
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.linear_model import LogisticRegression, Ridge
 
 from training import paths  # noqa: F401  (sys.path bootstrap)
 from training.data import FEATURES, FeatureStandardizer, Split
+from training.lag_features import LAG_COLUMNS, add_country_lags
 
 from model_tgn import DEFAULT_LINEAR_WEIGHTS, linear_composition  # noqa: E402
 
@@ -32,8 +37,17 @@ LOGGER = logging.getLogger("training.baselines")
 
 PREDICTION_COLUMNS = ["model", "split", "month", "node_id", "target", "score"]
 
-CLASSIFICATION_BASELINES = ("constant_prevalence", "hand_weighted_linear", "logistic_regression")
-REGRESSION_BASELINES = ("train_median", "ridge_regression")
+CLASSIFICATION_BASELINES = (
+    "constant_prevalence",
+    "hand_weighted_linear",
+    "logistic_regression",
+    "random_forest",
+    "lightgbm",
+    "lightgbm_lags",
+)
+REGRESSION_BASELINES = ("train_median", "ridge_regression", "random_forest", "lightgbm", "lightgbm_lags")
+
+TABULAR_EXTRA_FEATURES = list(LAG_COLUMNS)
 
 
 def _partition(frame: pd.DataFrame, months: Sequence[str], target_column: str) -> pd.DataFrame:
@@ -63,6 +77,45 @@ def _empty_frame() -> pd.DataFrame:
     return pd.DataFrame(columns=PREDICTION_COLUMNS)
 
 
+def _feature_matrix(frame: pd.DataFrame, standardizer: FeatureStandardizer) -> np.ndarray:
+    return standardizer.transform(frame)
+
+
+def _fit_lightgbm(task: str, train_x: np.ndarray, train_y: np.ndarray, seed: int):
+    import lightgbm as lgb
+
+    if task == "classification":
+        pos = max(float(train_y.sum()), 1.0)
+        neg = max(float(len(train_y) - train_y.sum()), 1.0)
+        return lgb.LGBMClassifier(
+            n_estimators=200,
+            learning_rate=0.05,
+            num_leaves=15,
+            min_child_samples=5,
+            subsample=0.9,
+            colsample_bytree=0.9,
+            scale_pos_weight=neg / pos,
+            random_state=seed,
+            verbosity=-1,
+        ).fit(train_x, train_y.astype(int))
+    return lgb.LGBMRegressor(
+        n_estimators=200,
+        learning_rate=0.05,
+        num_leaves=15,
+        min_child_samples=5,
+        subsample=0.9,
+        colsample_bytree=0.9,
+        random_state=seed,
+        verbosity=-1,
+    ).fit(train_x, train_y)
+
+
+def _predict_lightgbm(model, task: str, features: np.ndarray) -> np.ndarray:
+    if task == "classification":
+        return model.predict_proba(features)[:, 1]
+    return model.predict(features)
+
+
 def run_baselines(
     task: str,
     frame: pd.DataFrame,
@@ -73,10 +126,13 @@ def run_baselines(
     selected: Sequence[str] | None = None,
 ) -> tuple[dict[str, pd.DataFrame], dict[str, Any]]:
     """Fit and score every applicable baseline; return frames and notes."""
+    frame = add_country_lags(frame)
     available = CLASSIFICATION_BASELINES if task == "classification" else REGRESSION_BASELINES
     wanted = [name for name in (selected or available) if name in available]
     predictions: dict[str, pd.DataFrame] = {}
     notes: dict[str, Any] = {}
+    lag_standardizer = FeatureStandardizer()
+    lag_standardizer.features = [*FEATURES, *TABULAR_EXTRA_FEATURES]
 
     train = _partition(frame, split.train, target_column)
     if train.empty:
@@ -154,6 +210,66 @@ def run_baselines(
                 parts.append(
                     _rows(subset, name, split_name, target_column, model.predict(standardizer.transform(subset)))
                 )
+
+        elif name == "random_forest":
+            if task == "classification":
+                if np.unique(train_target).size < 2:
+                    predictions[name] = _empty_frame()
+                    notes[name] = "N/A - single-class training labels"
+                    continue
+                model = RandomForestClassifier(
+                    n_estimators=300,
+                    max_depth=6,
+                    min_samples_leaf=2,
+                    class_weight="balanced",
+                    random_state=seed,
+                    n_jobs=-1,
+                )
+                model.fit(standardizer.transform(train), train_target.astype(int))
+                note = "balanced random forest on train-standardised features"
+                predict = lambda subset: model.predict_proba(standardizer.transform(subset))[:, 1]
+            else:
+                model = RandomForestRegressor(
+                    n_estimators=300,
+                    max_depth=6,
+                    min_samples_leaf=2,
+                    random_state=seed,
+                    n_jobs=-1,
+                )
+                model.fit(standardizer.transform(train), train_target)
+                note = "random forest on train-standardised features"
+                predict = lambda subset: model.predict(standardizer.transform(subset))
+            for split_name, months in split.as_dict().items():
+                subset = _partition(frame, months, target_column)
+                if subset.empty:
+                    continue
+                parts.append(_rows(subset, name, split_name, target_column, predict(subset)))
+
+        elif name in {"lightgbm", "lightgbm_lags"}:
+            use_lags = name == "lightgbm_lags"
+            active = lag_standardizer if use_lags else standardizer
+            train_subset = _partition(frame, split.train, target_column)
+            if use_lags:
+                active.fit(train_subset)
+            train_x = active.transform(train_subset)
+            train_y = pd.to_numeric(train_subset[target_column], errors="coerce").to_numpy(dtype=float)
+            if task == "classification" and np.unique(train_y).size < 2:
+                predictions[name] = _empty_frame()
+                notes[name] = "N/A - single-class training labels"
+                continue
+            try:
+                model = _fit_lightgbm(task, train_x, train_y, seed)
+            except Exception as exc:
+                predictions[name] = _empty_frame()
+                notes[name] = f"N/A - lightgbm unavailable ({exc})"
+                continue
+            note = "LightGBM on standardised features" + (" with causal lags" if use_lags else "")
+            for split_name, months in split.as_dict().items():
+                subset = _partition(frame, months, target_column)
+                if subset.empty:
+                    continue
+                scores = _predict_lightgbm(model, task, active.transform(subset))
+                parts.append(_rows(subset, name, split_name, target_column, scores))
 
         predictions[name] = pd.concat(parts, ignore_index=True) if parts else _empty_frame()
         if note:

@@ -1,0 +1,562 @@
+{
+  "supervision": "pooled_directed_pair_month",
+  "task": "regression",
+  "tau": null,
+  "target_column": "contraction",
+  "seconds": 267.425,
+  "output_dir": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/pair_pooled/regression",
+  "environment": {
+    "python": "3.12.3",
+    "python_executable": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/../backend/.venv/bin/python",
+    "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "torch": "2.13.0+cu130",
+    "torch_cuda_build": "13.0",
+    "torch_cudnn": 92000,
+    "cuda_available": false,
+    "cuda_device_count": 0,
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "yaml": "6.0.3",
+    "requested_device": "auto",
+    "selected_device": "cpu",
+    "device_reason": "CUDA unavailable: PyTorch was built against CUDA 13.0 but no usable GPU was detected; check that an NVIDIA driver is installed and that `nvidia-smi` works"
+  },
+  "split": {
+    "mode": "date_ranges",
+    "train": [
+      "2021-12",
+      "2022-01",
+      "2022-02",
+      "2022-03",
+      "2022-04",
+      "2022-05",
+      "2022-06",
+      "2022-07",
+      "2022-08",
+      "2022-09",
+      "2022-10",
+      "2022-11",
+      "2022-12"
+    ],
+    "validation": [
+      "2023-01",
+      "2023-02",
+      "2023-03",
+      "2023-04",
+      "2023-05",
+      "2023-06",
+      "2023-07",
+      "2023-08",
+      "2023-09",
+      "2023-10",
+      "2023-11",
+      "2023-12"
+    ],
+    "test": [
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11"
+    ],
+    "month_counts": {
+      "train": 13,
+      "validation": 12,
+      "test": 11
+    },
+    "supervised_months": [
+      "2021-12",
+      "2022-01",
+      "2022-02",
+      "2022-03",
+      "2022-04",
+      "2022-05",
+      "2022-06",
+      "2022-07",
+      "2022-08",
+      "2022-09",
+      "2022-10",
+      "2022-11",
+      "2022-12",
+      "2023-01",
+      "2023-02",
+      "2023-03",
+      "2023-04",
+      "2023-05",
+      "2023-06",
+      "2023-07",
+      "2023-08",
+      "2023-09",
+      "2023-10",
+      "2023-11",
+      "2023-12",
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11"
+    ],
+    "excluded_months": [
+      "2021-01",
+      "2021-02",
+      "2021-03",
+      "2021-04",
+      "2021-05",
+      "2021-06",
+      "2021-07",
+      "2021-08",
+      "2021-09",
+      "2021-10",
+      "2021-11",
+      "2024-12"
+    ],
+    "notes": [
+      "12 month(s) have no observable target at this horizon and are excluded from every partition: ['2021-01', '2021-02', '2021-03', '2021-04', '2021-05', '2021-06', '2021-07', '2021-08', '2021-09', '2021-10', '2021-11', '2024-12']",
+      "train: dropped 11 requested month(s) that are absent or have no observable target: ['2021-01', '2021-02', '2021-03', '2021-04', '2021-05', '2021-06', '2021-07', '2021-08', '2021-09', '2021-10', '2021-11']",
+      "test: dropped 1 requested month(s) that are absent or have no observable target: ['2024-12']"
+    ]
+  },
+  "pair_target_stats": {
+    "supervision_unit": "directed_pair_month",
+    "horizon_months": 1,
+    "baseline_window_months": 12,
+    "baseline_min_periods": 12,
+    "pair_month_rows": 15599,
+    "valid_targets": 11582,
+    "unique_directed_pairs": 340,
+    "contraction": {
+      "count": 11582,
+      "min": -0.999780695153363,
+      "max": 87.39146839453302,
+      "mean": 0.2446680625453504,
+      "median": -0.005088025504902737,
+      "std": 2.3813100903220126
+    },
+    "positives_by_tau": {
+      "0.20": 2791,
+      "0.30": 1766,
+      "0.35": 1406,
+      "0.40": 1135
+    }
+  },
+  "node_target_stats": {
+    "horizon_months": 1,
+    "baseline_window_months": 12,
+    "baseline_min_periods": 12,
+    "country_month_rows": 960,
+    "valid_targets": 643,
+    "invalid_targets": 317,
+    "invalid_reasons": {
+      "future_value_unobserved": 20,
+      "baseline_unavailable": 220,
+      "baseline_not_positive": 80
+    },
+    "contraction": {
+      "count": 643,
+      "min": -1.0,
+      "max": 1.2402992956707204,
+      "mean": 0.0037222519784053587,
+      "median": -0.002789614551993425,
+      "std": 0.20734475171419003,
+      "quantiles": {
+        "0.01": -0.7920863990890651,
+        "0.05": -0.2504195701001478,
+        "0.25": -0.10551627097028765,
+        "0.5": -0.002789614551993425,
+        "0.75": 0.12175641871635066,
+        "0.95": 0.30708610940169306,
+        "0.99": 0.4951258544040551
+      }
+    },
+    "positives_by_tau": {
+      "0.20": 65,
+      "0.30": 23,
+      "0.35": 15,
+      "0.40": 13
+    }
+  },
+  "validation": {
+    "node_rows": 960,
+    "edge_rows": 30844,
+    "months": [
+      "2021-01",
+      "2021-02",
+      "2021-03",
+      "2021-04",
+      "2021-05",
+      "2021-06",
+      "2021-07",
+      "2021-08",
+      "2021-09",
+      "2021-10",
+      "2021-11",
+      "2021-12",
+      "2022-01",
+      "2022-02",
+      "2022-03",
+      "2022-04",
+      "2022-05",
+      "2022-06",
+      "2022-07",
+      "2022-08",
+      "2022-09",
+      "2022-10",
+      "2022-11",
+      "2022-12",
+      "2023-01",
+      "2023-02",
+      "2023-03",
+      "2023-04",
+      "2023-05",
+      "2023-06",
+      "2023-07",
+      "2023-08",
+      "2023-09",
+      "2023-10",
+      "2023-11",
+      "2023-12",
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12"
+    ],
+    "month_count": 48,
+    "node_count": 20,
+    "complete_country_month_grid": true,
+    "expected_grid_rows": 960,
+    "orphan_edge_rows": 0,
+    "edge_months_missing_from_nodes": [],
+    "features": {
+      "inventory_days_proxy": {
+        "missing": 0,
+        "min": 5.0,
+        "max": 90.0,
+        "mean": 30.259150342436268,
+        "std": 5.373939216092059,
+        "constant": false
+      },
+      "trade_delay_proxy": {
+        "missing": 0,
+        "min": 0.0,
+        "max": 30.0,
+        "mean": 1.4883286107939224,
+        "std": 3.921684830527054,
+        "constant": false
+      },
+      "news_vol_7d": {
+        "missing": 0,
+        "min": 0.0,
+        "max": 54769.0,
+        "mean": 2510.54375,
+        "std": 7317.741565179288,
+        "constant": false
+      },
+      "neg_tone_frac_3d": {
+        "missing": 0,
+        "min": 0.0,
+        "max": 0.933130699088146,
+        "mean": 0.5220282767517599,
+        "std": 0.3162638772195731,
+        "constant": false
+      },
+      "strike_flag_7d": {
+        "missing": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.7479166666666667,
+        "std": 0.4342088511176262,
+        "constant": false
+      },
+      "weather_anomaly_7d": {
+        "missing": 0,
+        "min": 0.0,
+        "max": 0.0,
+        "mean": 0.0,
+        "std": 0.0,
+        "constant": true
+      },
+      "global_risk": {
+        "missing": 0,
+        "min": 0.0,
+        "max": 0.0,
+        "mean": 0.0,
+        "std": 0.0,
+        "constant": true
+      }
+    },
+    "inbound_flow_missing": 0,
+    "inbound_flow_nonpositive": 108
+  },
+  "baseline_notes": {
+    "train_median": "constant prediction 0.068056 (median training contraction)",
+    "ridge_regression": "ridge regression on concatenated source, destination, and edge features"
+  },
+  "metrics": {
+    "train_median": {
+      "train": {
+        "n": 4252,
+        "target_mean": 0.29050400237767154,
+        "target_std": 1.905584049722566,
+        "mae": 0.4843284761965294,
+        "rmse": 1.9185238556801674,
+        "r2": -0.01362704481427457,
+        "directional_accuracy": 0.5881937911571026,
+        "note": "",
+        "pearson_r": -2.367732323932978e-17,
+        "spearman_r": NaN
+      },
+      "validation": {
+        "n": 3911,
+        "target_mean": 0.23617554088635784,
+        "target_std": 3.0045813458783988,
+        "mae": 0.5421279256859448,
+        "rmse": 3.0092811965616364,
+        "r2": -0.003130903085070802,
+        "directional_accuracy": 0.42035285093326513,
+        "note": "",
+        "pearson_r": 1.1186394977906474e-17,
+        "spearman_r": NaN
+      },
+      "test": {
+        "n": 3419,
+        "target_mean": 0.197379333689337,
+        "target_std": 2.0885487103320473,
+        "mae": 0.4751206564144071,
+        "rmse": 2.092548756538405,
+        "r2": -0.003834123366209141,
+        "directional_accuracy": 0.45481134834747,
+        "note": "",
+        "pearson_r": 1.5920858301515034e-17,
+        "spearman_r": NaN
+      }
+    },
+    "ridge_regression": {
+      "train": {
+        "n": 4252,
+        "target_mean": 0.29050400237767154,
+        "target_std": 1.905584049722566,
+        "mae": 0.5659151390311054,
+        "rmse": 1.8806523922451788,
+        "r2": 0.025995768748357073,
+        "directional_accuracy": 0.5757290686735654,
+        "note": "",
+        "pearson_r": 0.16123204793110862,
+        "spearman_r": 0.07548897476959045
+      },
+      "validation": {
+        "n": 3911,
+        "target_mean": 0.23617554088635784,
+        "target_std": 3.0045813458783988,
+        "mae": 0.697889276831503,
+        "rmse": 2.9993507801120325,
+        "r2": 0.003478696240475032,
+        "directional_accuracy": 0.43390437228330353,
+        "note": "",
+        "pearson_r": 0.06949091397164403,
+        "spearman_r": -0.06401971455216579
+      },
+      "test": {
+        "n": 3419,
+        "target_mean": 0.197379333689337,
+        "target_std": 2.0885487103320473,
+        "mae": 0.6817938306340771,
+        "rmse": 2.1060145380489663,
+        "r2": -0.016795258870714314,
+        "directional_accuracy": 0.4194208832992103,
+        "note": "",
+        "pearson_r": 0.06710772249942024,
+        "spearman_r": -0.0988195221674572
+      }
+    },
+    "mlp": {
+      "train": {
+        "n": 4252,
+        "target_mean": 0.29050400237767154,
+        "target_std": 1.905584049722566,
+        "mae": 0.4751480411244852,
+        "rmse": 1.912420556128362,
+        "r2": -0.007188105705758119,
+        "directional_accuracy": 0.5990122295390404,
+        "note": "",
+        "pearson_r": 0.08540778901964273,
+        "spearman_r": 0.22546792749202046
+      },
+      "validation": {
+        "n": 3911,
+        "target_mean": 0.23617554088635784,
+        "target_std": 3.0045813458783988,
+        "mae": 0.5461232724351427,
+        "rmse": 3.006819624274658,
+        "r2": -0.001490465290852283,
+        "directional_accuracy": 0.45231398619278956,
+        "note": "",
+        "pearson_r": 0.043978220786622196,
+        "spearman_r": 0.046858159576223815
+      },
+      "test": {
+        "n": 3419,
+        "target_mean": 0.197379333689337,
+        "target_std": 2.0885487103320473,
+        "mae": 0.4870090281543756,
+        "rmse": 2.095658143184662,
+        "r2": -0.006819599748187022,
+        "directional_accuracy": 0.4533489324363849,
+        "note": "",
+        "pearson_r": -0.040412593595218455,
+        "spearman_r": -0.02606285065739169
+      }
+    },
+    "gcn": {
+      "train": {
+        "n": 4252,
+        "target_mean": 0.29050400237767154,
+        "target_std": 1.905584049722566,
+        "mae": 0.46846726124840676,
+        "rmse": 1.9059373057908944,
+        "r2": -0.00037079320807986704,
+        "directional_accuracy": 0.6331138287864534,
+        "note": "",
+        "pearson_r": 0.10374045115426771,
+        "spearman_r": 0.2914921021280963
+      },
+      "validation": {
+        "n": 3911,
+        "target_mean": 0.23617554088635784,
+        "target_std": 3.0045813458783988,
+        "mae": 0.6018560725155734,
+        "rmse": 3.0023467719067467,
+        "r2": 0.001486891359114062,
+        "directional_accuracy": 0.43006903605216057,
+        "note": "",
+        "pearson_r": 0.04193763736313967,
+        "spearman_r": 0.07574330418504008
+      },
+      "test": {
+        "n": 3419,
+        "target_mean": 0.19737933368933702,
+        "target_std": 2.0885487103320473,
+        "mae": 0.5807624840419301,
+        "rmse": 2.0986739553322318,
+        "r2": -0.009719465434500973,
+        "directional_accuracy": 0.454226381983036,
+        "note": "",
+        "pearson_r": 0.01753221936351282,
+        "spearman_r": 0.01759006732601773
+      }
+    },
+    "tgn": {
+      "train": {
+        "n": 4252,
+        "target_mean": 0.29050400237767154,
+        "target_std": 1.905584049722566,
+        "mae": 0.46720908443438763,
+        "rmse": 1.9078699798462608,
+        "r2": -0.0024006301058370205,
+        "directional_accuracy": 0.6382878645343368,
+        "note": "",
+        "pearson_r": 0.09660260442380919,
+        "spearman_r": 0.2911365351158203
+      },
+      "validation": {
+        "n": 3911,
+        "target_mean": 0.23617554088635784,
+        "target_std": 3.0045813458783988,
+        "mae": 0.6031097957488509,
+        "rmse": 3.0024863465590768,
+        "r2": 0.0013940504116426444,
+        "directional_accuracy": 0.4323702377908463,
+        "note": "",
+        "pearson_r": 0.04506503952822102,
+        "spearman_r": 0.015859307785669362
+      },
+      "test": {
+        "n": 3419,
+        "target_mean": 0.19737933368933702,
+        "target_std": 2.0885487103320473,
+        "mae": 0.5633810848469887,
+        "rmse": 2.104642149322711,
+        "r2": -0.015470497189502552,
+        "directional_accuracy": 0.4735302720093595,
+        "note": "",
+        "pearson_r": 0.013659324466951896,
+        "spearman_r": 0.02157079367123357
+      }
+    },
+    "tgn_no_memory": {
+      "train": {
+        "n": 4252,
+        "target_mean": 0.29050400237767154,
+        "target_std": 1.905584049722566,
+        "mae": 0.46875799887297126,
+        "rmse": 1.9103001315957837,
+        "r2": -0.004955874530865323,
+        "directional_accuracy": 0.6345249294449671,
+        "note": "",
+        "pearson_r": 0.08491607479319906,
+        "spearman_r": 0.276042268415795
+      },
+      "validation": {
+        "n": 3911,
+        "target_mean": 0.23617554088635784,
+        "target_std": 3.0045813458783988,
+        "mae": 0.5800754053349336,
+        "rmse": 3.00352930585255,
+        "r2": 0.0007001679910303427,
+        "directional_accuracy": 0.4333929941191511,
+        "note": "",
+        "pearson_r": 0.04529933963072806,
+        "spearman_r": 0.0293772543224315
+      },
+      "test": {
+        "n": 3419,
+        "target_mean": 0.19737933368933702,
+        "target_std": 2.0885487103320473,
+        "mae": 0.5133335188510575,
+        "rmse": 2.096455854321873,
+        "r2": -0.0075862363010335,
+        "directional_accuracy": 0.4641708101784147,
+        "note": "",
+        "pearson_r": -0.017051849587051977,
+        "spearman_r": -0.010164580691671667
+      }
+    }
+  },
+  "plots": [
+    "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/pair_pooled/regression/plots/target_distribution.png",
+    "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/pair_pooled/regression/plots/loss_curves.png",
+    "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/pair_pooled/regression/plots/model_comparison.png",
+    "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/results/model_training/pair_pooled/regression/plots/prediction_distributions.png"
+  ],
+  "models": [
+    "train_median",
+    "ridge_regression",
+    "mlp",
+    "gcn",
+    "tgn",
+    "tgn_no_memory"
+  ]
+}

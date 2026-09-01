@@ -1,25 +1,51 @@
 import httpx
 from groq import Groq
-from tenacity import retry, stop_after_attempt, wait_exponential
+from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
 from ..utils.timeutils import utc_now_iso
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 from config.settings import settings
 
+_PLACEHOLDER_MARKERS = ("paste_your_key", "placeholder", "your_key_here", "changeme")
+
+
+def secret_configured(value: str | None) -> bool:
+    """True if an env value looks like a real key, not a template placeholder."""
+    if not value or not str(value).strip():
+        return False
+    lowered = str(value).strip().lower()
+    if lowered in {"none", "null", "n/a", "na"}:
+        return False
+    return not any(marker in lowered for marker in _PLACEHOLDER_MARKERS)
+
+
+def _retry_transient_http(exc: BaseException) -> bool:
+    if isinstance(exc, RuntimeError):
+        return False
+    if isinstance(exc, httpx.HTTPStatusError):
+        return exc.response is not None and exc.response.status_code >= 500
+    return True
+
+
 # Configure Groq client
 _groq_client = Groq(api_key=settings.groq_api_key)
-GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_MODEL = settings.groq_model
 
 def llm_generate(prompt: str) -> str:
     """Send a prompt to Groq and return the text response."""
-    resp = _groq_client.chat.completions.create(
+    kwargs = dict(
         model=GROQ_MODEL,
         messages=[{"role": "user", "content": prompt}],
         temperature=0.3,
         max_tokens=2048,
     )
-    return resp.choices[0].message.content or ""
+    # gpt-oss otherwise parks the answer in `reasoning` and leaves content empty.
+    if "gpt-oss" in GROQ_MODEL:
+        kwargs["reasoning_effort"] = "low"
+    resp = _groq_client.chat.completions.create(**kwargs)
+    msg = resp.choices[0].message
+    return (msg.content or getattr(msg, "reasoning", None) or "").strip()
 
 # Keep backward compatibility alias
 def get_gemini():
@@ -37,8 +63,15 @@ def get_gemini():
 def http_client():
     return httpx.AsyncClient(timeout=settings.http_timeout_seconds)
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=1, max=4))
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=1, max=4),
+    retry=retry_if_exception(_retry_transient_http),
+    reraise=True,
+)
 async def serp_search(query: str, num: int = 10) -> dict:
+    if not secret_configured(settings.serp_api_key):
+        raise RuntimeError("SERP_API_KEY is not configured")
     url = "https://serpapi.com/search.json"
     params = {
         "engine": "google",
@@ -144,16 +177,17 @@ async def geocode(address: str) -> tuple[float, float] | None:
             pass
     
     # Strategy 2: REST key URL pattern
-    try:
-        base = f"https://apis.mappls.com/advancedmaps/v1/{settings.mappls_api_key}/geocode"
-        async with http_client() as client:
-            r = await client.get(base, params={"address": address, "itemCount": 1})
-            if r.status_code == 200:
-                coords = _extract_coords(r.json())
-                if coords:
-                    return coords
-    except Exception:
-        pass
+    if secret_configured(settings.mappls_api_key):
+        try:
+            base = f"https://apis.mappls.com/advancedmaps/v1/{settings.mappls_api_key}/geocode"
+            async with http_client() as client:
+                r = await client.get(base, params={"address": address, "itemCount": 1})
+                if r.status_code == 200:
+                    coords = _extract_coords(r.json())
+                    if coords:
+                        return coords
+        except Exception:
+            pass
     
     # Strategy 3: Fallback to known locations
     return _fallback_geocode(address)
@@ -179,6 +213,8 @@ def _extract_coords(data) -> tuple[float, float] | None:
     return None
 
 async def fetch_openweather(lat: float, lon: float) -> dict | None:
+    if not secret_configured(settings.weather_api_key):
+        return None
     url = "https://api.openweathermap.org/data/3.0/onecall"
     params = {
         "lat": lat, "lon": lon, "appid": settings.weather_api_key,
@@ -191,7 +227,8 @@ async def fetch_openweather(lat: float, lon: float) -> dict | None:
     return None
 
 async def fetch_weatherapi(lat: float, lon: float) -> dict | None:
-    # Map lat/lon to a query string as provider expects city names; here we pass coord
+    if not secret_configured(settings.weather_api_key):
+        return None
     url = "http://api.weatherapi.com/v1/forecast.json"
     params = {
         "key": settings.weather_api_key, "q": f"{lat},{lon}", "days": 7, "aqi": "no", "alerts": "no"
@@ -210,7 +247,7 @@ async def fetch_weather(lat: float, lon: float) -> dict | None:
 async def gemini_structured(prompt: str) -> dict:
     """Ask LLM (Groq) to return strict JSON. If parsing fails, return {}."""
     try:
-        resp = _groq_client.chat.completions.create(
+        kwargs = dict(
             model=GROQ_MODEL,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant. Always respond with valid JSON only, no markdown or extra text."},
@@ -220,8 +257,12 @@ async def gemini_structured(prompt: str) -> dict:
             max_tokens=2048,
             response_format={"type": "json_object"},
         )
+        if "gpt-oss" in GROQ_MODEL:
+            kwargs["reasoning_effort"] = "low"
+        resp = _groq_client.chat.completions.create(**kwargs)
         import json
-        return json.loads(resp.choices[0].message.content or "{}")
+        msg = resp.choices[0].message
+        return json.loads((msg.content or getattr(msg, "reasoning", None) or "{}"))
     except Exception:
         # Fallback: try without JSON mode
         try:

@@ -1,0 +1,14 @@
+=== 01 mocked LangGraph E2E (no external APIs) ===
+utc=2026-09-01T14:29:19.216343+00:00
+git=60bfd147fdfeec5c3673593e3efbd507547e6037
+python=/home/aditya/Desktop/ARiES/LAMDAAnalytics/backend/.venv/bin/python
+cwd=/home/aditya/Desktop/ARiES/LAMDAAnalytics
+---
+exit=0
+elapsed_s=2.303
+--- stdout/stderr ---
+PASS LangGraph network
+  risk_score=0.582
+  risk_label=Medium
+  features=['inventory_days', 'past_delay_days', 'news_vol_7d', 'neg_tone_frac_3d', 'strike_flag_7d', 'weather_anomaly_7d', 'global_risk']
+  nodes_ran=geocode+5 agents+normalize+tgn+report

@@ -1,0 +1,24 @@
+=== 03 GET fast endpoints ===
+utc=2026-09-01T14:29:25.358489+00:00
+git=60bfd147fdfeec5c3673593e3efbd507547e6037
+python=/home/aditya/Desktop/ARiES/LAMDAAnalytics/backend/.venv/bin/python
+cwd=/home/aditya/Desktop/ARiES/LAMDAAnalytics
+---
+base=http://127.0.0.1:38625
+
+=== GET /model/info elapsed_s=0.014 exit=0 ===
+{"model_name":"TGN","model_class":"FixedTGN","f1_score":0.45392434594234293,"loaded_at":"2025-09-28T07:34:29.408680"}
+http_code=200
+time_total_s=0.005472
+
+=== GET /analytics/overview elapsed_s=0.008 exit=0 ===
+{"total_suppliers":10000,"active_routes":24,"active_alerts":7,"reliability_score":89.2,"risk_trend":"decreasing","last_updated":"2024-01-01T00:00:00Z"}
+http_code=200
+time_total_s=0.001189
+
+=== GET /monitoring/alerts elapsed_s=0.007 exit=0 ===
+{"alerts":[{"id":1,"type":"weather","severity":"high","msg":"Storm risk near Kaohsiung port"},{"id":2,"type":"labor","severity":"medium","msg":"Container terminal slowdown"}]}
+http_code=200
+time_total_s=0.001203
+
+wall_s=0.031

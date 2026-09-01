@@ -51,6 +51,8 @@ coverage.xml
 
 # Django stuff:
 *.log
+!evidence/**/*.log
+!evidence/**/*.txt
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -215,6 +217,8 @@ temp/
 # Logs
 logs
 *.log
+!evidence/**/*.log
+!evidence/**/*.txt
 
 # Runtime data
 pids
@@ -276,6 +280,7 @@ ehthumbs.db
 Thumbs.db
 
 # Project specific
+Research Paper/
 backend/data/
 backend/logs/
 backend/.env

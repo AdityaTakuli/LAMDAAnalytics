@@ -57,9 +57,11 @@ from evaluation. They are never converted into negative examples.
 | `regression` (default) | `contraction`, a signed ratio | Always available. This is the defensible target for the current data. |
 | `classification` | `label(tau)`, binary | Only when the training months contain both classes. |
 
-The default is `regression` because the binary label is extremely rare in this
-dataset: 2 positives at `tau=0.30` and none at `0.35` or `0.40` in the 2024
-profile, and 15 of 626 valid targets in the four-year profile. `train_models.py`
+The default is `regression` because severe contractions are rare at the
+paper's `tau=0.35` threshold: only 15 positives across the four-year profile
+and 3 in the training split. Binary classification therefore uses the
+pre-specified `classification_tau: 0.20` in `config.yaml` (≥20% below the
+12-month baseline), which yields 10 training positives. `train_models.py`
 refuses a classification run whose training partition has a single class, and
 tells you what to do instead. That refusal is deliberate — see
 [Troubleshooting](#13-troubleshooting).
@@ -419,7 +421,7 @@ reads it, so editing it cannot affect the acquisition or fusion stages.
 ```yaml
 model_training:
   task: "regression"            # or "classification"
-  tau: 0.35                     # binary threshold; fixed in advance, never tuned on test
+  tau: 0.20                     # binary threshold; matches analysis.classification_tau
   baseline_window: 12           # months in the baseline median
   baseline_min_periods: 1       # 1 for the 12-month profile, 12 for the four-year profile
   models: ["gcn", "tgn", "tgn_no_memory"]

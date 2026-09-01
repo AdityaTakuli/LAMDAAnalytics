@@ -1,0 +1,23 @@
+{
+  "supervision_unit": "directed_pair_month",
+  "horizon_months": 1,
+  "baseline_window_months": 12,
+  "baseline_min_periods": 12,
+  "pair_month_rows": 15599,
+  "valid_targets": 11582,
+  "unique_directed_pairs": 340,
+  "contraction": {
+    "count": 11582,
+    "min": -0.999780695153363,
+    "max": 87.39146839453302,
+    "mean": 0.2446680625453504,
+    "median": -0.005088025504902737,
+    "std": 2.3813100903220126
+  },
+  "positives_by_tau": {
+    "0.20": 2791,
+    "0.30": 1766,
+    "0.35": 1406,
+    "0.40": 1135
+  }
+}

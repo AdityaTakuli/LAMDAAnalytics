@@ -454,13 +454,20 @@ def _normalise_chunk(
         str(value).strip().zfill(2)
         for value in source.get("labor_unrest_event_roots", ["14"])
     }
+    labor_base_codes = {
+        str(value).strip().zfill(3)
+        for value in source.get("labor_unrest_event_base_codes", ["143", "144"])
+    }
     relevant_roots = {
         str(value).strip().zfill(2)
         for value in source.get(
             "supply_chain_event_roots", ["14", "16", "17", "18", "19"]
         )
     }
-    result["is_labor_unrest"] = result["event_root_code"].isin(labor_roots).astype(int)
+    if labor_base_codes:
+        result["is_labor_unrest"] = result["event_base_code"].isin(labor_base_codes).astype(int)
+    else:
+        result["is_labor_unrest"] = result["event_root_code"].isin(labor_roots).astype(int)
     result["is_supply_chain_relevant"] = result["event_root_code"].isin(relevant_roots).astype(int)
     result["source_file_date"] = source_file_date.isoformat()
     result["source"] = "gdelt_event_database"

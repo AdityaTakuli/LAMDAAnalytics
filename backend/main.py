@@ -49,7 +49,7 @@ async def analyze(req: AnalyzeRequest):
         from datetime import datetime, timezone
         import uuid
         
-        print(f"WARNING: Using mock response due to: {e}")
+        print(f"WARNING: Using mock response due to: {type(e).__name__}: {e}")
         print("INFO: To run with real data, add your API keys to backend/.env")
         
         # Create a comprehensive mock response that shows the full pipeline

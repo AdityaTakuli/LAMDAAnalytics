@@ -1,4 +1,5 @@
 import asyncio
+import os
 import uuid
 from datetime import datetime, timezone
 
@@ -19,8 +20,14 @@ async def run_analysis(inp: AnalyzeRequest) -> AnalyzeResponse:
         "errors": [],
     }
 
+    async def _invoke():
+        # Evidence flag: hang until AGENT_TIMEOUT_SECONDS fires (see evidence/REPRODUCE.md).
+        if os.environ.get("LAMDA_FORCE_TIMEOUT") == "1":
+            await asyncio.sleep(10_000)
+        return await analysis_graph.ainvoke(initial_state)
+
     final_state = await asyncio.wait_for(
-        analysis_graph.ainvoke(initial_state),
+        _invoke(),
         timeout=settings.agent_timeout_seconds,
     )
 

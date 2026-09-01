@@ -1,0 +1,38 @@
+{
+  "train": {
+    "n": 234,
+    "target_mean": 0.05943183447493804,
+    "target_std": 0.19584552524540233,
+    "mae": 0.14463109879962985,
+    "rmse": 0.19601579182707046,
+    "r2": -0.0017395403410713772,
+    "directional_accuracy": 0.6068376068376068,
+    "note": "",
+    "pearson_r": 1.7563809818435592e-17,
+    "spearman_r": NaN
+  },
+  "validation": {
+    "n": 216,
+    "target_mean": -0.061154342280772225,
+    "target_std": 0.17755527998129478,
+    "mae": 0.16773393157971647,
+    "rmse": 0.2101515161455059,
+    "r2": -0.40087012040723136,
+    "directional_accuracy": 0.3148148148148148,
+    "note": "N/A - correlation is undefined for a constant series",
+    "pearson_r": null,
+    "spearman_r": null
+  },
+  "test": {
+    "n": 193,
+    "target_mean": -0.020779367706103943,
+    "target_std": 0.24047955289564044,
+    "mae": 0.16465627979504271,
+    "rmse": 0.25103903523989957,
+    "r2": -0.08974830668089462,
+    "directional_accuracy": 0.48186528497409326,
+    "note": "N/A - correlation is undefined for a constant series",
+    "pearson_r": null,
+    "spearman_r": null
+  }
+}

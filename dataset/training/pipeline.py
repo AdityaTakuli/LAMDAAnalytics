@@ -84,8 +84,14 @@ def resolve_options(config: Mapping[str, Any], overrides: Mapping[str, Any] | No
     training = _block(config, "training")
     analysis = _block(config, "analysis")
 
-    taus = [float(value) for value in analysis.get("taus", [0.30, 0.35, 0.40])]
-    tau = float(overrides.get("tau", settings.get("tau", analysis.get("default_tau", 0.35))))
+    taus = [float(value) for value in analysis.get("taus", [0.20, 0.30, 0.35, 0.40])]
+    task = str(overrides.get("task", settings.get("task", model_factory.CLASSIFICATION))).lower()
+    default_tau = float(
+        analysis.get("classification_tau", analysis.get("default_tau", 0.35))
+        if task == model_factory.CLASSIFICATION
+        else analysis.get("default_tau", 0.35)
+    )
+    tau = float(overrides.get("tau", settings.get("tau", default_tau)))
     if tau not in taus:
         taus = sorted({*taus, tau})
 
@@ -114,7 +120,6 @@ def resolve_options(config: Mapping[str, Any], overrides: Mapping[str, Any] | No
             f"Unknown model name(s) {unknown}; valid graph models are {list(model_factory.GRAPH_MODELS)}"
         )
 
-    task = str(overrides.get("task", settings.get("task", model_factory.CLASSIFICATION))).lower()
     if task not in model_factory.TASKS:
         raise ValueError(f"Unknown task {task!r}; expected one of {model_factory.TASKS}")
 

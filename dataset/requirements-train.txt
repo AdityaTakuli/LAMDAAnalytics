@@ -17,6 +17,7 @@ pandas>=2.1
 PyYAML>=6.0
 scikit-learn>=1.4
 matplotlib>=3.8
+lightgbm>=4.0
 
 # Optional but recommended: parquet input support and .env loading. Both have
 # graceful fallbacks, so training still runs without them.

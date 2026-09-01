@@ -115,7 +115,7 @@ async def main():
         from groq import Groq
         client = Groq(api_key=settings.groq_api_key)
         resp = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=settings.groq_model,
             messages=[{"role": "user", "content": "Reply with exactly: API_OK"}],
             max_tokens=10,
         )

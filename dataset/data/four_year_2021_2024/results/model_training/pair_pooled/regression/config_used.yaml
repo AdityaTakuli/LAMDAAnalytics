@@ -1,0 +1,315 @@
+analysis:
+  start_date: '2021-01-01'
+  end_date: '2024-12-31'
+  monthly_step: MS
+  horizon_months: 1
+  taus:
+  - 0.2
+  - 0.3
+  - 0.35
+  - 0.4
+  default_tau: 0.35
+  classification_tau: 0.2
+  focal_country:
+    name: India
+    comtrade_code: '699'
+    iso3: IND
+  country_count: 20
+sources:
+  comtrade:
+    subscription_key_env: COMTRADE_SUBSCRIPTION_KEY
+    secondary_key_env: COMTRADE_SECONDARY_KEY
+    reporter_code: '699'
+    flow_code: M
+    classification: HS
+    hs_codes:
+    - 8517
+    - 8471
+    - 8528
+    - 8516
+    - 8507
+    - 9403
+    - 6109
+    - 6203
+    - 6204
+    - 9503
+    - 3304
+    max_records: 250000
+    cache_dir: data/four_year_2021_2024/cache/comtrade
+    bilateral_cache_dir: data/four_year_2021_2024/cache/comtrade/bilateral
+  gdelt:
+    mode: raw
+    start_date: '2020-01-01'
+    end_date: '2024-12-31'
+    test_start_date: '2020-01-01'
+    test_end_date: '2020-01-03'
+    url_template: https://data.gdeltproject.org/events/{date}.export.CSV.zip
+    bigquery_project_env: GCP_PROJECT
+    bigquery_table: gdelt-bq.gdeltv2.events
+    cache_dir: data/four_year_2021_2024/cache/gdelt
+    max_retries: 3
+    timeout_seconds: 180
+    backoff_seconds: 2
+    request_delay_seconds: 0.2
+    download_workers: 8
+    max_failed_files: 0
+    negative_tone_threshold: -2.0
+    countries:
+    - IND
+    - CHN
+    - VNM
+    - TWN
+    - KOR
+    - JPN
+    - MYS
+    - SGP
+    - THA
+    - IDN
+    - PHL
+    - USA
+    - DEU
+    - NLD
+    - GBR
+    - ARE
+    - AUS
+    - MEX
+    - BRA
+    - FRA
+    labor_unrest_event_roots:
+    - '14'
+    supply_chain_event_roots:
+    - '14'
+    - '16'
+    - '17'
+    - '18'
+    - '19'
+  weather:
+    provider: nasa_power
+    noaa_token_env: NOAA_CDO_TOKEN
+    cache_dir: data/four_year_2021_2024/cache/weather
+    locations:
+    - name: United States
+      node_id: country_us
+      comtrade_code: '842'
+      iso3: USA
+      latitude: 39.8283
+      longitude: -98.5795
+      aliases:
+      - USA
+      - US
+    - name: China
+      node_id: country_cn
+      comtrade_code: '156'
+      iso3: CHN
+      latitude: 35.8617
+      longitude: 104.1954
+      aliases:
+      - PRC
+    - name: Taiwan
+      node_id: country_tw
+      comtrade_code: '490'
+      iso3: TWN
+      latitude: 23.6978
+      longitude: 120.9605
+      aliases:
+      - Chinese Taipei
+    - name: South Korea
+      node_id: country_kr
+      comtrade_code: '410'
+      iso3: KOR
+      latitude: 35.9078
+      longitude: 127.7669
+      aliases:
+      - Korea
+      - Republic of Korea
+    - name: Japan
+      node_id: country_jp
+      comtrade_code: '392'
+      iso3: JPN
+      latitude: 36.2048
+      longitude: 138.2529
+      aliases: []
+    - name: Singapore
+      node_id: country_sg
+      comtrade_code: '702'
+      iso3: SGP
+      latitude: 1.3521
+      longitude: 103.8198
+      aliases: []
+    - name: Germany
+      node_id: country_de
+      comtrade_code: '276'
+      iso3: DEU
+      latitude: 51.1657
+      longitude: 10.4515
+      aliases: []
+    - name: Netherlands
+      node_id: country_nl
+      comtrade_code: '528'
+      iso3: NLD
+      latitude: 52.1326
+      longitude: 5.2913
+      aliases:
+      - The Netherlands
+    - name: India
+      node_id: country_in
+      comtrade_code: '699'
+      iso3: IND
+      latitude: 20.5937
+      longitude: 78.9629
+      aliases: []
+    - name: Vietnam
+      node_id: country_vn
+      comtrade_code: '704'
+      iso3: VNM
+      latitude: 14.0583
+      longitude: 108.2772
+      aliases:
+      - Viet Nam
+    - name: Malaysia
+      node_id: country_my
+      comtrade_code: '458'
+      iso3: MYS
+      latitude: 4.2105
+      longitude: 101.9758
+      aliases: []
+    - name: Thailand
+      node_id: country_th
+      comtrade_code: '764'
+      iso3: THA
+      latitude: 15.87
+      longitude: 100.9925
+      aliases: []
+    - name: Indonesia
+      node_id: country_id
+      comtrade_code: '360'
+      iso3: IDN
+      latitude: -0.7893
+      longitude: 113.9213
+      aliases: []
+    - name: Philippines
+      node_id: country_ph
+      comtrade_code: '608'
+      iso3: PHL
+      latitude: 12.8797
+      longitude: 121.774
+      aliases: []
+    - name: France
+      node_id: country_fr
+      comtrade_code: '251'
+      iso3: FRA
+      latitude: 46.2276
+      longitude: 2.2137
+      aliases: []
+    - name: United Kingdom
+      node_id: country_gb
+      comtrade_code: '826'
+      iso3: GBR
+      latitude: 55.3781
+      longitude: -3.436
+      aliases:
+      - UK
+      - Britain
+    - name: United Arab Emirates
+      node_id: country_ae
+      comtrade_code: '784'
+      iso3: ARE
+      latitude: 23.4241
+      longitude: 53.8478
+      aliases:
+      - UAE
+    - name: Australia
+      node_id: country_au
+      comtrade_code: '36'
+      iso3: AUS
+      latitude: -25.2744
+      longitude: 133.7751
+      aliases: []
+    - name: Mexico
+      node_id: country_mx
+      comtrade_code: '484'
+      iso3: MEX
+      latitude: 23.6345
+      longitude: -102.5528
+      aliases: []
+    - name: Brazil
+      node_id: country_br
+      comtrade_code: '76'
+      iso3: BRA
+      latitude: -14.235
+      longitude: -51.9253
+      aliases: []
+  gscpi:
+    overview_url: https://www.newyorkfed.org/research/policy/gscpi#/overview
+    excel_url: https://www.newyorkfed.org/medialibrary/research/interactives/gscpi/downloads/gscpi_data.xlsx
+    cache_dir: data/four_year_2021_2024/cache/gscpi
+outputs:
+  comtrade: data/four_year_2021_2024/processed/comtrade.csv
+  gdelt: data/four_year_2021_2024/processed/gdelt_events.csv
+  gdelt_features: data/four_year_2021_2024/processed/gdelt_features.csv
+  gdelt_monthly_features: data/four_year_2021_2024/processed/gdelt_monthly_features.csv
+  gdelt_metadata: data/four_year_2021_2024/processed/gdelt_metadata.json
+  gdelt_validation: data/four_year_2021_2024/processed/gdelt_validation.json
+  weather: data/four_year_2021_2024/processed/weather_daily.csv
+  gscpi: data/four_year_2021_2024/processed/gscpi_monthly.csv
+  country_universe: data/four_year_2021_2024/processed/country_universe.csv
+  nodes: data/four_year_2021_2024/processed/nodes_monthly.csv
+  edges: data/four_year_2021_2024/processed/edges_monthly.csv
+  graph: data/four_year_2021_2024/processed/graph.json
+  training_metrics: data/four_year_2021_2024/processed/training_metrics.json
+  checkpoints_dir: data/four_year_2021_2024/checkpoints
+  model_training_dir: data/four_year_2021_2024/results/model_training
+  analysis_results: data/four_year_2021_2024/results/data_analysis
+model:
+  memory_dim: 32
+  time_dim: 8
+  edge_dim: 2
+  message_dim: 64
+  embedding_dim: 32
+  max_neighbors: 20
+  gcn_layers: 2
+training:
+  train_months: 24
+  validation_months: 12
+  test_months: 12
+  epochs: 10
+  learning_rate: 0.001
+  seed: 7
+model_training:
+  task: regression
+  tau: 0.2
+  pair:
+    run_name: pair_pooled
+    task: classification
+    models:
+    - gcn
+    - tgn
+    - tgn_no_memory
+  baseline_window: 12
+  baseline_min_periods: 12
+  models:
+  - gcn
+  - tgn
+  - tgn_no_memory
+  split:
+    mode: date_ranges
+    train:
+    - 2021-01
+    - 2022-12
+    validation:
+    - 2023-01
+    - 2023-12
+    test:
+    - 2024-01
+    - 2024-12
+  epochs: 40
+  learning_rate: 0.003
+  weight_decay: 0.0
+  grad_clip: 5.0
+  patience: 10
+  decision_threshold: 0.5
+  regression_loss: huber
+  huber_beta: 0.1
+  device: auto
+  seed: 7
+_config_path: /home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/config.yaml

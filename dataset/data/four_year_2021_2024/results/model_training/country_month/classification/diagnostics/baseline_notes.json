@@ -1,0 +1,14 @@
+{
+  "constant_prevalence": "constant score 0.042735 (training prevalence)",
+  "hand_weighted_linear": "fixed deployment weights; not fitted on any partition",
+  "logistic_regression": "balanced logistic regression on train-standardised features",
+  "hand_weighted_linear_weights": {
+    "inventory_days_proxy": 0.2,
+    "trade_delay_proxy": 0.2,
+    "news_vol_7d": 0.15,
+    "neg_tone_frac_3d": 0.15,
+    "strike_flag_7d": 0.15,
+    "weather_anomaly_7d": 0.1,
+    "global_risk": 0.05
+  }
+}

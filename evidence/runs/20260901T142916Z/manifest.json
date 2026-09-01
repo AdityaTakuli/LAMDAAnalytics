@@ -1,0 +1,45 @@
+{
+  "timestamp_utc": "20260901T142916Z",
+  "git_commit": "60bfd147fdfeec5c3673593e3efbd507547e6037",
+  "kind": "cli_transcripts",
+  "steps": [
+    {
+      "name": "01_langgraph_mock_e2e",
+      "seconds": 2.303,
+      "exit": 0
+    },
+    {
+      "name": "02_generate_results_figures",
+      "seconds": 4.031,
+      "exit": 0
+    },
+    {
+      "name": "03_fast_endpoints",
+      "seconds": 0.031,
+      "exit": 0
+    },
+    {
+      "name": "04_analyze_timed",
+      "seconds": 4.502,
+      "exit": 0
+    },
+    {
+      "name": "05_forced_timeout",
+      "seconds": 1.145,
+      "exit": 0
+    },
+    {
+      "name": "06_forced_agent_failure",
+      "seconds": 2.275,
+      "exit": 0
+    }
+  ],
+  "files": [
+    "01_langgraph_mock_e2e.log",
+    "02_generate_results_figures.log",
+    "03_fast_endpoints.log",
+    "04_analyze_timed.log",
+    "05_forced_timeout.log",
+    "06_forced_agent_failure.log"
+  ]
+}

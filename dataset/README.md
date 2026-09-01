@@ -14,8 +14,10 @@ config.yaml  ->  data/four_year_2021_2024/
   `config.yaml`).
 * **Graph:** country-level monthly snapshots; no firm-level edges invented from
   trade data.
-* **Target:** one-month-ahead inbound contraction (continuous regression is the
-  default; binary classification is gated when positives are too rare).
+* **Target:** one-month-ahead inbound contraction. Regression uses the signed
+  ratio directly; binary classification uses `tau=0.20` (severe contraction).
+  `tau=0.35` remains in config for sensitivity reporting but has too few
+  country-month positives (3 in train) for a defensible binary benchmark.
 
 ## Layout
 
@@ -38,7 +40,9 @@ dataset/
         ├── processed/             # fused tables + graph.json
         └── results/
             ├── data_analysis/     # readiness report
-            ├── model_training/    # final GCN/TGN regression run
+            ├── model_training/
+            │   ├── country_month/   # archived country-month runs
+            │   └── pair_pooled/     # pooled directed pair-month runs
             └── zero_value_audit.csv
 ```
 
@@ -77,24 +81,29 @@ python audit_zero_inbound.py
 
 ## Training (final results)
 
+### Country-month (aggregate inbound per country)
+
 Preflight and train:
 
 ```bash
 python check_training_env.py --config config.yaml
 python train_models.py --self-test --device cpu
 python train_models.py --config config.yaml --task regression --device cpu
+python train_models.py --config config.yaml --task classification --device cpu
 ```
 
-Final regression artifacts (already produced):
+Archived outputs: `data/four_year_2021_2024/results/model_training/country_month/`.
 
-```text
-data/four_year_2021_2024/results/model_training/regression/
-├── run_summary.json
-├── metrics/comparison.csv
-├── checkpoints/
-├── diagnostics/
-└── plots/
+### Pooled bilateral pairs (importer ← exporter links)
+
+One model trained on all ~340 observed directed trade pairs (India→VN, VN→India, …):
+
+```bash
+python train_pair_models.py --config config.yaml --task both --overwrite
 ```
+
+Outputs: `data/four_year_2021_2024/results/model_training/pair_pooled/{classification,regression}/`
+(metrics, predictions, checkpoints, plots).
 
 See `TRAINING.md` for every CLI option, metric interpretation, and checkpoint
 loading.

@@ -216,11 +216,16 @@
     "contraction_statistics": {
       "min": -1.0,
       "median": -0.002789614551993425,
-      "mean": 0.0037222519784053526,
+      "mean": 0.0037222519784053587,
       "std": 0.2075061723316435,
       "max": 1.2402992956707204
     },
     "counts_by_tau": {
+      "0.20": {
+        "positive": 65,
+        "negative": 578,
+        "prevalence": 0.10108864696734059
+      },
       "0.30": {
         "positive": 23,
         "negative": 620,
@@ -237,30 +242,31 @@
         "prevalence": 0.02021772939346812
       }
     },
+    "classification_tau": 0.2,
     "chronological_split": {
       "train_2021_2022": {
         "rows": 480,
         "target_valid": 234,
-        "positive_tau_0.35": 3,
-        "negative_tau_0.35": 231,
-        "prevalence_tau_0.35": 0.01282051282051282
+        "positive_tau_0.20": 10,
+        "negative_tau_0.20": 224,
+        "prevalence_tau_0.20": 0.042735042735042736
       },
       "validation_2023": {
         "rows": 240,
         "target_valid": 216,
-        "positive_tau_0.35": 5,
-        "negative_tau_0.35": 211,
-        "prevalence_tau_0.35": 0.023148148148148147
+        "positive_tau_0.20": 36,
+        "negative_tau_0.20": 180,
+        "prevalence_tau_0.20": 0.16666666666666666
       },
       "test_2024": {
         "rows": 240,
         "target_valid": 193,
-        "positive_tau_0.35": 7,
-        "negative_tau_0.35": 186,
-        "prevalence_tau_0.35": 0.03626943005181347
+        "positive_tau_0.20": 19,
+        "negative_tau_0.20": 174,
+        "prevalence_tau_0.20": 0.09844559585492228
       }
     },
-    "has_both_classes_in_every_split_tau_0.35": true
+    "has_both_classes_in_every_split": true
   },
   "gdelt": {
     "cache_roots": [
@@ -373,18 +379,19 @@
     ]
   },
   "training_readiness": {
-    "decision": "READY FOR CONTINUOUS-TARGET PILOT; BINARY CLASSIFICATION BLOCKED",
-    "reason": "the training split has only 3 positive tau=0.35 targets; use continuous contraction regression instead of a binary benchmark.",
+    "decision": "READY FOR TRAINING REVIEW",
+    "reason": "Source coverage, target classes, and processed artifacts passed this profile.",
     "acquisition_gate": "PASS",
     "feature_gate": "PASS",
-    "label_gate": "FAIL",
+    "label_gate": "PASS",
     "continuous_target_gate": "PASS",
-    "recommended_target": "continuous contraction regression",
+    "recommended_target": "regression and classification",
     "four_year_processed_root_exists": true,
     "four_year_processed_artifacts_complete": true,
     "gdelt_has_known_missing_dates": true,
-    "target_has_both_classes_in_every_split_tau_0.35": true,
-    "do_not_train_yet": true,
-    "models_trained": false
+    "do_not_train_yet": false,
+    "models_trained": false,
+    "classification_tau": 0.2,
+    "target_has_both_classes_in_every_split": true
   }
 }

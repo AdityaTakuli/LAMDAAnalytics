@@ -1,0 +1,22 @@
+{
+  "timestamp_utc": "20260901T140253Z",
+  "git_commit": "60bfd147fdfeec5c3673593e3efbd507547e6037",
+  "recommended_tag": "v1.0-paper",
+  "steps": [
+    {
+      "name": "langgraph_mock_e2e",
+      "seconds": 2.395,
+      "exit": 0
+    },
+    {
+      "name": "generate_results_figures",
+      "seconds": 3.94,
+      "exit": 0
+    },
+    {
+      "name": "bootstrap_ci",
+      "seconds": 0.876,
+      "exit": 0
+    }
+  ]
+}
