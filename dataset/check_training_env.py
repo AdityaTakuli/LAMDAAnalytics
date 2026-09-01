@@ -14,7 +14,7 @@ Usage::
 
     python check_training_env.py
     python check_training_env.py --config config.yaml
-    python check_training_env.py --config config_4year.yaml --device cuda --json
+    python check_training_env.py --config config.yaml --device cuda --json
 
 Exit codes
 ----------

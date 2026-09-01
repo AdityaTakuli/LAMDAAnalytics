@@ -216,8 +216,8 @@ Device
   Selected device  : cuda:0 (CUDA is available)
   Matmul smoke test: passed
 Data (config.yaml)
-  nodes    found  .../data/one_year_2024/processed/nodes_monthly.csv
-  edges    found  .../data/one_year_2024/processed/edges_monthly.csv
+  nodes    found  .../data/four_year_2021_2024/processed/nodes_monthly.csv
+  edges    found  .../data/four_year_2021_2024/processed/edges_monthly.csv
   240 country-month rows, 12 months, 20 countries, 7404 edges
   187 valid targets across 11 supervised months
   positives by tau: {'0.30': 2, '0.35': 0, '0.40': 0}
@@ -256,7 +256,7 @@ epochs with early stopping, and `--device auto`.
 ### The four-year profile (48 months)
 
 ```bash
-python train_models.py --config config_4year.yaml --device cuda
+python train_models.py --config config.yaml --device cuda
 ```
 
 Split: train `2021-01…2022-12`, validation `2023`, test `2024`. December 2024 is
@@ -282,7 +282,7 @@ python train_models.py --config config.yaml --task both --overwrite
 python train_models.py --config config.yaml --models tgn,tgn_no_memory --epochs 100 --patience 15
 
 # An explicit split, overriding the config
-python train_models.py --config config_4year.yaml \
+python train_models.py --config config.yaml \
     --train-range 2021-01:2022-06 \
     --validation-range 2022-07:2023-06 \
     --test-range 2023-07:2024-11
@@ -303,7 +303,7 @@ Default location: `<results_dir>/model_training/<task>/`, so for the 2024
 profile in regression mode:
 
 ```text
-data/one_year_2024/results/model_training/regression/
+data/four_year_2021_2024/results/model_training/regression/
 ├── README.md                    # what each file is, written per run
 ├── run_summary.json             # START HERE: options, environment, split, all metrics
 ├── config_used.yaml             # the configuration this run actually saw
@@ -413,7 +413,7 @@ support the run · `3` requested device unavailable.
 
 ### The `model_training:` config block
 
-Both `config.yaml` and `config_4year.yaml` carry this block. No other script
+Both `config.yaml` and `config.yaml` carry this block. No other script
 reads it, so editing it cannot affect the acquisition or fusion stages.
 
 ```yaml
@@ -477,7 +477,7 @@ sys.path.insert(0, "dataset")          # or run from inside dataset/
 from training.models import load_checkpoint
 
 model, meta = load_checkpoint(
-    "data/one_year_2024/results/model_training/regression/checkpoints/tgn.pt",
+    "data/four_year_2021_2024/results/model_training/regression/checkpoints/tgn.pt",
     device="cuda",                      # or "cpu"
 )
 

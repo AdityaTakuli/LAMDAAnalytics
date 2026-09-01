@@ -29,7 +29,7 @@ def _source_path(config: dict[str, Any]) -> Path:
         "sources",
         "comtrade",
         "bilateral_cache_dir",
-        default="data/three_year_2021_2023/cache/comtrade/bilateral",
+        default="data/four_year_2021_2024/cache/comtrade/bilateral",
     )
     path = Path(value)
     return path if path.is_absolute() else BASE / path
@@ -40,7 +40,7 @@ def _root(config: dict[str, Any]) -> Path:
         config,
         "outputs",
         "root",
-        default="data/three_year_2021_2023",
+        default="data/four_year_2021_2024",
     )
     path = Path(value)
     return path if path.is_absolute() else BASE / path
@@ -173,7 +173,7 @@ def run(config: dict[str, Any], year: int) -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", default="config_three_year_download.yaml")
+    parser.add_argument("--config", default="config.yaml")
     parser.add_argument(
         "--year",
         type=int,

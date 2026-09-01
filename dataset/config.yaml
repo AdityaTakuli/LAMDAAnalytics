@@ -1,5 +1,6 @@
+# Country-month supply-chain profile: January 2021 through December 2024.
 analysis:
-  start_date: "2024-01-01"
+  start_date: "2021-01-01"
   end_date: "2024-12-31"
   monthly_step: "MS"
   horizon_months: 1
@@ -11,41 +12,27 @@ analysis:
     iso3: "IND"
   country_count: 20
 
-country_month_experiment:
-  train_months: 7
-  validation_months: 2
-  test_months: 2
-
-# Values ending in _env are environment-variable names, not secrets.
 sources:
   comtrade:
     subscription_key_env: COMTRADE_SUBSCRIPTION_KEY
     secondary_key_env: COMTRADE_SECONDARY_KEY
-    reporter_code: "699"       # legacy single-reporter compatibility
-    reporter_codes: [699, 156, 704, 842, 458, 702, 490, 764, 484, 410, 50, 392, 276, 344, 203, 251, 372, 380, 826, 608]
-    partner_codes: [699, 156, 704, 842, 458, 702, 490, 764, 484, 410, 50, 392, 276, 344, 203, 251, 372, 380, 826, 608]
-    flow_code: "M"              # imports; used for inbound labels
+    reporter_code: "699"
+    flow_code: "M"
     classification: "HS"
-    hs_codes: [8541, 8542]
+    hs_codes: [8517, 8471, 8528, 8516, 8507, 9403, 6109, 6203, 6204, 9503, 3304]
     max_records: 250000
-    cache_dir: "data/one_year_2024/cache/comtrade"
-    bilateral_cache_dir: "data/one_year_2024/cache/comtrade/bilateral"
-    api_url: "https://comtradeapi.un.org/data/v1/get/C/M/HS"
-    public_api_url: "https://comtradeapi.un.org/public/v1/preview/C/M/HS"
-    max_retries: 4
-    timeout_seconds: 120
-    backoff_seconds: 2
-    request_delay_seconds: 1.0
+    cache_dir: "data/four_year_2021_2024/cache/comtrade"
+    bilateral_cache_dir: "data/four_year_2021_2024/cache/comtrade/bilateral"
   gdelt:
-    mode: "raw"                 # official GDELT daily Event Database exports
-    start_date: "2024-01-01"
+    mode: "raw"
+    start_date: "2020-01-01"
     end_date: "2024-12-31"
     test_start_date: "2020-01-01"
     test_end_date: "2020-01-03"
     url_template: "https://data.gdeltproject.org/events/{date}.export.CSV.zip"
     bigquery_project_env: GCP_PROJECT
     bigquery_table: "gdelt-bq.gdeltv2.events"
-    cache_dir: "cache/gdelt"
+    cache_dir: "data/four_year_2021_2024/cache/gdelt"
     max_retries: 3
     timeout_seconds: 180
     backoff_seconds: 2
@@ -53,17 +40,13 @@ sources:
     download_workers: 8
     max_failed_files: 0
     negative_tone_threshold: -2.0
-    # Country universe can later be replaced by Comtrade's selected universe.
     countries: [IND, CHN, VNM, TWN, KOR, JPN, MYS, SGP, THA, IDN, PHL, USA, DEU, NLD, GBR, ARE, AUS, MEX, BRA, FRA]
-    # Root 14 is CAMEO Protest; it is a transparent labor-unrest proxy.
     labor_unrest_event_roots: ["14"]
     supply_chain_event_roots: ["14", "16", "17", "18", "19"]
   weather:
-    provider: "nasa_power"      # nasa_power or noaa
+    provider: "nasa_power"
     noaa_token_env: NOAA_CDO_TOKEN
-    cache_dir: "data/one_year_2024/cache/weather"
-    # Add facility coordinates as needed. Country centroids are valid fallback
-    # locations for country-level exogenous weather features.
+    cache_dir: "data/four_year_2021_2024/cache/weather"
     locations:
       - {name: "United States", node_id: "country_us", comtrade_code: "842", iso3: "USA", latitude: 39.8283, longitude: -98.5795, aliases: ["USA", "US"]}
       - {name: "China", node_id: "country_cn", comtrade_code: "156", iso3: "CHN", latitude: 35.8617, longitude: 104.1954, aliases: ["PRC"]}
@@ -88,27 +71,25 @@ sources:
   gscpi:
     overview_url: "https://www.newyorkfed.org/research/policy/gscpi#/overview"
     excel_url: "https://www.newyorkfed.org/medialibrary/research/interactives/gscpi/downloads/gscpi_data.xlsx"
-    cache_dir: "data/one_year_2024/cache/gscpi"
+    cache_dir: "data/four_year_2021_2024/cache/gscpi"
 
 outputs:
-  comtrade: "data/one_year_2024/processed/comtrade.csv"
-  gdelt: "data/one_year_2024/processed/gdelt_events.csv"
-  gdelt_features: "data/one_year_2024/processed/gdelt_features.csv"
-  gdelt_monthly_features: "data/one_year_2024/processed/gdelt_monthly_features.csv"
-  gdelt_metadata: "data/one_year_2024/processed/gdelt_metadata.json"
-  gdelt_validation: "data/one_year_2024/processed/gdelt_validation.json"
-  weather: "data/one_year_2024/processed/weather_daily.csv"
-  gscpi: "data/one_year_2024/processed/gscpi_monthly.csv"
-  country_universe: "data/one_year_2024/processed/country_universe.csv"
-  nodes: "data/one_year_2024/processed/nodes_monthly.csv"
-  edges: "data/one_year_2024/processed/edges_monthly.csv"
-  graph: "data/one_year_2024/processed/graph.json"
-  results_dir: "data/one_year_2024/results"
-  country_month_experiment: "data/one_year_2024/results/country_month_experiment"
-  comtrade_coverage_fix: "data/one_year_2024/results/comtrade_coverage_fix"
-  training_metrics: "data/one_year_2024/results/training_metrics.json"
-  checkpoints_dir: "data/one_year_2024/results/checkpoints"
-  model_training_dir: "data/one_year_2024/results/model_training"
+  comtrade: "data/four_year_2021_2024/processed/comtrade.csv"
+  gdelt: "data/four_year_2021_2024/processed/gdelt_events.csv"
+  gdelt_features: "data/four_year_2021_2024/processed/gdelt_features.csv"
+  gdelt_monthly_features: "data/four_year_2021_2024/processed/gdelt_monthly_features.csv"
+  gdelt_metadata: "data/four_year_2021_2024/processed/gdelt_metadata.json"
+  gdelt_validation: "data/four_year_2021_2024/processed/gdelt_validation.json"
+  weather: "data/four_year_2021_2024/processed/weather_daily.csv"
+  gscpi: "data/four_year_2021_2024/processed/gscpi_monthly.csv"
+  country_universe: "data/four_year_2021_2024/processed/country_universe.csv"
+  nodes: "data/four_year_2021_2024/processed/nodes_monthly.csv"
+  edges: "data/four_year_2021_2024/processed/edges_monthly.csv"
+  graph: "data/four_year_2021_2024/processed/graph.json"
+  training_metrics: "data/four_year_2021_2024/processed/training_metrics.json"
+  checkpoints_dir: "data/four_year_2021_2024/checkpoints"
+  model_training_dir: "data/four_year_2021_2024/results/model_training"
+  analysis_results: "data/four_year_2021_2024/results/data_analysis"
 
 model:
   memory_dim: 32
@@ -120,41 +101,29 @@ model:
   gcn_layers: 2
 
 training:
-  train_months: 6
-  validation_months: 3
-  test_months: 3
+  train_months: 24
+  validation_months: 12
+  test_months: 12
   epochs: 10
   learning_rate: 0.001
   seed: 7
 
-# Settings read by train_models.py only. Adding this block does not change any
-# existing stage; every other script ignores it.
 model_training:
-  # The 2024 binary label has 2 positives at tau=0.30 and none at 0.35/0.40, so
-  # a binary benchmark is not supportable here. The continuous contraction
-  # target is the defensible default; run --task classification explicitly if
-  # you want the degenerate case for a plumbing check.
   task: "regression"
   tau: 0.35
-  # The 2024 profile is only twelve months long, so a full twelve-month
-  # baseline median is impossible. min_periods=1 reproduces the labels already
-  # stored in data/one_year_2024/processed/nodes_monthly.csv. Raise it to 12
-  # once a longer history is available.
   baseline_window: 12
-  baseline_min_periods: 1
+  baseline_min_periods: 12
   models: ["gcn", "tgn", "tgn_no_memory"]
-  # December 2024 is absent from every partition because its next-month target
-  # would fall outside the dataset.
   split:
     mode: "date_ranges"
-    train:      ["2024-01", "2024-07"]
-    validation: ["2024-08", "2024-09"]
-    test:       ["2024-10", "2024-11"]
-  epochs: 30
-  learning_rate: 0.005
+    train:      ["2021-01", "2022-12"]
+    validation: ["2023-01", "2023-12"]
+    test:       ["2024-01", "2024-12"]
+  epochs: 40
+  learning_rate: 0.003
   weight_decay: 0.0
   grad_clip: 5.0
-  patience: 8
+  patience: 10
   decision_threshold: 0.5
   regression_loss: "huber"
   huber_beta: 0.1

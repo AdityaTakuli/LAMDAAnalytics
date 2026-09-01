@@ -44,28 +44,19 @@ def _codes(config: dict[str, Any]) -> list[str]:
     ]
 
 
+FOUR_YEAR_ROOT = BASE / "data" / "four_year_2021_2024"
+
+
 def _comtrade_manifest_paths() -> dict[int, Path]:
-    root = BASE / "data" / "three_year_2021_2023"
+    root = FOUR_YEAR_ROOT
     paths = {year: root / f"comtrade_{year}_manifest.json" for year in (2021, 2022, 2023)}
-    paths[2024] = (
-        BASE
-        / "data"
-        / "one_year_2024"
-        / "cache"
-        / "comtrade"
-        / "bilateral"
-        / "manifest.json"
-    )
+    paths[2024] = root / "cache" / "comtrade" / "bilateral" / "manifest.json"
     return paths
 
 
 def _comtrade_cache_paths() -> dict[int, Path]:
-    root = BASE / "data" / "three_year_2021_2023" / "cache" / "comtrade" / "bilateral"
-    paths = {year: root for year in (2021, 2022, 2023)}
-    paths[2024] = (
-        BASE / "data" / "one_year_2024" / "cache" / "comtrade" / "bilateral"
-    )
-    return paths
+    root = FOUR_YEAR_ROOT / "cache" / "comtrade" / "bilateral"
+    return {year: root for year in YEARS}
 
 
 def _manifest_summary() -> dict[str, Any]:
@@ -198,7 +189,9 @@ def _target_analysis(inbound: pd.DataFrame, codes: list[str]) -> dict[str, Any]:
     values["month_date"] = pd.to_datetime(values["month"] + "-01", utc=True)
     values = values.sort_values(["country_code", "month_date"])
     values["baseline"] = values.groupby("country_code")["inbound_value_usd"].transform(
-        lambda series: series.shift(1).rolling(12, min_periods=12).median()
+        # Eq. 7 for h=1 uses V[T-11] ... V[T], including the current
+        # feature month and excluding the future target month T+1.
+        lambda series: series.rolling(12, min_periods=12).median()
     )
     values["future_value"] = values.groupby("country_code")["inbound_value_usd"].shift(-1)
     values["contraction"] = (values["future_value"] - values["baseline"]) / values["baseline"]
@@ -263,9 +256,7 @@ def _target_analysis(inbound: pd.DataFrame, codes: list[str]) -> dict[str, Any]:
 
 def _gdelt_analysis() -> dict[str, Any]:
     roots = [
-        BASE / "data" / "three_year_2021_2023" / "cache" / "gdelt",
-        BASE / "cache" / "gdelt",
-        BASE / "data" / "one_year_2024" / "cache" / "gdelt",
+        FOUR_YEAR_ROOT / "cache" / "gdelt",
     ]
     dates: set[str] = set()
     files = 0
@@ -294,8 +285,7 @@ def _gdelt_analysis() -> dict[str, Any]:
 
 def _weather_analysis(expected_locations: list[str]) -> dict[str, Any]:
     roots = [
-        BASE / "data" / "three_year_2021_2023" / "cache" / "weather",
-        BASE / "data" / "one_year_2024" / "cache" / "weather",
+        FOUR_YEAR_ROOT / "cache" / "weather",
     ]
     json_files = [path for root in roots for path in root.rglob("*.json")]
     daily_rows = 0
@@ -309,14 +299,7 @@ def _weather_analysis(expected_locations: list[str]) -> dict[str, Any]:
                 dates.update(str(key) for key in values)
         locations[path.stem] = len(dates)
         daily_rows += len(dates)
-    processed_candidates = [
-        BASE / "data" / "four_year_2021_2024" / "processed" / "weather_daily.csv",
-        BASE / "data" / "one_year_2024" / "processed" / "weather_daily.csv",
-    ]
-    processed = next(
-        (candidate for candidate in processed_candidates if candidate.exists()),
-        processed_candidates[0],
-    )
+    processed = FOUR_YEAR_ROOT / "processed" / "weather_daily.csv"
     processed_summary: dict[str, Any] = {"path": str(processed), "exists": processed.exists()}
     if processed.exists():
         frame = pd.read_csv(processed)
@@ -350,17 +333,10 @@ def _weather_analysis(expected_locations: list[str]) -> dict[str, Any]:
 
 
 def _gscpi_analysis() -> dict[str, Any]:
-    workbook_root = BASE / "data" / "three_year_2021_2023" / "cache" / "gscpi"
+    workbook_root = FOUR_YEAR_ROOT / "cache" / "gscpi"
     workbooks = sorted(workbook_root.rglob("*.xlsx"))
     workbook = workbooks[0] if workbooks else workbook_root / "gscpi.xlsx"
-    processed_candidates = [
-        BASE / "data" / "four_year_2021_2024" / "processed" / "gscpi_monthly.csv",
-        BASE / "data" / "one_year_2024" / "processed" / "gscpi_monthly.csv",
-    ]
-    processed = next(
-        (candidate for candidate in processed_candidates if candidate.exists()),
-        processed_candidates[0],
-    )
+    processed = FOUR_YEAR_ROOT / "processed" / "gscpi_monthly.csv"
     result: dict[str, Any] = {
         "raw_workbook": str(workbook),
         "raw_workbook_exists": workbook.exists(),
@@ -407,7 +383,8 @@ def _write_report(destination: Path, report: dict[str, Any]) -> None:
         f"- Label gate: **{readiness['label_gate']}** "
         "(both classes in each split and at least 10 training positives required).",
         f"- Continuous-target gate: **{readiness['continuous_target_gate']}** "
-        "(626 valid non-constant contraction targets support regression).",
+        f"({report['target']['valid_target_rows']} valid non-constant contraction "
+        "targets support regression).",
         "",
         "## Acquisition findings",
         "",
@@ -454,7 +431,7 @@ def _write_report(destination: Path, report: dict[str, Any]) -> None:
     (destination / "analysis_report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def run(config_path: str = "config_three_year_download.yaml") -> Path:
+def run(config_path: str = "config.yaml") -> Path:
     config = load_config(config_path)
     codes = _codes(config)
     manifests = _manifest_summary()
@@ -472,7 +449,7 @@ def run(config_path: str = "config_three_year_download.yaml") -> Path:
 
     total_expected = sum(item["requests"] for item in manifests.values())
     total_successful = sum(item["status_counts"].get("success", 0) for item in manifests.values())
-    processed_root = BASE / "data" / "four_year_2021_2024" / "processed"
+    processed_root = FOUR_YEAR_ROOT / "processed"
     processed_paths = [
         processed_root / "nodes_monthly.csv",
         processed_root / "edges_monthly.csv",
@@ -570,7 +547,7 @@ def run(config_path: str = "config_three_year_download.yaml") -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", default="config_three_year_download.yaml")
+    parser.add_argument("--config", default="config.yaml")
     args = parser.parse_args()
     output = run(args.config)
     print(f"Wrote four-year analysis to {output}")

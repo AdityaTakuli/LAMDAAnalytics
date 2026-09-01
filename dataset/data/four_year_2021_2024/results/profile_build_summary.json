@@ -1,0 +1,25 @@
+{
+  "profile": "four_year_2021_2024",
+  "processed": true,
+  "trained": false,
+  "gdelt_link_summary": {
+    "linked_exports": 1459,
+    "missing_exports": 2,
+    "missing_dates": [
+      "20221110",
+      "20230323"
+    ],
+    "source_roots": [
+      "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/three_year_2021_2023/cache/gdelt",
+      "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/cache/gdelt",
+      "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/one_year_2024/cache/gdelt"
+    ]
+  },
+  "weather_provider": "nasa_power",
+  "comtrade_source_years": [
+    2021,
+    2022,
+    2023,
+    2024
+  ]
+}
