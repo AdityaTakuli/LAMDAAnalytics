@@ -28,7 +28,7 @@ sources:
     bilateral_cache_dir: "data/four_year_2021_2024/cache/comtrade/bilateral"
   gdelt:
     mode: "raw"
-    start_date: "2020-01-01"
+    start_date: "2021-01-01"   # matches the span of the fused panel (and the original 1459-file run)
     end_date: "2024-12-31"
     test_start_date: "2020-01-01"
     test_end_date: "2020-01-03"
@@ -45,6 +45,8 @@ sources:
     negative_tone_threshold: -2.0
     countries: [IND, CHN, VNM, TWN, KOR, JPN, MYS, SGP, THA, IDN, PHL, USA, DEU, NLD, GBR, ARE, AUS, MEX, BRA, FRA]
     labor_unrest_event_roots: ["14"]
+    # Used by repair_processed_sources.py, which sets the monthly strike flag in the published
+    # corpus: 1 if any 143/144 event becomes available during the calendar month.
     labor_unrest_event_base_codes: ["143", "144"]
     supply_chain_event_roots: ["14", "16", "17", "18", "19"]
   weather:
@@ -72,6 +74,11 @@ sources:
       - {name: "Australia", node_id: "country_au", comtrade_code: "36", iso3: "AUS", latitude: -25.2744, longitude: 133.7751, aliases: []}
       - {name: "Mexico", node_id: "country_mx", comtrade_code: "484", iso3: "MEX", latitude: 23.6345, longitude: -102.5528, aliases: []}
       - {name: "Brazil", node_id: "country_br", comtrade_code: "76", iso3: "BRA", latitude: -14.2350, longitude: -51.9253, aliases: []}
+      # Selected by Comtrade's country universe; coordinates match processed/weather_daily.csv.
+      - {name: "Czechia", node_id: "country_203", comtrade_code: "203", iso3: "CZE", latitude: 49.8175, longitude: 15.4730, aliases: ["Czech Republic"]}
+      - {name: "Hong Kong", node_id: "country_344", comtrade_code: "344", iso3: "HKG", latitude: 22.3193, longitude: 114.1694, aliases: ["China, Hong Kong SAR"]}
+      - {name: "Ireland", node_id: "country_372", comtrade_code: "372", iso3: "IRL", latitude: 53.1424, longitude: -7.6921, aliases: []}
+      - {name: "Italy", node_id: "country_380", comtrade_code: "380", iso3: "ITA", latitude: 41.8719, longitude: 12.5674, aliases: []}
   gscpi:
     overview_url: "https://www.newyorkfed.org/research/policy/gscpi#/overview"
     excel_url: "https://www.newyorkfed.org/medialibrary/research/interactives/gscpi/downloads/gscpi_data.xlsx"

@@ -1,0 +1,24 @@
+
+=========== GRAPH MODELS: REGRESSION (test R2) ===========
+model            features  |     val    test
+----------------------------------------------
+GCN              paper     |  -0.009   0.156
+TGN              paper     |   0.025   0.307
+TGN no-memory    paper     |   0.040   0.323
+----------------------------------------------
+GCN              improved  |   0.140   0.587
+TGN              improved  |   0.168   0.373
+TGN no-memory    improved  |   0.221   0.552
+----------------------------------------------
+
+=========== GRAPH MODELS: CLASSIFICATION (test PR-AUC) ===========
+model            features  |     val    test
+----------------------------------------------
+GCN              paper     |   0.259   0.421
+TGN              paper     |   0.397   0.414
+TGN no-memory    paper     |   0.378   0.409
+----------------------------------------------
+GCN              improved  |   0.270   0.468
+TGN              improved  |   0.493   0.521
+TGN no-memory    improved  |   0.412   0.549
+----------------------------------------------
