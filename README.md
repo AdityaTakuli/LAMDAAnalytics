@@ -1,5 +1,7 @@
 # LAMDA Supply Chain Risk Analysis System
 
+> **Agents / paper work:** read [`CODEBASE.md`](CODEBASE.md) first (Claude: [`CLAUDE.md`](CLAUDE.md)). This README is the **live demo app** only. The scientific claim lives in `Research Paper/paper.tex`.
+
 AI-powered supply chain risk analysis with a **LangGraph multi-agent network**, PyTorch TGN risk scoring, real-time external APIs, and a React dashboard.
 
 ## Features

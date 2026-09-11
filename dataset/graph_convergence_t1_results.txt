@@ -1,0 +1,9 @@
+=== Converged graph models under T1 (regression, test R2) ===
+budget: 80 epochs, patience 15, seeds [0, 1, 2, 3, 4]; AR ridge reference = 0.138
+model            |    mean      sd | per-seed
+------------------------------------------------------------
+GCN              |   0.077   0.025 | +0.032 +0.107 +0.093 +0.079 +0.075
+TGN              |   0.121   0.015 | +0.103 +0.128 +0.113 +0.148 +0.116
+TGN no-memory    |   0.112   0.010 | +0.093 +0.114 +0.122 +0.117 +0.113
+------------------------------------------------------------
+figure -> figures/graph_convergence_t1.pdf (+ .png)

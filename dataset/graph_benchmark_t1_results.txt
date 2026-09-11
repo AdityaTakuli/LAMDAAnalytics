@@ -1,0 +1,16 @@
+
+=== GRAPH MODELS under T1 (log return): REGRESSION (test R2) ===
+model            |     val    test
+----------------------------------
+GCN              |   0.130   0.032
+TGN              |   0.159   0.103
+TGN no-memory    |   0.158   0.093
+----------------------------------
+
+=== GRAPH MODELS under T1 (log return): CLASSIFICATION (test PR-AUC) ===
+model            |     val    test
+----------------------------------
+GCN              |   0.207   0.232
+TGN              |   0.256   0.230
+TGN no-memory    |   0.252   0.257
+----------------------------------
