@@ -2,7 +2,8 @@
 """Round 2: corrected version of the benchmark figure (results_country_month_panels), scored on the
 187 test rows with an observable target. Same layout and colours as the first version; the own-lag
 ridge (Table ablation) is added because it is the only model with positive skill.
-Writes Research Paper/paper2/figures/results_country_month_panels_r2.{pdf,png}"""
+Writes results/paper21_revision/round2/figures/results_country_month_panels_r2.{pdf,png}, and the
+manuscript's figures folder too when it is present."""
 from pathlib import Path
 
 import matplotlib
@@ -12,7 +13,8 @@ import pandas as pd
 from matplotlib.patches import Patch
 
 R2 = Path(__file__).resolve().parents[1] / "results" / "paper21_revision" / "round2"
-FIG = Path(__file__).resolve().parents[1] / "Research Paper" / "paper2" / "figures"
+FIG = R2 / "figures"
+PAPER_FIG = Path(__file__).resolve().parents[1] / "Research Paper" / "paper2" / "figures"
 COL = {"Graph": "#2563eb", "Linear": "#059669", "Tree": "#d97706", "Baseline": "#6b7280"}
 plt.rcParams.update({"font.family": "serif", "font.size": 10})
 
@@ -52,6 +54,8 @@ axes[1].set_xlim(0, 0.42)
 fig.suptitle("Country-month benchmark, corrected (post-repair, $n=187$ rows with an observable target)", fontweight="bold")
 fig.legend(handles=[Patch(color=c, label=k) for k, c in COL.items()], loc="lower center", ncol=4, frameon=False)
 fig.tight_layout(rect=(0, 0.07, 1, 0.94))
-for ext in ("pdf", "png"):
-    fig.savefig(FIG / f"results_country_month_panels_r2.{ext}", dpi=300)
+FIG.mkdir(parents=True, exist_ok=True)
+for out in (FIG, PAPER_FIG) if PAPER_FIG.is_dir() else (FIG,):
+    for ext in ("pdf", "png"):
+        fig.savefig(out / f"results_country_month_panels_r2.{ext}", dpi=300)
 print("written")

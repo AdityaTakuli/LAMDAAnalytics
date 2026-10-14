@@ -77,6 +77,7 @@ CSV files under `results/paper21_revision/`. Times are for one laptop CPU.
 |---|---|---|
 | Benchmark on the original panel (unreported months treated as missing), tests, ablation, rolling origins | `$PY rev21_r2_corrected.py` | ~10 min |
 | Every model with and without the unreported-month rows | `$PY rev21_r2_missing.py` | 1 min |
+| Corrected benchmark figure | `$PY rev21_r2_figure.py` (writes `round2/figures/`) | seconds |
 | Non-overlapping target, rolling origins, refit | `$PY rev21_tabular.py` | 1 min |
 | Extended panels, 2021–2024 | `REV21_PANEL=processed_v3 REV21_OUT=phaseB $PY rev21_consumer_analyses.py` | minutes |
 | Seven-year evaluation, ten half-year blocks | `$PY rev21_phaseD_analyses.py` | ~20 min |
