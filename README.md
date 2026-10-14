@@ -50,6 +50,7 @@ are in `results/paper21_revision/NUMBERS_REVIEW.md`.
 | `project2/` | React dashboard (Vite) |
 | `evidence/` | Orchestration and extraction studies, bootstrap intervals, CLI transcripts |
 | `figures/` | Figures |
+| `SHA256SUMS` | SHA-256 checksums of every panel file |
 | `docs/` | Service documentation: API, agent pipeline, orchestrator, deployment; lab notes |
 | `tests/` | Integration scripts for the service (most need API keys) |
 
@@ -64,6 +65,7 @@ cd LAMDAAnalytics
 python3.12 -m venv backend/.venv
 backend/.venv/bin/pip install torch==2.13.0 --index-url https://download.pytorch.org/whl/cpu
 backend/.venv/bin/pip install -r requirements.txt
+sha256sum -c SHA256SUMS          # verify the data files
 ```
 
 ## Reproducing the results
@@ -145,7 +147,8 @@ The raw Comtrade replies (about 20 GB) and raw GDELT event files (about 24 GB) a
 download and build scripts in `dataset/` rebuild them (`ingest_*.py` and `fuse_dataset.py` for the
 original panel; `rev21_download_*.py` and `rev21_build_*_panel.py` for the extended ones). Comtrade
 requests need a key in `dataset/.env` (see `dataset/.env.example`). Use of the Comtrade-derived tables
-is subject to the UN Comtrade terms of use.
+is subject to the UN Comtrade terms of use. India's partner ranking, used to choose the countries, is in
+`dataset/data/four_year_2021_2024/cache/comtrade/india_partner_ranking/`.
 
 ### Unreported months
 

@@ -1,4 +1,4 @@
-localhost:~/Desktop/ARiES/LAMDAAnalytics$ python -m evidence.analyze_client \
+localhost:~/LAMDAAnalytics$ python -m evidence.analyze_client \
   --url http://127.0.0.1:8007/analyze \
   --payload evidence/payloads/analyze_example.json
 utc=2026-09-01T15:02:56Z
