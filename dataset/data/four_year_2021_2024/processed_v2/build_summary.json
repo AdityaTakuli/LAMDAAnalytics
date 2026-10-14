@@ -1,0 +1,45 @@
+{
+  "cache_files": 72,
+  "consumer_records": 167135,
+  "duplicate_records_dropped": 0,
+  "consumer_hs_codes": [
+    "3304",
+    "6109",
+    "6203",
+    "6204",
+    "8471",
+    "8507",
+    "8516",
+    "8517",
+    "8528",
+    "9403",
+    "9503"
+  ],
+  "consumer_reporters": 18,
+  "consumer_months": 48,
+  "consumer_value_share_by_code": {
+    "3304": 0.0375,
+    "6109": 0.0146,
+    "6203": 0.015,
+    "6204": 0.0222,
+    "8471": 0.3124,
+    "8507": 0.0718,
+    "8516": 0.0295,
+    "8517": 0.3759,
+    "8528": 0.0438,
+    "9403": 0.0439,
+    "9503": 0.0334
+  },
+  "semiconductor_rebuild_match": 1.0,
+  "exogenous_match": 1.0,
+  "rows": {
+    "semiconductor": 864,
+    "consumer": 864,
+    "combined": 1728
+  },
+  "valid_targets": {
+    "semiconductor": 643,
+    "consumer": 643
+  },
+  "zero_inbound_rows_consumer": 12
+}

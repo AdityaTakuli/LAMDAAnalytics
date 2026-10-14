@@ -1,0 +1,69 @@
+target,train,rep,features,train_rows,r2
+pair contraction,10% of train pairs,0,own lag + ratio,403,0.10511014447958977
+pair log change,10% of train pairs,0,own lag + ratio,403,0.27207507649822904
+pair contraction,10% of train pairs,0,full contagion set,403,0.08093651882707442
+pair log change,10% of train pairs,0,full contagion set,403,0.22975046920025566
+pair contraction,10% of train pairs,1,own lag + ratio,403,0.0442343339925515
+pair log change,10% of train pairs,1,own lag + ratio,403,0.2802028244376322
+pair contraction,10% of train pairs,1,full contagion set,403,-0.035418218540259394
+pair log change,10% of train pairs,1,full contagion set,403,0.24977602589017978
+pair contraction,10% of train pairs,2,own lag + ratio,403,-0.04471490036053938
+pair log change,10% of train pairs,2,own lag + ratio,403,0.23590652511407972
+pair contraction,10% of train pairs,2,full contagion set,403,-0.07927876980538295
+pair log change,10% of train pairs,2,full contagion set,403,0.15458906180815057
+pair contraction,10% of train pairs,3,own lag + ratio,403,0.02066289271220967
+pair log change,10% of train pairs,3,own lag + ratio,403,0.279105907427986
+pair contraction,10% of train pairs,3,full contagion set,403,-1.3398967182512722
+pair log change,10% of train pairs,3,full contagion set,403,0.2138964220427091
+pair contraction,10% of train pairs,4,own lag + ratio,403,-0.002374041660599957
+pair log change,10% of train pairs,4,own lag + ratio,403,0.26453387009010754
+pair contraction,10% of train pairs,4,full contagion set,403,-0.3388020868298125
+pair log change,10% of train pairs,4,full contagion set,403,0.1250217873769781
+pair contraction,25% of train pairs,0,own lag + ratio,988,0.11097933717514274
+pair log change,25% of train pairs,0,own lag + ratio,988,0.2527725207052448
+pair contraction,25% of train pairs,0,full contagion set,988,0.09193857642596781
+pair log change,25% of train pairs,0,full contagion set,988,0.21374152741015828
+pair contraction,25% of train pairs,1,own lag + ratio,988,0.11036532583843439
+pair log change,25% of train pairs,1,own lag + ratio,988,0.2754051954876623
+pair contraction,25% of train pairs,1,full contagion set,988,-0.1712166009811653
+pair log change,25% of train pairs,1,full contagion set,988,0.24085972936211986
+pair contraction,25% of train pairs,2,own lag + ratio,988,0.11840123516322598
+pair log change,25% of train pairs,2,own lag + ratio,988,0.28223390882716104
+pair contraction,25% of train pairs,2,full contagion set,988,0.10148308133374018
+pair log change,25% of train pairs,2,full contagion set,988,0.2010978068355802
+pair contraction,25% of train pairs,3,own lag + ratio,988,0.11999477312987272
+pair log change,25% of train pairs,3,own lag + ratio,988,0.2756138071053801
+pair contraction,25% of train pairs,3,full contagion set,988,0.09561417959040497
+pair log change,25% of train pairs,3,full contagion set,988,0.24861949586210097
+pair contraction,25% of train pairs,4,own lag + ratio,988,-0.11940474369809784
+pair log change,25% of train pairs,4,own lag + ratio,988,0.23868558507071047
+pair contraction,25% of train pairs,4,full contagion set,988,-0.11341402481441398
+pair log change,25% of train pairs,4,full contagion set,988,0.18869280182802228
+pair contraction,50% of train pairs,0,own lag + ratio,1989,0.09510775531646676
+pair log change,50% of train pairs,0,own lag + ratio,1989,0.2808001465867953
+pair contraction,50% of train pairs,0,full contagion set,1989,0.0871794612006388
+pair log change,50% of train pairs,0,full contagion set,1989,0.2508868191990853
+pair contraction,50% of train pairs,1,own lag + ratio,1989,0.11846617814824933
+pair log change,50% of train pairs,1,own lag + ratio,1989,0.27366797957378686
+pair contraction,50% of train pairs,1,full contagion set,1989,0.09694338423910853
+pair log change,50% of train pairs,1,full contagion set,1989,0.24550760111394798
+pair contraction,50% of train pairs,2,own lag + ratio,1989,0.11336611672526331
+pair log change,50% of train pairs,2,own lag + ratio,1989,0.28089866966208465
+pair contraction,50% of train pairs,2,full contagion set,1989,0.04604586120143794
+pair log change,50% of train pairs,2,full contagion set,1989,0.271881476314197
+pair contraction,50% of train pairs,3,own lag + ratio,1989,-0.0334539064115702
+pair log change,50% of train pairs,3,own lag + ratio,1989,0.2600007169211066
+pair contraction,50% of train pairs,3,full contagion set,1989,-0.02973286221009208
+pair log change,50% of train pairs,3,full contagion set,1989,0.23259986266290578
+pair contraction,50% of train pairs,4,own lag + ratio,1989,0.09909573011398343
+pair log change,50% of train pairs,4,own lag + ratio,1989,0.2847825628467393
+pair contraction,50% of train pairs,4,full contagion set,1989,0.07671510184912578
+pair log change,50% of train pairs,4,full contagion set,1989,0.2524114971793162
+pair contraction,100% of train pairs,0,own lag + ratio,3978,0.11927855373595253
+pair log change,100% of train pairs,0,own lag + ratio,3978,0.27617981297323824
+pair contraction,100% of train pairs,0,full contagion set,3978,0.10873218151274411
+pair log change,100% of train pairs,0,full contagion set,3978,0.2538539881392817
+pair contraction,train+validation (25 months),0,own lag + ratio,7621,0.023773095726056126
+pair log change,train+validation (25 months),0,own lag + ratio,7621,0.27363600753137374
+pair contraction,train+validation (25 months),0,full contagion set,7621,0.020287484795491473
+pair log change,train+validation (25 months),0,full contagion set,7621,0.26956150763794706

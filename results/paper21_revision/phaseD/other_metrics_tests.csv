@@ -1,0 +1,16 @@
+evaluation,data,A,B,mae_diff,p_country,p_month
+ten half-year blocks,semiconductor,"Own lags 1, 12 (AR(1,12))",All seven features,-0.004421887611107914,0.0213,0.0077
+ten half-year blocks,semiconductor,"AR(1,12) + exogenous","Own lags 1, 12 (AR(1,12))",0.0006791776764103062,0.1118,0.4998
+ten half-year blocks,consumer,"Own lags 1, 12 (AR(1,12))",All seven features,-0.013221687742353603,0.0001,0.0001
+ten half-year blocks,consumer,"AR(1,12) + exogenous","Own lags 1, 12 (AR(1,12))",0.0036819372198933203,0.0001,0.027
+ten half-year blocks,both baskets,"Own lags 1, 12 (AR(1,12))",All seven features,-0.00708680693503072,0.0001,0.0001
+ten half-year blocks,both baskets,"AR(1,12) + exogenous","Own lags 1, 12 (AR(1,12))",0.002493812452353541,0.0001,0.0507
+"single split, test 2024-25",semiconductor,"Own lags 1, 12 (AR(1,12))",GCN,-0.004380857754660602,0.0967,0.1261
+"single split, test 2024-25",semiconductor,"Own lags 1, 12 (AR(1,12))",TGN,-0.00509626852362968,0.0878,0.0845
+"single split, test 2024-25",semiconductor,"Own lags 1, 12 (AR(1,12))","TGN, no memory",-0.006664918914782522,0.0195,0.0778
+"single split, test 2024-25",consumer,"Own lags 1, 12 (AR(1,12))",GCN,-0.018398125399296892,0.0001,0.0005
+"single split, test 2024-25",consumer,"Own lags 1, 12 (AR(1,12))",TGN,-0.010062648502308777,0.0001,0.0127
+"single split, test 2024-25",consumer,"Own lags 1, 12 (AR(1,12))","TGN, no memory",-0.009529377680391733,0.0002,0.0282
+"single split, test 2024-25",both baskets,"Own lags 1, 12 (AR(1,12))",GCN,-0.011389491576978746,0.0001,0.0032
+"single split, test 2024-25",both baskets,"Own lags 1, 12 (AR(1,12))",TGN,-0.007579458512969228,0.0001,0.0056
+"single split, test 2024-25",both baskets,"Own lags 1, 12 (AR(1,12))","TGN, no memory",-0.008097148297587129,0.0001,0.0049

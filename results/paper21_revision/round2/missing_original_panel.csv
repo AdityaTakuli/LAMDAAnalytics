@@ -1,0 +1,47 @@
+part,target,model,scope,n,positives,r2,pr_auc
+"original panel, test 2024",T0,Persistence,all test rows,193,20.0,0.6476144933678263,
+"original panel, test 2024",T0,Persistence,without artefacts,187,14.0,0.24703397556465057,
+"original panel, test 2024",T0,Own lag c_{T-1} (AR(1)),all test rows,193,20.0,0.5581455591025399,0.637675605876431
+"original panel, test 2024",T0,Own lag c_{T-1} (AR(1)),without artefacts,187,14.0,0.36353890104448827,0.33393299517917163
+"original panel, test 2024",T0,Trade proxies only,all test rows,193,20.0,0.39421175985759116,0.4431279897979665
+"original panel, test 2024",T0,Trade proxies only,without artefacts,187,14.0,0.02058011139922289,0.09962281198864606
+"original panel, test 2024",T0,Exogenous only,all test rows,193,20.0,-0.10532660365822522,0.09083277578479464
+"original panel, test 2024",T0,Exogenous only,without artefacts,187,14.0,-0.42562598181261335,0.05491720579074781
+"original panel, test 2024",T0,All seven features (ridge),all test rows,193,20.0,0.3384793534510845,0.38797813291969907
+"original panel, test 2024",T0,All seven features (ridge),without artefacts,187,14.0,-0.24222680950533615,0.06489102300262811
+"original panel, test 2024",T0 regression (saved 5-seed predictions),gcn,all test rows,193,,0.32846216657550875,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),lightgbm,all test rows,193,,-0.022421358766903987,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),lightgbm_lags,all test rows,193,,0.1438704909614229,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),random_forest,all test rows,193,,0.038420714238224685,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),ridge_regression,all test rows,193,,0.33847935361471326,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),tgn,all test rows,193,,0.30816766170341825,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),tgn_no_memory,all test rows,193,,0.3136410491402769,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),train_median,all test rows,193,,-0.0897483066940461,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),gcn,without artefacts,187,,-0.07987502162131332,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),lightgbm,without artefacts,187,,-0.22542063248129374,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),lightgbm_lags,without artefacts,187,,-0.03451030329728266,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),random_forest,without artefacts,187,,-0.046894179369634026,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),ridge_regression,without artefacts,187,,-0.24222680761492654,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),tgn,without artefacts,187,,-0.18822791882321055,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),tgn_no_memory,without artefacts,187,,-0.11145047028820376,
+"original panel, test 2024",T0 regression (saved 5-seed predictions),train_median,without artefacts,187,,-0.05908160089941461,
+"original panel, test 2024",T0 classification (saved 5-seed predictions),constant_prevalence,all test rows,193,20.0,,0.10362694300518134
+"original panel, test 2024",T0 classification (saved 5-seed predictions),gcn,all test rows,193,20.0,,0.3963318011953121
+"original panel, test 2024",T0 classification (saved 5-seed predictions),hand_weighted_linear,all test rows,193,20.0,,0.39779471860627796
+"original panel, test 2024",T0 classification (saved 5-seed predictions),lightgbm,all test rows,193,20.0,,0.3785722740635883
+"original panel, test 2024",T0 classification (saved 5-seed predictions),lightgbm_lags,all test rows,193,20.0,,0.36491532353067774
+"original panel, test 2024",T0 classification (saved 5-seed predictions),logistic_regression,all test rows,193,20.0,,0.38797813291969907
+"original panel, test 2024",T0 classification (saved 5-seed predictions),random_forest,all test rows,193,20.0,,0.16165917873637753
+"original panel, test 2024",T0 classification (saved 5-seed predictions),tgn,all test rows,193,20.0,,0.39936476450837416
+"original panel, test 2024",T0 classification (saved 5-seed predictions),tgn_no_memory,all test rows,193,20.0,,0.3912482111008782
+"original panel, test 2024",T0 classification (saved 5-seed predictions),constant_prevalence,without artefacts,187,14.0,,0.0748663101604278
+"original panel, test 2024",T0 classification (saved 5-seed predictions),gcn,without artefacts,187,14.0,,0.06980118938658941
+"original panel, test 2024",T0 classification (saved 5-seed predictions),hand_weighted_linear,without artefacts,187,14.0,,0.09744908600236038
+"original panel, test 2024",T0 classification (saved 5-seed predictions),lightgbm,without artefacts,187,14.0,,0.07443917196781025
+"original panel, test 2024",T0 classification (saved 5-seed predictions),lightgbm_lags,without artefacts,187,14.0,,0.07796075589792999
+"original panel, test 2024",T0 classification (saved 5-seed predictions),logistic_regression,without artefacts,187,14.0,,0.06489102300262811
+"original panel, test 2024",T0 classification (saved 5-seed predictions),random_forest,without artefacts,187,14.0,,0.07207135622084077
+"original panel, test 2024",T0 classification (saved 5-seed predictions),tgn,without artefacts,187,14.0,,0.06992804855590842
+"original panel, test 2024",T0 classification (saved 5-seed predictions),tgn_no_memory,without artefacts,187,14.0,,0.06470492685894075
+"original panel, test 2024",T1,(row count),T1 defined,187,,,
+"original panel, test 2024",T1,(row count),T1 defined and an artefact row,0,,,

@@ -1,0 +1,50 @@
+{
+  "train": {
+    "n": 533,
+    "positive": 27,
+    "negative": 506,
+    "prevalence": 0.05065666041275797,
+    "decision_threshold": 0.5,
+    "accuracy": 0.949343339587242,
+    "brier_score": 0.048090563168584476,
+    "balanced_accuracy": 0.5,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "roc_auc": 0.5,
+    "average_precision": 0.05065666041275797,
+    "note": ""
+  },
+  "validation": {
+    "n": 492,
+    "positive": 27,
+    "negative": 465,
+    "prevalence": 0.054878048780487805,
+    "decision_threshold": 0.5,
+    "accuracy": 0.9451219512195121,
+    "brier_score": 0.051884268662285404,
+    "balanced_accuracy": 0.5,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "roc_auc": 0.5,
+    "average_precision": 0.054878048780487805,
+    "note": ""
+  },
+  "test": {
+    "n": 446,
+    "positive": 26,
+    "negative": 420,
+    "prevalence": 0.05829596412556054,
+    "decision_threshold": 0.5,
+    "accuracy": 0.9417040358744395,
+    "brier_score": 0.054955903653448324,
+    "balanced_accuracy": 0.5,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "roc_auc": 0.5,
+    "average_precision": 0.05829596412556054,
+    "note": ""
+  }
+}

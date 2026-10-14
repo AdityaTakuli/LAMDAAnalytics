@@ -1,0 +1,5 @@
+basket,target,gain_pooled,wild_p_country,wild_p_month,n_months,"gain_by_block(23H1,23H2,24H1,24H2)"
+semiconductor,T0,-0.033,0.146,0.327,23,"[-0.042, -0.036, -0.037, -0.009]"
+semiconductor,T1,-0.062,0.0,0.132,23,"[-0.178, -0.001, -0.008, 0.0]"
+consumer,T0,-0.01,0.047,0.437,23,"[0.045, -0.095, 0.006, 0.004]"
+consumer,T1,0.031,0.0,0.168,23,"[0.039, 0.047, 0.03, 0.008]"

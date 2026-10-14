@@ -1,0 +1,85 @@
+{
+  "created_utc": "2026-10-14T05:07:34+00:00",
+  "source": "dataset/rev21_export_serving_model.py",
+  "panel": "dataset/data/four_year_2021_2024/processed/nodes_monthly.csv",
+  "train_months": [
+    "2021-12",
+    "2022-12"
+  ],
+  "heads": {
+    "contraction_ridge7": {
+      "target": "T0",
+      "target_definition": "(V_{T+1} - median(V_{T-11..T})) / median(V_{T-11..T})",
+      "features": [
+        "inventory_days_proxy",
+        "trade_delay_proxy",
+        "news_vol_7d",
+        "neg_tone_frac_3d",
+        "strike_flag_7d",
+        "weather_anomaly_7d",
+        "global_risk"
+      ],
+      "sign_flipped": [
+        "inventory_days_proxy"
+      ],
+      "raw_nan_fill": 0.0,
+      "mean": [
+        -30.60691860440589,
+        1.3647970900477129,
+        2419.4188034188032,
+        0.6650940193756705,
+        0.8418803418803419,
+        0.6410256410256411,
+        2.580901708724463
+      ],
+      "scale": [
+        4.607804850749794,
+        2.256513705529415,
+        6507.633562616095,
+        0.19633553863303976,
+        0.3648531647605373,
+        0.479699664971017,
+        1.1483024491087344
+      ],
+      "coef": [
+        -0.04075880462865219,
+        -0.024184448642806132,
+        -0.005296595547979275,
+        0.03123521733247876,
+        0.006125576187243567,
+        -0.019476250968363907,
+        0.0518171204469722
+      ],
+      "intercept": 0.059431834474937974,
+      "alpha": 1.0,
+      "test_2024_r2": -0.24222680950533615,
+      "test_rows": 187
+    },
+    "logchange_ar1_12": {
+      "target": "T1",
+      "target_definition": "log(V_{T+1} / V_T)",
+      "features": [
+        "T1_lag1",
+        "T1_lag12"
+      ],
+      "sign_flipped": [],
+      "raw_nan_fill": 0.0,
+      "mean": [
+        0.0010745841380145496,
+        0.0262227879489791
+      ],
+      "scale": [
+        0.1587663864190865,
+        0.289170330667757
+      ],
+      "coef": [
+        -0.0541600132808294,
+        0.044566777329298785
+      ],
+      "intercept": -0.008856798516427894,
+      "alpha": 1.0,
+      "test_2024_r2": 0.21536250630480802,
+      "test_rows": 187
+    }
+  }
+}

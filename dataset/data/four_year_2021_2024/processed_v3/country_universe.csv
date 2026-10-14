@@ -1,0 +1,42 @@
+rank,country_name,comtrade_code,iso3,trade_value_usd,selection_reason
+1,India,699,IND,93839477822.143,fixed_focal_country
+2,China,156,CHN,47007454717.017,top_partner_with_reporter_data
+3,South Korea,410,KOR,9899594473.222,top_partner_with_reporter_data
+4,Hong Kong,344,HKG,8649410803.262,top_partner_with_reporter_data
+5,Singapore,702,SGP,4500815462.052,top_partner_with_reporter_data
+6,Vietnam,704,VNM,2420157040.729,top_partner_with_reporter_data
+7,Malaysia,458,MYS,2351475915.712,top_partner_with_reporter_data
+8,Japan,392,JPN,2317196591.367,top_partner_with_reporter_data
+9,Thailand,764,THA,1111536768.806,top_partner_with_reporter_data
+10,Ireland,372,IRL,922710842.102,top_partner_with_reporter_data
+11,United States,842,USA,875913182.394,top_partner_with_reporter_data
+12,Mexico,484,MEX,668089241.087,top_partner_with_reporter_data
+13,Philippines,608,PHL,551618756.277,top_partner_with_reporter_data
+14,Germany,276,DEU,406816161.017,top_partner_with_reporter_data
+15,United Kingdom,826,GBR,120923313.59,top_partner_with_reporter_data
+16,France,251,FRA,107059958.353,top_partner_with_reporter_data
+17,Italy,380,ITA,23070082.334,top_partner_with_reporter_data
+18,Czechia,203,CZE,8305339.09,top_partner_with_reporter_data
+19,Israel,376,ISR,838569443.632,phase_b_partner_with_monthly_reporter_data
+20,Netherlands,528,NLD,738295263.489,phase_b_partner_with_monthly_reporter_data
+21,Finland,246,FIN,417626257.023,phase_b_partner_with_monthly_reporter_data
+22,Indonesia,360,IDN,348980588.251,phase_b_partner_with_monthly_reporter_data
+23,Cambodia,116,KHM,274791320.598,phase_b_partner_with_monthly_reporter_data
+24,Belgium,56,BEL,244112649.588,phase_b_partner_with_monthly_reporter_data
+25,Hungary,348,HUN,222883375.659,phase_b_partner_with_monthly_reporter_data
+26,Spain,724,ESP,193503440.129,phase_b_partner_with_monthly_reporter_data
+27,Canada,124,CAN,180935085.17,phase_b_partner_with_monthly_reporter_data
+28,Turkiye,792,TUR,178309664.824,phase_b_partner_with_monthly_reporter_data
+29,Switzerland,757,CHE,146823844.539,phase_b_partner_with_monthly_reporter_data
+30,Poland,616,POL,130461869.239,phase_b_partner_with_monthly_reporter_data
+31,Sweden,752,SWE,118978957.303,phase_b_partner_with_monthly_reporter_data
+32,Slovakia,703,SVK,40509372.661,phase_b_partner_with_monthly_reporter_data
+33,Australia,36,AUS,38226017.039,phase_b_partner_with_monthly_reporter_data
+34,Estonia,233,EST,32363864.019,phase_b_partner_with_monthly_reporter_data
+35,Lithuania,440,LTU,28366064.653,phase_b_partner_with_monthly_reporter_data
+36,Brazil,76,BRA,26879199.289,phase_b_partner_with_monthly_reporter_data
+37,Denmark,208,DNK,24877034.129,phase_b_partner_with_monthly_reporter_data
+38,Latvia,428,LVA,23735700.973,phase_b_partner_with_monthly_reporter_data
+39,Myanmar,104,MMR,20880332.899,phase_b_partner_with_monthly_reporter_data
+40,Malta,470,MLT,19819881.528,phase_b_partner_with_monthly_reporter_data
+41,Norway,579,NOR,13128471.967,phase_b_partner_with_monthly_reporter_data

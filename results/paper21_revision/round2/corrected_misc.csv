@@ -1,0 +1,23 @@
+item,scope,n,median,sd,positives,prevalence,value
+T0 over all valid rows,as published,643,-0.013830263332058858,0.211236666068331,,,
+test positives (tau 0.20),as published,193,,,20.0,0.10362694300518134,
+validation positives,as published,216,,,,0.17592592592592593,
+T0 over all valid rows,corrected,636,-0.010579502089612272,0.18461420008125687,,,
+test positives (tau 0.20),corrected,187,,,14.0,0.0748663101604278,
+validation positives,corrected,215,,,,0.17209302325581396,
+"validation 2023 R2, gcn",as published,216,,,,,-0.009390812357237488
+"validation 2023 R2, lightgbm",as published,216,,,,,-0.35626353990163384
+"validation 2023 R2, lightgbm_lags",as published,216,,,,,-0.036471406783242344
+"validation 2023 R2, random_forest",as published,216,,,,,-0.14116527922993916
+"validation 2023 R2, ridge_regression",as published,216,,,,,-0.05383013415163673
+"validation 2023 R2, tgn",as published,216,,,,,0.041068164593832224
+"validation 2023 R2, tgn_no_memory",as published,216,,,,,0.021664218079175734
+"validation 2023 R2, train_median",as published,216,,,,,-0.4008701204072316
+"validation 2023 R2, gcn",corrected,215,,,,,0.000451122165014084
+"validation 2023 R2, lightgbm",corrected,215,,,,,-0.34985230182330374
+"validation 2023 R2, lightgbm_lags",corrected,215,,,,,0.0028160147864271234
+"validation 2023 R2, random_forest",corrected,215,,,,,-0.11885651542406395
+"validation 2023 R2, ridge_regression",corrected,215,,,,,-0.04896850465835856
+"validation 2023 R2, tgn",corrected,215,,,,,0.052971747144543446
+"validation 2023 R2, tgn_no_memory",corrected,215,,,,,0.039025946543063905
+"validation 2023 R2, train_median",corrected,215,,,,,-0.423719093493822

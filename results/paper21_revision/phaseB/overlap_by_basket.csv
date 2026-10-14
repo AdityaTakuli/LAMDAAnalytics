@@ -1,0 +1,5 @@
+target,lag1_autocorr_all,lag1_autocorr_test2024,window_overlap,basket
+T0,0.49343009818370376,0.6227541563383976,11/12 of the median window,semiconductor
+T1,-0.4120978127356994,-0.40724317886441963,0,semiconductor
+T0,0.5164030441348305,0.6212934900404,11/12 of the median window,consumer
+T1,-0.38724520435090576,-0.3620930684268015,0,consumer

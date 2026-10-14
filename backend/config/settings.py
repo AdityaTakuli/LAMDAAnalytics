@@ -13,6 +13,9 @@ class Settings(BaseSettings):
     weather_provider: str = Field("openweather", alias="WEATHER_PROVIDER")
     http_timeout_seconds: int = Field(30, alias="HTTP_TIMEOUT_SECONDS")
     agent_timeout_seconds: int = Field(90, alias="AGENT_TIMEOUT_SECONDS")
+    # Per-agent cap. A hung agent degrades to its defaults instead of running
+    # the whole graph into AGENT_TIMEOUT_SECONDS and the mock fallback.
+    agent_node_timeout_seconds: float = Field(30.0, alias="AGENT_NODE_TIMEOUT_SECONDS")
     scoring_state_path: str = Field("./data/scoring_state.json", alias="SCORING_STATE_PATH")
     log_level: str = Field("INFO", alias="LOG_LEVEL")
 

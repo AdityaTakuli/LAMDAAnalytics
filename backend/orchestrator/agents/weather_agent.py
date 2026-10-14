@@ -1,4 +1,5 @@
 from ..utils.api_clients import fetch_weather
+from ..utils.cache import get_cached, set_cached, weather_cache
 from ..utils.schema import WeatherFeatures
 
 def detect_anomaly_openweather(payload: dict) -> int:
@@ -34,9 +35,15 @@ def detect_anomaly_weatherapi(payload: dict) -> int:
     return 0
 
 async def weather_features(lat: float, lon: float) -> WeatherFeatures:
+    key = f"{round(lat, 2)}|{round(lon, 2)}"
+    cached = get_cached(weather_cache, key)
+    if cached:
+        return cached
     data = await fetch_weather(lat, lon)
     if not data:
         return WeatherFeatures(weather_anomaly_7d=0, details={})
     # choose detector by payload shape
     anomaly = 1 if ("daily" in data and detect_anomaly_openweather(data)) else detect_anomaly_weatherapi(data)
-    return WeatherFeatures(weather_anomaly_7d=anomaly, details={"provider_payload_shape": list(data.keys())})
+    feats = WeatherFeatures(weather_anomaly_7d=anomaly, details={"provider_payload_shape": list(data.keys())})
+    set_cached(weather_cache, key, feats)
+    return feats

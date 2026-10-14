@@ -1,0 +1,50 @@
+{
+  "train": {
+    "n": 234,
+    "positive": 12,
+    "negative": 222,
+    "prevalence": 0.05128205128205128,
+    "decision_threshold": 0.5,
+    "accuracy": 0.9230769230769231,
+    "brier_score": 0.1950357188603634,
+    "balanced_accuracy": 0.6047297297297297,
+    "precision": 0.25,
+    "recall": 0.25,
+    "f1": 0.25,
+    "roc_auc": 0.5713213213213213,
+    "average_precision": 0.2722723766319205,
+    "note": ""
+  },
+  "validation": {
+    "n": 216,
+    "positive": 38,
+    "negative": 178,
+    "prevalence": 0.17592592592592593,
+    "decision_threshold": 0.5,
+    "accuracy": 0.8333333333333334,
+    "brier_score": 0.18615648278964708,
+    "balanced_accuracy": 0.5470136014192786,
+    "precision": 0.6666666666666666,
+    "recall": 0.10526315789473684,
+    "f1": 0.18181818181818182,
+    "roc_auc": 0.7020993494973389,
+    "average_precision": 0.3894967390873897,
+    "note": ""
+  },
+  "test": {
+    "n": 193,
+    "positive": 20,
+    "negative": 173,
+    "prevalence": 0.10362694300518134,
+    "decision_threshold": 0.5,
+    "accuracy": 0.9222797927461139,
+    "brier_score": 0.17024875391236544,
+    "balanced_accuracy": 0.6471098265895954,
+    "precision": 0.8571428571428571,
+    "recall": 0.3,
+    "f1": 0.4444444444444444,
+    "roc_auc": 0.7098265895953758,
+    "average_precision": 0.445673931842773,
+    "note": ""
+  }
+}

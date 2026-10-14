@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import asyncio
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Awaitable, Callable
+
+from config.settings import settings
 
 from ..agents.gscpi_agent import gscpi_features
 from ..agents.news_agent import analyze_news
@@ -11,8 +14,39 @@ from ..agents.reporter_agent import concise_from_contrib, comprehensive, label_f
 from ..agents.trade_agent import fetch_trade_features
 from ..agents.weather_agent import weather_features
 from ..utils.geocoding import resolve_pair
-from ..utils.schema import AnalyzeResponse, TGNResult
+from ..utils.schema import (
+    AnalyzeResponse,
+    GSCPIFeatures,
+    NewsFeatures,
+    PoliticalFeatures,
+    TGNResult,
+    TradeFeatures,
+    WeatherFeatures,
+)
 from .state import AnalysisState
+
+# Conservative defaults written when an agent fails or exceeds its own timeout.
+# They match the in-agent fallbacks, so a degraded field looks the same whether
+# the failure happened inside the agent or around it.
+_DEFAULTS: dict[str, Callable[[], Any]] = {
+    "trade": lambda: TradeFeatures(inventory_days=30.0, past_delay_days=5.0, edges=[]),
+    "news": lambda: NewsFeatures(news_vol_7d=0, neg_tone_frac_3d=0.0, strike_flag_7d=0, sources=[]),
+    "weather": lambda: WeatherFeatures(weather_anomaly_7d=0, details={}),
+    "political": lambda: PoliticalFeatures(sanction_flag=0, political_risk_score=0.3, notes=None),
+    "gscpi": lambda: GSCPIFeatures(global_risk=0.2, timestamp=None),
+}
+
+
+async def _guarded(key: str, call: Awaitable[Any]) -> dict[str, Any]:
+    """Run one feature agent under its own timeout; never raise into the graph."""
+    try:
+        value = await asyncio.wait_for(call, timeout=settings.agent_node_timeout_seconds)
+        status = "ok"
+    except asyncio.TimeoutError:
+        value, status = _DEFAULTS[key](), "timeout"
+    except Exception as exc:  # noqa: BLE001 - isolation is the point
+        value, status = _DEFAULTS[key](), f"error: {type(exc).__name__}"
+    return {key: value, "agent_status": {key: status}}
 
 
 async def geocode_node(state: AnalysisState) -> dict[str, Any]:
@@ -26,44 +60,34 @@ async def geocode_node(state: AnalysisState) -> dict[str, Any]:
 
 async def trade_node(state: AnalysisState) -> dict[str, Any]:
     req = state["request"]
-    trade = await fetch_trade_features(req.component_type, req.seller_location, req.import_location)
-    return {"trade": trade}
+    return await _guarded(
+        "trade", fetch_trade_features(req.component_type, req.seller_location, req.import_location)
+    )
 
 
 async def news_node(state: AnalysisState) -> dict[str, Any]:
     req = state["request"]
-    news = await analyze_news(
-        req.component_type,
-        req.seller_location,
-        req.import_location,
-        req.seller_name,
+    return await _guarded(
+        "news",
+        analyze_news(req.component_type, req.seller_location, req.import_location, req.seller_name),
     )
-    return {"news": news}
 
 
 async def weather_node(state: AnalysisState) -> dict[str, Any]:
-    seller_latlon = state.get("seller_latlon")
-    if seller_latlon:
-        weather = await weather_features(*seller_latlon)
-    else:
-        weather = await weather_features(0.0, 0.0)
-    return {"weather": weather}
+    seller_latlon = state.get("seller_latlon") or (0.0, 0.0)
+    return await _guarded("weather", weather_features(*seller_latlon))
 
 
 async def political_node(state: AnalysisState) -> dict[str, Any]:
     req = state["request"]
-    political = await political_features(
-        req.component_type,
-        req.seller_location,
-        req.import_location,
-        req.seller_name,
+    return await _guarded(
+        "political",
+        political_features(req.component_type, req.seller_location, req.import_location, req.seller_name),
     )
-    return {"political": political}
 
 
 async def gscpi_node(state: AnalysisState) -> dict[str, Any]:
-    gscpi = await gscpi_features()
-    return {"gscpi": gscpi}
+    return await _guarded("gscpi", gscpi_features())
 
 
 async def normalize_node(state: AnalysisState) -> dict[str, Any]:

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, TypedDict
+import operator
+from typing import Annotated, Dict, List, Optional, Tuple, TypedDict
 
 from ..utils.schema import (
     AnalyzeRequest,
@@ -43,6 +44,10 @@ class AnalysisState(TypedDict, total=False):
     concise: List[RiskFactorReport]
     comprehensive: ComprehensiveReport
     response: AnalyzeResponse
+
+    # Per-agent outcome ("ok", "timeout", "error: <type>"). Parallel agents each
+    # write their own key; the reducer merges the dicts at fan-in.
+    agent_status: Annotated[Dict[str, str], operator.or_]
 
     # Soft error channel (optional)
     errors: List[str]

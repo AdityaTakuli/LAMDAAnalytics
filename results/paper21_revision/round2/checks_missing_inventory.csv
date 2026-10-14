@@ -1,0 +1,17 @@
+basket,kind,rows,detail
+consumer,country-months in panel,3444,
+consumer,unreported reporter-months (stored as zero),50,"{'country_116': 12, 'country_233': 1, 'country_cn': 12, 'country_ph': 1, 'country_vn': 24}"
+consumer,rows whose log change is undefined because of a gap,55,
+consumer,rows with a valid log change,3351,
+consumer,rows within 12 months after a gap (lags/proxies touched),14,
+consumer,rows with lag 12 missing (series start or gap),492,
+consumer,rows in June 2025 (news interpolated),41,
+consumer,Hong Kong rows with zero news volume,21,
+semiconductor,country-months in panel,3444,
+semiconductor,unreported reporter-months (stored as zero),50,"{'country_116': 12, 'country_233': 1, 'country_cn': 12, 'country_ph': 1, 'country_vn': 24}"
+semiconductor,rows whose log change is undefined because of a gap,55,
+semiconductor,rows with a valid log change,3351,
+semiconductor,rows within 12 months after a gap (lags/proxies touched),14,
+semiconductor,rows with lag 12 missing (series start or gap),492,
+semiconductor,rows in June 2025 (news interpolated),41,
+semiconductor,Hong Kong rows with zero news volume,21,

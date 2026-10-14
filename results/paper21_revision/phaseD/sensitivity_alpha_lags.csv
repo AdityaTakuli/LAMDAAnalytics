@@ -1,0 +1,163 @@
+data,model,alpha,r2
+semiconductor,Own lag 1,0.01,0.15157500318611938
+semiconductor,Own lag 1,0.1,0.15157709655875906
+semiconductor,Own lag 1,1.0,0.15159782264589672
+semiconductor,Own lag 1,10.0,0.1517848792016866
+semiconductor,Own lag 1,100.0,0.15208587276994168
+semiconductor,Own lag 1,1000.0,0.12379641957215004
+semiconductor,"Own lags 1, 12",0.01,0.17163790388515376
+semiconductor,"Own lags 1, 12",0.1,0.17163981049291133
+semiconductor,"Own lags 1, 12",1.0,0.17165861280980454
+semiconductor,"Own lags 1, 12",10.0,0.17182109113683408
+semiconductor,"Own lags 1, 12",100.0,0.1715363157534866
+semiconductor,"Own lags 1, 12",1000.0,0.1364328354277028
+semiconductor,"Own lags 1, 2, 3",0.01,0.15996235629132494
+semiconductor,"Own lags 1, 2, 3",0.1,0.15996243104143293
+semiconductor,"Own lags 1, 2, 3",1.0,0.15996280686676811
+semiconductor,"Own lags 1, 2, 3",10.0,0.15993193686585971
+semiconductor,"Own lags 1, 2, 3",100.0,0.15764380982449266
+semiconductor,"Own lags 1, 2, 3",1000.0,0.12081356567543877
+semiconductor,Own lags 1 to 12,0.01,0.1473257461304459
+semiconductor,Own lags 1 to 12,0.1,0.1473327390369077
+semiconductor,Own lags 1 to 12,1.0,0.14740190340835135
+semiconductor,Own lags 1 to 12,10.0,0.14802182236226058
+semiconductor,Own lags 1 to 12,100.0,0.14990976038671588
+semiconductor,Own lags 1 to 12,1000.0,0.12100566461018103
+semiconductor,All seven features,0.01,0.11606710927441644
+semiconductor,All seven features,0.1,0.11607106733604067
+semiconductor,All seven features,1.0,0.11611049273540308
+semiconductor,All seven features,10.0,0.11648970624412869
+semiconductor,All seven features,100.0,0.11912208949405256
+semiconductor,All seven features,1000.0,0.11323994391035641
+semiconductor,Trade proxies only,0.01,0.1133932002884207
+semiconductor,Trade proxies only,0.1,0.11339669877153491
+semiconductor,Trade proxies only,1.0,0.11343151862285328
+semiconductor,Trade proxies only,10.0,0.11376383269879031
+semiconductor,Trade proxies only,100.0,0.11592094647222728
+semiconductor,Trade proxies only,1000.0,0.10902224157875173
+semiconductor,Exogenous only,0.01,-0.005177544218525343
+semiconductor,Exogenous only,0.1,-0.005175775060777266
+semiconductor,Exogenous only,1.0,-0.005158123446311169
+semiconductor,Exogenous only,10.0,-0.004985519782328529
+semiconductor,Exogenous only,100.0,-0.003581679636437185
+semiconductor,Exogenous only,1000.0,0.0002868990561819551
+semiconductor,"AR(1,12) + exogenous",0.01,0.16592849513455676
+semiconductor,"AR(1,12) + exogenous",0.1,0.16593306737826186
+semiconductor,"AR(1,12) + exogenous",1.0,0.16597845847649573
+semiconductor,"AR(1,12) + exogenous",10.0,0.1664002173029987
+semiconductor,"AR(1,12) + exogenous",100.0,0.16817124855415733
+semiconductor,"AR(1,12) + exogenous",1000.0,0.13801115419978316
+semiconductor,"All seven + own lags 1, 12",0.01,0.1700707801514505
+semiconductor,"All seven + own lags 1, 12",0.1,0.1700797705530004
+semiconductor,"All seven + own lags 1, 12",1.0,0.17016891402709822
+semiconductor,"All seven + own lags 1, 12",10.0,0.17098927372110184
+semiconductor,"All seven + own lags 1, 12",100.0,0.17501853148113533
+semiconductor,"All seven + own lags 1, 12",1000.0,0.16248587342823972
+consumer,Own lag 1,0.01,0.10674161324616105
+consumer,Own lag 1,0.1,0.10674042129411543
+consumer,Own lag 1,1.0,0.10672845357287608
+consumer,Own lag 1,10.0,0.10660409783530045
+consumer,Own lag 1,100.0,0.10500609658245796
+consumer,Own lag 1,1000.0,0.08438490249189834
+consumer,"Own lags 1, 12",0.01,0.19251217376431495
+consumer,"Own lags 1, 12",0.1,0.19251284854099782
+consumer,"Own lags 1, 12",1.0,0.19251942262458543
+consumer,"Own lags 1, 12",10.0,0.192568269531033
+consumer,"Own lags 1, 12",100.0,0.19174913946236238
+consumer,"Own lags 1, 12",1000.0,0.15849459860526716
+consumer,"Own lags 1, 2, 3",0.01,0.13285206579010678
+consumer,"Own lags 1, 2, 3",0.1,0.132849048043594
+consumer,"Own lags 1, 2, 3",1.0,0.13281880626621223
+consumer,"Own lags 1, 2, 3",10.0,0.13251024934244293
+consumer,"Own lags 1, 2, 3",100.0,0.1290234479159139
+consumer,"Own lags 1, 2, 3",1000.0,0.09614796008999871
+consumer,Own lags 1 to 12,0.01,0.21486113307179322
+consumer,Own lags 1 to 12,0.1,0.21493288825319046
+consumer,Own lags 1 to 12,1.0,0.2156200115562501
+consumer,Own lags 1 to 12,10.0,0.22022963346656366
+consumer,Own lags 1 to 12,100.0,0.2209633671446345
+consumer,Own lags 1 to 12,1000.0,0.1683144151440532
+consumer,All seven features,0.01,0.06744727632077008
+consumer,All seven features,0.1,0.06746323837994617
+consumer,All seven features,1.0,0.0676223228808408
+consumer,All seven features,10.0,0.06916161793567399
+consumer,All seven features,100.0,0.08073624992494255
+consumer,All seven features,1000.0,0.09939677065651142
+consumer,Trade proxies only,0.01,0.12061299209398335
+consumer,Trade proxies only,0.1,0.12061543460178703
+consumer,Trade proxies only,1.0,0.12063960478686386
+consumer,Trade proxies only,10.0,0.12085777288667854
+consumer,Trade proxies only,100.0,0.12169815846399168
+consumer,Trade proxies only,1000.0,0.11034012679209215
+consumer,Exogenous only,0.01,-0.03312249805213274
+consumer,Exogenous only,0.1,-0.03311606240063236
+consumer,Exogenous only,1.0,-0.03305184184694809
+consumer,Exogenous only,10.0,-0.032422953053385495
+consumer,Exogenous only,100.0,-0.02723478982140448
+consumer,Exogenous only,1000.0,-0.010791702142353587
+consumer,"AR(1,12) + exogenous",0.01,0.15544008241098028
+consumer,"AR(1,12) + exogenous",0.1,0.15544953663762584
+consumer,"AR(1,12) + exogenous",1.0,0.15554369408653668
+consumer,"AR(1,12) + exogenous",10.0,0.15644776428677787
+consumer,"AR(1,12) + exogenous",100.0,0.16252297752311728
+consumer,"AR(1,12) + exogenous",1000.0,0.14953656860061515
+consumer,"All seven + own lags 1, 12",0.01,0.16293994440262094
+consumer,"All seven + own lags 1, 12",0.1,0.1629537109095801
+consumer,"All seven + own lags 1, 12",1.0,0.16309088327657983
+consumer,"All seven + own lags 1, 12",10.0,0.16441514993420892
+consumer,"All seven + own lags 1, 12",100.0,0.17410385445818544
+consumer,"All seven + own lags 1, 12",1000.0,0.17965134360074075
+both baskets,Own lag 1,0.01,0.13954477211019556
+both baskets,Own lag 1,0.1,0.13954527000980244
+both baskets,Own lag 1,1.0,0.1395502102617291
+both baskets,Own lag 1,10.0,0.13959579155536128
+both baskets,Own lag 1,100.0,0.13971696623585161
+both baskets,Own lag 1,1000.0,0.1285320536769632
+both baskets,"Own lags 1, 12",0.01,0.17340887448260667
+both baskets,"Own lags 1, 12",0.1,0.17340914455993262
+both baskets,"Own lags 1, 12",1.0,0.17341179500265336
+both baskets,"Own lags 1, 12",10.0,0.1734333461590949
+both baskets,"Own lags 1, 12",100.0,0.17322349878195542
+both baskets,"Own lags 1, 12",1000.0,0.15703355563526622
+both baskets,"Own lags 1, 2, 3",0.01,0.15566439272756916
+both baskets,"Own lags 1, 2, 3",0.1,0.1556635390116713
+both baskets,"Own lags 1, 2, 3",1.0,0.15565494877620123
+both baskets,"Own lags 1, 2, 3",10.0,0.15556389817605942
+both baskets,"Own lags 1, 2, 3",100.0,0.1542622489261981
+both baskets,"Own lags 1, 2, 3",1000.0,0.1340130967472014
+both baskets,Own lags 1 to 12,0.01,0.17413557563514115
+both baskets,Own lags 1 to 12,0.1,0.1741345957118341
+both baskets,Own lags 1 to 12,1.0,0.17412474516342125
+both baskets,Own lags 1 to 12,10.0,0.17402126080110947
+both baskets,Own lags 1 to 12,100.0,0.17260704862123966
+both baskets,Own lags 1 to 12,1000.0,0.15151197636788793
+both baskets,All seven features,0.01,0.10792983895392982
+both baskets,All seven features,0.1,0.10793274475449333
+both baskets,All seven features,1.0,0.10796175004992037
+both baskets,All seven features,10.0,0.10824661917075395
+both baskets,All seven features,100.0,0.11064834869874918
+both baskets,All seven features,1000.0,0.11582141792497735
+both baskets,Trade proxies only,0.01,0.12144346740843748
+both baskets,Trade proxies only,0.1,0.12144442087878438
+both baskets,Trade proxies only,1.0,0.12145391923164672
+both baskets,Trade proxies only,10.0,0.12154535782930342
+both baskets,Trade proxies only,100.0,0.12217479427713218
+both baskets,Trade proxies only,1000.0,0.11905485481981337
+both baskets,Exogenous only,0.01,-0.012252861822402483
+both baskets,Exogenous only,0.1,-0.012251396740750264
+both baskets,Exogenous only,1.0,-0.012236761789690576
+both baskets,Exogenous only,10.0,-0.01209198218950025
+both baskets,Exogenous only,100.0,-0.010786136433018845
+both baskets,Exogenous only,1000.0,-0.004613871969611161
+both baskets,"AR(1,12) + exogenous",0.01,0.15726614709328757
+both baskets,"AR(1,12) + exogenous",0.1,0.15726894374150402
+both baskets,"AR(1,12) + exogenous",1.0,0.1572968260885399
+both baskets,"AR(1,12) + exogenous",10.0,0.15756735876351136
+both baskets,"AR(1,12) + exogenous",100.0,0.15955169745450037
+both baskets,"AR(1,12) + exogenous",1000.0,0.1525027248874138
+both baskets,"All seven + own lags 1, 12",0.01,0.16464371879290252
+both baskets,"All seven + own lags 1, 12",0.1,0.16464820420813264
+both baskets,"All seven + own lags 1, 12",1.0,0.16469290318963592
+both baskets,"All seven + own lags 1, 12",10.0,0.16512486751698063
+both baskets,"All seven + own lags 1, 12",100.0,0.16830670629874178
+both baskets,"All seven + own lags 1, 12",1000.0,0.17054841851531333

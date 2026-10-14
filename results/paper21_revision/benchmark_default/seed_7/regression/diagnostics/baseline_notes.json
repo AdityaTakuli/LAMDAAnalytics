@@ -1,0 +1,7 @@
+{
+  "train_median": "constant prediction 0.051264 (median training contraction)",
+  "ridge_regression": "ridge regression (alpha=1.0) on train-standardised features",
+  "random_forest": "random forest on train-standardised features",
+  "lightgbm": "LightGBM on standardised features",
+  "lightgbm_lags": "LightGBM on standardised features with causal lags"
+}

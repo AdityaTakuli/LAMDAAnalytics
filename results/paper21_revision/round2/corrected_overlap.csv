@@ -1,0 +1,3 @@
+target,lag1_autocorr_all,lag1_autocorr_test2024,window_overlap
+T0,0.6052915859430464,0.6224149396801307,11/12 of the median window
+T1,-0.4493955779616968,-0.42638018748535333,0

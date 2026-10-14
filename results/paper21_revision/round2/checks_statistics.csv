@@ -1,0 +1,25 @@
+check,model,value,r2_test_mean,contrast,t,p,ljung_box_p_3lags,months,blocks,p_holm,family_size
+R2 against the training-mean forecast (Campbell-Thompson),ar,0.174072090828292,0.17341179500265336,,,,,,,,
+R2 against the training-mean forecast (Campbell-Thompson),all7,0.10867432873080529,0.10796175004992037,,,,,,,,
+R2 against the training-mean forecast (Campbell-Thompson),trade,0.12215572008756914,0.12145391923164672,,,,,,,,
+R2 against the training-mean forecast (Campbell-Thompson),ar_exo,0.15796999488604035,0.1572968260885399,,,,,,,,
+two-way clustered (country x month) t-test,,,,"AR(1,12) - all seven",1.8394946501398748,0.07327273922514038,,,,,
+moving-block bootstrap over months (blocks of 6),,,,"AR(1,12) - all seven",,0.0029,,,,,
+lag-1 autocorrelation of the monthly loss differential,,-0.19490808260859058,,"AR(1,12) - all seven",,,0.24289987239706046,59.0,,,
+kurtosis of the row loss differential,,352.1504083154682,,"AR(1,12) - all seven",,,,,,,
+two-way clustered (country x month) t-test,,,,all seven - trade only,-1.23684219820748,0.2233583853769658,,,,,
+moving-block bootstrap over months (blocks of 6),,,,all seven - trade only,,0.1928,,,,,
+lag-1 autocorrelation of the monthly loss differential,,0.12238474922224622,,all seven - trade only,,,0.5303564598381598,59.0,,,
+kurtosis of the row loss differential,,59.32789684811091,,all seven - trade only,,,,,,,
+two-way clustered (country x month) t-test,,,,"(AR+exogenous) - AR(1,12)",-1.8273379195722832,0.07511630152767959,,,,,
+moving-block bootstrap over months (blocks of 6),,,,"(AR+exogenous) - AR(1,12)",,0.093,,,,,
+lag-1 autocorrelation of the monthly loss differential,,0.22285603656235078,,"(AR+exogenous) - AR(1,12)",,,0.26275629388427085,59.0,,,
+kurtosis of the row loss differential,,121.07115413294095,,"(AR+exogenous) - AR(1,12)",,,,,,,
+"sign test: blocks where AR(1,12) beats all seven",,9.0,,,,0.021484375,,,10.0,,
+sign test: blocks where adding exogenous channels helps,,3.0,,,,0.34375,,,10.0,,
+Holm adjustment over the main family (month-clustered p),,,,"AR(1,12) minus all seven",,0.006,,,,0.036000000000000004,6.0
+Holm adjustment over the main family (month-clustered p),,,,all seven minus trade only,,0.249,,,,0.498,6.0
+Holm adjustment over the main family (month-clustered p),,,,+ news (3),,0.067,,,,0.335,6.0
+Holm adjustment over the main family (month-clustered p),,,,+ weather,,0.312,,,,0.498,6.0
+Holm adjustment over the main family (month-clustered p),,,,+ GSCPI,,0.126,,,,0.378,6.0
+Holm adjustment over the main family (month-clustered p),,,,+ all exogenous (5),,0.083,,,,0.335,6.0

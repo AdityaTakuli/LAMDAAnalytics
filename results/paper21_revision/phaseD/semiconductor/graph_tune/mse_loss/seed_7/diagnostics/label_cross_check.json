@@ -1,0 +1,38 @@
+{
+  "0.20": {
+    "status": "match",
+    "comparable_rows": 2925,
+    "agreeing_rows": 2925,
+    "stored_labelled_rows": 2925,
+    "derived_labelled_rows": 2925,
+    "stored_positive": 389,
+    "derived_positive": 389
+  },
+  "0.30": {
+    "status": "match",
+    "comparable_rows": 2925,
+    "agreeing_rows": 2925,
+    "stored_labelled_rows": 2925,
+    "derived_labelled_rows": 2925,
+    "stored_positive": 206,
+    "derived_positive": 206
+  },
+  "0.35": {
+    "status": "match",
+    "comparable_rows": 2925,
+    "agreeing_rows": 2925,
+    "stored_labelled_rows": 2925,
+    "derived_labelled_rows": 2925,
+    "stored_positive": 143,
+    "derived_positive": 143
+  },
+  "0.40": {
+    "status": "match",
+    "comparable_rows": 2925,
+    "agreeing_rows": 2925,
+    "stored_labelled_rows": 2925,
+    "derived_labelled_rows": 2925,
+    "stored_positive": 107,
+    "derived_positive": 107
+  }
+}

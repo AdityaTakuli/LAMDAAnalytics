@@ -27,9 +27,11 @@ Return JSON with fields:
 Be conservative; cite month strings in last 1-2 months if possible. If unsure, provide plausible conservative values.
 """
     model = get_gemini()
-    resp = model.generate_content(prompt)
     data = {}
     try:
+        # The LLM call sits inside the try so a provider error degrades this
+        # agent to its defaults instead of failing the whole graph.
+        resp = await model.agenerate_content(prompt)
         import json, re
         txt = resp.text or "{}"
         txt = re.sub(r"```json|```", "", txt).strip()

@@ -1,0 +1,24 @@
+model,r2,n_test_subset,n_test
+Train median,-0.00424449383553549,,3179
+Persistence (pair lag),-0.3559717162579332,,3179
+Pair own lag (AR(1)),0.10600386275263607,,3179
+"+ pair trade ratio, log value",0.11927855373595253,,3179
++ destination-country features (7),0.11879528395903616,,3179
++ source-country features (7),0.10870160984550203,,3179
++ exporter-wide export shock,0.10873218151274411,,3179
+Exporter-side only (source features + shock),-0.03336290590996227,,3179
+"Node features only (paper's pooled inputs, no lags)",-0.007252890925251387,,3179
+[pair log change] Pair own lag (AR(1)),0.23967425188832225,,3179
+"[pair log change] + pair trade ratio, log value",0.27617981297323824,,3179
+[pair log change] + destination-country features (7),0.2702571747758026,,3179
+[pair log change] + source-country features (7),0.25441891993846455,,3179
+[pair log change] + exporter-wide export shock,0.2538539881392817,,3179
+[pair log change] Exporter-side only (source features + shock),-0.010709815109220644,,3179
+"[pair log change] Node features only (paper's pooled inputs, no lags)",-0.028946080951889996,,3179
+"[pair log change, top-quartile pairs = 91% of value] Pair own lag (AR(1))",0.1347302849105083,792.0,3179
+"[pair log change, top-quartile pairs = 91% of value] + pair trade ratio, log value",0.1852035900554443,792.0,3179
+"[pair log change, top-quartile pairs = 91% of value] + destination-country features (7)",-0.15722190003623004,792.0,3179
+"[pair log change, top-quartile pairs = 91% of value] + source-country features (7)",-0.18578392639648977,792.0,3179
+"[pair log change, top-quartile pairs = 91% of value] + exporter-wide export shock",-0.19493949268630217,792.0,3179
+"[pair log change, top-quartile pairs = 91% of value] Exporter-side only (source features + shock)",-0.21484557726730058,792.0,3179
+"[pair log change, top-quartile pairs = 91% of value] Node features only (paper's pooled inputs, no lags)",-0.30048567501359824,792.0,3179

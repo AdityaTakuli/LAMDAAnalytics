@@ -64,10 +64,23 @@ class ScoringState:
 scoring_state = ScoringState(settings.scoring_state_path)
 scoring_state.load()
 
+# More inventory cover lowers risk. The offline standardizer flips this feature
+# (dataset/training/data.py PROTECTIVE_FEATURE); the live path now does the
+# same. sigmoid(-z) == 1 - sigmoid(z), so orienting after the z-score is
+# identical to flipping before it and keeps the stored Welford state valid.
+PROTECTIVE_FEATURES = {"inventory_days"}
+
+
 def normalize_features(raw: Dict[str, float]) -> Dict[str, float]:
     # Update rolling stats then produce normalized values in [0,1] via z-score sigmoid
     scoring_state.update(raw)
-    return {k: scoring_state.zscore(k, v) for k, v in raw.items() if v is not None}
+    out = {}
+    for k, v in raw.items():
+        if v is None:
+            continue
+        value = scoring_state.zscore(k, v)
+        out[k] = 1.0 - value if k in PROTECTIVE_FEATURES else value
+    return out
 
 def weighted_risk(norm: Dict[str, float], weights: Dict[str, float] = None) -> tuple[float, Dict[str, float]]:
     if not weights:

@@ -1,0 +1,7 @@
+data,contrast,diff_r2,p country,p month,95% CI (months)
+both baskets,"AR(1,12) minus all seven",0.065,0.0,0.006,"[+0.022, +0.116]"
+both baskets,all seven minus trade only,-0.013,0.0,0.249,"[-0.038, +0.007]"
+semiconductor,"AR(1,12) minus all seven",0.056,0.32,0.075,"[+0.002, +0.124]"
+semiconductor,all seven minus trade only,0.003,0.47,0.736,"[-0.014, +0.018]"
+consumer,"AR(1,12) minus all seven",0.125,0.0,0.003,"[+0.048, +0.209]"
+consumer,all seven minus trade only,-0.053,0.0,0.05,"[-0.115, -0.002]"

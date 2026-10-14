@@ -78,7 +78,7 @@ Texts:
 {texts[:10]}
 """
     try:
-        resp = model.generate_content(prompt)
+        resp = await model.agenerate_content(prompt)
         import json, re
         s = (resp.text or "{}")
         s = re.sub(r"```json|```", "", s).strip()

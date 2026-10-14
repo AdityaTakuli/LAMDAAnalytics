@@ -1,3 +1,5 @@
+import asyncio
+
 import httpx
 from groq import Groq
 from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
@@ -47,17 +49,38 @@ def llm_generate(prompt: str) -> str:
     msg = resp.choices[0].message
     return (msg.content or getattr(msg, "reasoning", None) or "").strip()
 
+
+async def llm_generate_async(prompt: str) -> str:
+    """Non-blocking LLM call for use inside async LangGraph nodes.
+
+    ``llm_generate`` is a synchronous HTTP call. Awaiting it directly inside an
+    ``async def`` node blocks the event loop, so LangGraph's parallel fan-out
+    degenerates to one LLM call at a time. Running it in a worker thread lets
+    the agents' calls overlap.
+    """
+    return await asyncio.to_thread(llm_generate, prompt)
+
+
+class _Resp:
+    def __init__(self, text):
+        self.text = text
+
+
+def _prompt_text(prompt) -> str:
+    if isinstance(prompt, list):
+        prompt = prompt[0].get("text", str(prompt[0])) if isinstance(prompt[0], dict) else str(prompt[0])
+    return str(prompt)
+
+
 # Keep backward compatibility alias
 def get_gemini():
     """Deprecated: returns a wrapper that uses Groq instead of Gemini."""
     class _GroqWrapper:
         def generate_content(self, prompt, **kwargs):
-            if isinstance(prompt, list):
-                prompt = prompt[0].get("text", str(prompt[0])) if isinstance(prompt[0], dict) else str(prompt[0])
-            class _Resp:
-                def __init__(self, text):
-                    self.text = text
-            return _Resp(llm_generate(str(prompt)))
+            return _Resp(llm_generate(_prompt_text(prompt)))
+
+        async def agenerate_content(self, prompt, **kwargs):
+            return _Resp(await llm_generate_async(_prompt_text(prompt)))
     return _GroqWrapper()
 
 def http_client():

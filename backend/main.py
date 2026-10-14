@@ -179,6 +179,24 @@ async def analyze(req: AnalyzeRequest):
         )
         return mock_result
 
+
+@app.get("/forecast")
+def forecast(country: str, month: str):
+    """Offline-parity forecast: the evaluated models on published-series features.
+
+    Unlike /analyze (LLM-extracted features, fixed linear blend), this route runs
+    the exact models scored in the paper on the same fused public series, so the
+    served number and the evaluated number come from one pipeline.
+    """
+    from fastapi import HTTPException
+    from models.parity_model import ForecastNotAvailable, forecast as parity_forecast
+
+    try:
+        return parity_forecast(country, month)
+    except ForecastNotAvailable as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
 @app.get("/monitoring/alerts")
 def monitoring_alerts():
     # Simple mock alerts (replace with real)

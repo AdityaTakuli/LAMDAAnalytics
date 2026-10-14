@@ -1,0 +1,721 @@
+data,target,scope,model,block,n,r2
+semiconductor,T1,all 41,Persistence,2021H1,246,-1.4407457370973864
+semiconductor,T1,all 41,Persistence,2021H2,246,-2.2868631946217466
+semiconductor,T1,all 41,Persistence,2022H1,246,-1.474321020367551
+semiconductor,T1,all 41,Persistence,2022H2,246,-1.9021982094066239
+semiconductor,T1,all 41,Persistence,2023H1,246,-1.8626812506530515
+semiconductor,T1,all 41,Persistence,2023H2,245,-1.5215956015561352
+semiconductor,T1,all 41,Persistence,2024H1,240,-1.8541982365071061
+semiconductor,T1,all 41,Persistence,2024H2,238,-1.5304708297011547
+semiconductor,T1,all 41,Persistence,2025H1,228,-1.8514504598064558
+semiconductor,T1,all 41,Persistence,2025H2,188,-1.8898839433631633
+semiconductor,T1,all 41,Own lag (AR(1)),2021H1,246,0.020628209082480864
+semiconductor,T1,all 41,Own lag (AR(1)),2021H2,246,0.3483686176333981
+semiconductor,T1,all 41,Own lag (AR(1)),2022H1,246,-0.0700643564568062
+semiconductor,T1,all 41,Own lag (AR(1)),2022H2,246,0.211960451689296
+semiconductor,T1,all 41,Own lag (AR(1)),2023H1,246,0.13678448857910797
+semiconductor,T1,all 41,Own lag (AR(1)),2023H2,245,-0.04371941408242552
+semiconductor,T1,all 41,Own lag (AR(1)),2024H1,240,0.1637911877103675
+semiconductor,T1,all 41,Own lag (AR(1)),2024H2,238,0.15932422214295494
+semiconductor,T1,all 41,Own lag (AR(1)),2025H1,228,0.1873725338121237
+semiconductor,T1,all 41,Own lag (AR(1)),2025H2,188,0.14194139800143069
+semiconductor,T1,all 41,"Own lags 1, 12 (AR(1,12))",2021H1,246,0.028441016240354555
+semiconductor,T1,all 41,"Own lags 1, 12 (AR(1,12))",2021H2,246,0.3547878794662773
+semiconductor,T1,all 41,"Own lags 1, 12 (AR(1,12))",2022H1,246,-0.06690146935650976
+semiconductor,T1,all 41,"Own lags 1, 12 (AR(1,12))",2022H2,246,0.25901068106200464
+semiconductor,T1,all 41,"Own lags 1, 12 (AR(1,12))",2023H1,246,0.17998727715523755
+semiconductor,T1,all 41,"Own lags 1, 12 (AR(1,12))",2023H2,245,-0.04764635319706434
+semiconductor,T1,all 41,"Own lags 1, 12 (AR(1,12))",2024H1,240,0.2031122793068335
+semiconductor,T1,all 41,"Own lags 1, 12 (AR(1,12))",2024H2,238,0.1455733770883928
+semiconductor,T1,all 41,"Own lags 1, 12 (AR(1,12))",2025H1,228,0.2073632987814552
+semiconductor,T1,all 41,"Own lags 1, 12 (AR(1,12))",2025H2,188,0.2144335460439103
+semiconductor,T1,all 41,Trade proxies only,2021H1,246,0.036020479906002545
+semiconductor,T1,all 41,Trade proxies only,2021H2,246,0.20259533633338977
+semiconductor,T1,all 41,Trade proxies only,2022H1,246,0.029316195360735042
+semiconductor,T1,all 41,Trade proxies only,2022H2,246,0.16959780685510206
+semiconductor,T1,all 41,Trade proxies only,2023H1,246,0.1386818387933788
+semiconductor,T1,all 41,Trade proxies only,2023H2,245,-0.16897484875378566
+semiconductor,T1,all 41,Trade proxies only,2024H1,240,0.09449769024066001
+semiconductor,T1,all 41,Trade proxies only,2024H2,238,0.14279597836475177
+semiconductor,T1,all 41,Trade proxies only,2025H1,228,0.1397070796508203
+semiconductor,T1,all 41,Trade proxies only,2025H2,188,0.2025754184997698
+semiconductor,T1,all 41,Exogenous only,2021H1,246,-0.02921425956660073
+semiconductor,T1,all 41,Exogenous only,2021H2,246,-0.014778815717502392
+semiconductor,T1,all 41,Exogenous only,2022H1,246,-0.010273952733815372
+semiconductor,T1,all 41,Exogenous only,2022H2,246,-0.004850850851472632
+semiconductor,T1,all 41,Exogenous only,2023H1,246,0.007843316304987802
+semiconductor,T1,all 41,Exogenous only,2023H2,245,-0.000966373139457799
+semiconductor,T1,all 41,Exogenous only,2024H1,240,-0.0027167236491238977
+semiconductor,T1,all 41,Exogenous only,2024H2,238,0.0008558861689991204
+semiconductor,T1,all 41,Exogenous only,2025H1,228,-0.005056319610651672
+semiconductor,T1,all 41,Exogenous only,2025H2,188,-0.00470158391258324
+semiconductor,T1,all 41,All seven features,2021H1,246,0.025057050089038913
+semiconductor,T1,all 41,All seven features,2021H2,246,0.19444314723135891
+semiconductor,T1,all 41,All seven features,2022H1,246,0.018180425943517764
+semiconductor,T1,all 41,All seven features,2022H2,246,0.18664404775416676
+semiconductor,T1,all 41,All seven features,2023H1,246,0.13833643273688878
+semiconductor,T1,all 41,All seven features,2023H2,245,-0.06076480621120228
+semiconductor,T1,all 41,All seven features,2024H1,240,0.08592145287665531
+semiconductor,T1,all 41,All seven features,2024H2,238,0.1471288733810019
+semiconductor,T1,all 41,All seven features,2025H1,228,0.12388870076745417
+semiconductor,T1,all 41,All seven features,2025H2,188,0.1890053831746934
+semiconductor,T1,all 41,"AR(1,12) + exogenous",2021H1,246,-0.012377579775615377
+semiconductor,T1,all 41,"AR(1,12) + exogenous",2021H2,246,0.3377320555673816
+semiconductor,T1,all 41,"AR(1,12) + exogenous",2022H1,246,-0.07646421369489409
+semiconductor,T1,all 41,"AR(1,12) + exogenous",2022H2,246,0.2664102196295113
+semiconductor,T1,all 41,"AR(1,12) + exogenous",2023H1,246,0.19409074107812818
+semiconductor,T1,all 41,"AR(1,12) + exogenous",2023H2,245,0.015448297060459582
+semiconductor,T1,all 41,"AR(1,12) + exogenous",2024H1,240,0.1979413406647953
+semiconductor,T1,all 41,"AR(1,12) + exogenous",2024H2,238,0.1469497100825805
+semiconductor,T1,all 41,"AR(1,12) + exogenous",2025H1,228,0.19730840481089618
+semiconductor,T1,all 41,"AR(1,12) + exogenous",2025H2,188,0.20514195031032167
+semiconductor,T1,all 41,All seven + own lags,2021H1,246,-0.017503463757368998
+semiconductor,T1,all 41,All seven + own lags,2021H2,246,0.3374856036820858
+semiconductor,T1,all 41,All seven + own lags,2022H1,246,-0.042202685663928596
+semiconductor,T1,all 41,All seven + own lags,2022H2,246,0.3005949502552723
+semiconductor,T1,all 41,All seven + own lags,2023H1,246,0.19593382090823463
+semiconductor,T1,all 41,All seven + own lags,2023H2,245,-0.05513745470700382
+semiconductor,T1,all 41,All seven + own lags,2024H1,240,0.19561031088336123
+semiconductor,T1,all 41,All seven + own lags,2024H2,238,0.16329003369280382
+semiconductor,T1,all 41,All seven + own lags,2025H1,228,0.2096153956381509
+semiconductor,T1,all 41,All seven + own lags,2025H2,188,0.2129261460917442
+semiconductor,T0,all 41,Persistence,2021H1,246,0.4784259025297142
+semiconductor,T0,all 41,Persistence,2021H2,246,-0.903974440213897
+semiconductor,T0,all 41,Persistence,2022H1,246,-0.26476856772069546
+semiconductor,T0,all 41,Persistence,2022H2,246,-0.13465769583434684
+semiconductor,T0,all 41,Persistence,2023H1,246,0.1999813155216592
+semiconductor,T0,all 41,Persistence,2023H2,246,0.1766740634863806
+semiconductor,T0,all 41,Persistence,2024H1,246,0.4070665386443043
+semiconductor,T0,all 41,Persistence,2024H2,240,0.05481547385161656
+semiconductor,T0,all 41,Persistence,2025H1,240,0.4707092381384942
+semiconductor,T0,all 41,Persistence,2025H2,190,-0.6058759392428998
+semiconductor,T0,all 41,Own lag (AR(1)),2021H1,246,0.3464625577400372
+semiconductor,T0,all 41,Own lag (AR(1)),2021H2,246,-0.5606301959776727
+semiconductor,T0,all 41,Own lag (AR(1)),2022H1,246,-0.07693445582948
+semiconductor,T0,all 41,Own lag (AR(1)),2022H2,246,0.12981638869954681
+semiconductor,T0,all 41,Own lag (AR(1)),2023H1,246,-0.2825812935101284
+semiconductor,T0,all 41,Own lag (AR(1)),2023H2,246,-1.1680024451286126
+semiconductor,T0,all 41,Own lag (AR(1)),2024H1,246,-0.4625130925734282
+semiconductor,T0,all 41,Own lag (AR(1)),2024H2,240,-0.18057174060809222
+semiconductor,T0,all 41,Own lag (AR(1)),2025H1,240,0.4416795468808218
+semiconductor,T0,all 41,Own lag (AR(1)),2025H2,190,-0.07141045611363883
+semiconductor,T0,all 41,"Own lags 1, 12 (AR(1,12))",2021H1,246,0.34990611718071774
+semiconductor,T0,all 41,"Own lags 1, 12 (AR(1,12))",2021H2,246,-0.5652656706433632
+semiconductor,T0,all 41,"Own lags 1, 12 (AR(1,12))",2022H1,246,-0.07755840865958996
+semiconductor,T0,all 41,"Own lags 1, 12 (AR(1,12))",2022H2,246,0.12901429342049409
+semiconductor,T0,all 41,"Own lags 1, 12 (AR(1,12))",2023H1,246,-0.29120563897349094
+semiconductor,T0,all 41,"Own lags 1, 12 (AR(1,12))",2023H2,246,-1.1743406922868678
+semiconductor,T0,all 41,"Own lags 1, 12 (AR(1,12))",2024H1,246,-0.4746708528609993
+semiconductor,T0,all 41,"Own lags 1, 12 (AR(1,12))",2024H2,240,-0.18706894283984
+semiconductor,T0,all 41,"Own lags 1, 12 (AR(1,12))",2025H1,240,0.44165719152528704
+semiconductor,T0,all 41,"Own lags 1, 12 (AR(1,12))",2025H2,190,-0.07438491741133202
+semiconductor,T0,all 41,Trade proxies only,2021H1,246,-5.123314019153338
+semiconductor,T0,all 41,Trade proxies only,2021H2,246,-12.381579552074824
+semiconductor,T0,all 41,Trade proxies only,2022H1,246,-5.801905802351189
+semiconductor,T0,all 41,Trade proxies only,2022H2,246,-0.3164272400132939
+semiconductor,T0,all 41,Trade proxies only,2023H1,246,-9.461528159462802
+semiconductor,T0,all 41,Trade proxies only,2023H2,246,-27.589068531530028
+semiconductor,T0,all 41,Trade proxies only,2024H1,246,-33.5707477617917
+semiconductor,T0,all 41,Trade proxies only,2024H2,240,-3.9733544863202015
+semiconductor,T0,all 41,Trade proxies only,2025H1,240,-0.5137828259695176
+semiconductor,T0,all 41,Trade proxies only,2025H2,190,-2.517021449319425
+semiconductor,T0,all 41,Exogenous only,2021H1,246,-0.35793343970410074
+semiconductor,T0,all 41,Exogenous only,2021H2,246,-3.856571684747786
+semiconductor,T0,all 41,Exogenous only,2022H1,246,-0.6624806700245078
+semiconductor,T0,all 41,Exogenous only,2022H2,246,-0.7554614189276414
+semiconductor,T0,all 41,Exogenous only,2023H1,246,-16.893781524474427
+semiconductor,T0,all 41,Exogenous only,2023H2,246,-13.56349823700984
+semiconductor,T0,all 41,Exogenous only,2024H1,246,-4.984091267792093
+semiconductor,T0,all 41,Exogenous only,2024H2,240,-1.870362136046027
+semiconductor,T0,all 41,Exogenous only,2025H1,240,0.012641234880567342
+semiconductor,T0,all 41,Exogenous only,2025H2,190,-0.4429013704891658
+semiconductor,T0,all 41,All seven features,2021H1,246,-5.694752767053413
+semiconductor,T0,all 41,All seven features,2021H2,246,-18.617828963759212
+semiconductor,T0,all 41,All seven features,2022H1,246,-5.484548056125677
+semiconductor,T0,all 41,All seven features,2022H2,246,-0.843868568338265
+semiconductor,T0,all 41,All seven features,2023H1,246,-20.079034757082717
+semiconductor,T0,all 41,All seven features,2023H2,246,-36.596678300295245
+semiconductor,T0,all 41,All seven features,2024H1,246,-34.83621544656119
+semiconductor,T0,all 41,All seven features,2024H2,240,-4.125833406481438
+semiconductor,T0,all 41,All seven features,2025H1,240,-0.4848602251760141
+semiconductor,T0,all 41,All seven features,2025H2,190,-2.5689882380768414
+semiconductor,T0,all 41,"AR(1,12) + exogenous",2021H1,246,0.29595667243496027
+semiconductor,T0,all 41,"AR(1,12) + exogenous",2021H2,246,-2.2542157655942208
+semiconductor,T0,all 41,"AR(1,12) + exogenous",2022H1,246,-0.2736013182566952
+semiconductor,T0,all 41,"AR(1,12) + exogenous",2022H2,246,-0.14758632724092435
+semiconductor,T0,all 41,"AR(1,12) + exogenous",2023H1,246,-6.877866424270933
+semiconductor,T0,all 41,"AR(1,12) + exogenous",2023H2,246,-4.969123313076845
+semiconductor,T0,all 41,"AR(1,12) + exogenous",2024H1,246,-1.3468986987434777
+semiconductor,T0,all 41,"AR(1,12) + exogenous",2024H2,240,-0.6144445773193539
+semiconductor,T0,all 41,"AR(1,12) + exogenous",2025H1,240,0.44498761240917495
+semiconductor,T0,all 41,"AR(1,12) + exogenous",2025H2,190,-0.15824742953314042
+semiconductor,T0,all 41,All seven + own lags,2021H1,246,-3.9854778056468056
+semiconductor,T0,all 41,All seven + own lags,2021H2,246,-8.609584250137395
+semiconductor,T0,all 41,All seven + own lags,2022H1,246,-4.066550420386347
+semiconductor,T0,all 41,All seven + own lags,2022H2,246,-0.536098438707939
+semiconductor,T0,all 41,All seven + own lags,2023H1,246,-10.378815302570365
+semiconductor,T0,all 41,All seven + own lags,2023H2,246,-25.852691564426728
+semiconductor,T0,all 41,All seven + own lags,2024H1,246,-20.096225076684696
+semiconductor,T0,all 41,All seven + own lags,2024H2,240,-2.798827393779343
+semiconductor,T0,all 41,All seven + own lags,2025H1,240,-0.1763778918879504
+semiconductor,T0,all 41,All seven + own lags,2025H2,190,-0.8197923833473728
+semiconductor,T0,excl. Myanmar,Persistence,2021H1,240,0.47934183252997886
+semiconductor,T0,excl. Myanmar,Persistence,2021H2,240,-0.8402879019917029
+semiconductor,T0,excl. Myanmar,Persistence,2022H1,240,0.26233645306848574
+semiconductor,T0,excl. Myanmar,Persistence,2022H2,240,0.38891536216505407
+semiconductor,T0,excl. Myanmar,Persistence,2023H1,240,0.06771173577653644
+semiconductor,T0,excl. Myanmar,Persistence,2023H2,240,0.11603177914274043
+semiconductor,T0,excl. Myanmar,Persistence,2024H1,240,0.49869157500384254
+semiconductor,T0,excl. Myanmar,Persistence,2024H2,234,-0.2450238112381975
+semiconductor,T0,excl. Myanmar,Persistence,2025H1,234,0.224029973033679
+semiconductor,T0,excl. Myanmar,Persistence,2025H2,185,-0.5043200808761665
+semiconductor,T0,excl. Myanmar,Own lag (AR(1)),2021H1,240,0.352939906638878
+semiconductor,T0,excl. Myanmar,Own lag (AR(1)),2021H2,240,-0.5812445922749969
+semiconductor,T0,excl. Myanmar,Own lag (AR(1)),2022H1,240,-0.3786963708071118
+semiconductor,T0,excl. Myanmar,Own lag (AR(1)),2022H2,240,-0.2619321664015073
+semiconductor,T0,excl. Myanmar,Own lag (AR(1)),2023H1,240,-1.5135459438492767
+semiconductor,T0,excl. Myanmar,Own lag (AR(1)),2023H2,240,-1.1802193430154344
+semiconductor,T0,excl. Myanmar,Own lag (AR(1)),2024H1,240,-0.4055438132005258
+semiconductor,T0,excl. Myanmar,Own lag (AR(1)),2024H2,234,-0.4733538955126686
+semiconductor,T0,excl. Myanmar,Own lag (AR(1)),2025H1,234,0.119200964227691
+semiconductor,T0,excl. Myanmar,Own lag (AR(1)),2025H2,185,-0.04593273734537995
+semiconductor,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2021H1,240,0.3566565826884246
+semiconductor,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2021H2,240,-0.5869647916551175
+semiconductor,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2022H1,240,-0.38286893868612726
+semiconductor,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2022H2,240,-0.2671500831797913
+semiconductor,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2023H1,240,-1.528454719418737
+semiconductor,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2023H2,240,-1.1956635221940202
+semiconductor,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2024H1,240,-0.4175225012222066
+semiconductor,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2024H2,234,-0.4835818056151533
+semiconductor,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2025H1,234,0.1158348608940094
+semiconductor,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2025H2,185,-0.048208934839172546
+semiconductor,T0,excl. Myanmar,Trade proxies only,2021H1,240,-3.1911298919768507
+semiconductor,T0,excl. Myanmar,Trade proxies only,2021H2,240,-11.199678813605253
+semiconductor,T0,excl. Myanmar,Trade proxies only,2022H1,240,-20.30327841712907
+semiconductor,T0,excl. Myanmar,Trade proxies only,2022H2,240,-11.24038032994981
+semiconductor,T0,excl. Myanmar,Trade proxies only,2023H1,240,-36.27314651960391
+semiconductor,T0,excl. Myanmar,Trade proxies only,2023H2,240,-33.45944869024356
+semiconductor,T0,excl. Myanmar,Trade proxies only,2024H1,240,-41.34227947226502
+semiconductor,T0,excl. Myanmar,Trade proxies only,2024H2,234,-7.920981335614355
+semiconductor,T0,excl. Myanmar,Trade proxies only,2025H1,234,-21.114077608161438
+semiconductor,T0,excl. Myanmar,Trade proxies only,2025H2,185,-3.1205157314586573
+semiconductor,T0,excl. Myanmar,Exogenous only,2021H1,240,-0.36188830736878064
+semiconductor,T0,excl. Myanmar,Exogenous only,2021H2,240,-4.175753437435237
+semiconductor,T0,excl. Myanmar,Exogenous only,2022H1,240,-2.213860937198954
+semiconductor,T0,excl. Myanmar,Exogenous only,2022H2,240,-7.403615948485395
+semiconductor,T0,excl. Myanmar,Exogenous only,2023H1,240,-46.765813170446464
+semiconductor,T0,excl. Myanmar,Exogenous only,2023H2,240,-14.008162078364888
+semiconductor,T0,excl. Myanmar,Exogenous only,2024H1,240,-5.069189297762926
+semiconductor,T0,excl. Myanmar,Exogenous only,2024H2,234,-2.7652856445576557
+semiconductor,T0,excl. Myanmar,Exogenous only,2025H1,234,-0.7834960742887651
+semiconductor,T0,excl. Myanmar,Exogenous only,2025H2,185,-0.34214588682159275
+semiconductor,T0,excl. Myanmar,All seven features,2021H1,240,-3.917401714759462
+semiconductor,T0,excl. Myanmar,All seven features,2021H2,240,-18.637048257078888
+semiconductor,T0,excl. Myanmar,All seven features,2022H1,240,-19.669463953805593
+semiconductor,T0,excl. Myanmar,All seven features,2022H2,240,-14.698932363305197
+semiconductor,T0,excl. Myanmar,All seven features,2023H1,240,-61.75797299657973
+semiconductor,T0,excl. Myanmar,All seven features,2023H2,240,-42.70832103837624
+semiconductor,T0,excl. Myanmar,All seven features,2024H1,240,-42.28772907642401
+semiconductor,T0,excl. Myanmar,All seven features,2024H2,234,-8.426569901337531
+semiconductor,T0,excl. Myanmar,All seven features,2025H1,234,-20.86586410388281
+semiconductor,T0,excl. Myanmar,All seven features,2025H2,185,-3.206139295266027
+semiconductor,T0,excl. Myanmar,"AR(1,12) + exogenous",2021H1,240,0.2888375174521596
+semiconductor,T0,excl. Myanmar,"AR(1,12) + exogenous",2021H2,240,-2.4249703399742972
+semiconductor,T0,excl. Myanmar,"AR(1,12) + exogenous",2022H1,240,-0.9276831570828772
+semiconductor,T0,excl. Myanmar,"AR(1,12) + exogenous",2022H2,240,-2.7344428084534624
+semiconductor,T0,excl. Myanmar,"AR(1,12) + exogenous",2023H1,240,-19.594431578324706
+semiconductor,T0,excl. Myanmar,"AR(1,12) + exogenous",2023H2,240,-5.317903998401418
+semiconductor,T0,excl. Myanmar,"AR(1,12) + exogenous",2024H1,240,-1.3481220979861708
+semiconductor,T0,excl. Myanmar,"AR(1,12) + exogenous",2024H2,234,-1.1040969978895991
+semiconductor,T0,excl. Myanmar,"AR(1,12) + exogenous",2025H1,234,0.01622072774156169
+semiconductor,T0,excl. Myanmar,"AR(1,12) + exogenous",2025H2,185,-0.10274721432773792
+semiconductor,T0,excl. Myanmar,All seven + own lags,2021H1,240,-2.6066394030450537
+semiconductor,T0,excl. Myanmar,All seven + own lags,2021H2,240,-11.35776371445473
+semiconductor,T0,excl. Myanmar,All seven + own lags,2022H1,240,-14.347828011557235
+semiconductor,T0,excl. Myanmar,All seven + own lags,2022H2,240,-11.34740383062501
+semiconductor,T0,excl. Myanmar,All seven + own lags,2023H1,240,-35.024980303007474
+semiconductor,T0,excl. Myanmar,All seven + own lags,2023H2,240,-29.96988261724419
+semiconductor,T0,excl. Myanmar,All seven + own lags,2024H1,240,-25.79035559413423
+semiconductor,T0,excl. Myanmar,All seven + own lags,2024H2,234,-5.031979621868112
+semiconductor,T0,excl. Myanmar,All seven + own lags,2025H1,234,-11.900604469867076
+semiconductor,T0,excl. Myanmar,All seven + own lags,2025H2,185,-0.751813875508305
+consumer,T1,all 41,Persistence,2021H1,246,-1.763591679825633
+consumer,T1,all 41,Persistence,2021H2,246,-1.329558536321887
+consumer,T1,all 41,Persistence,2022H1,246,-1.9553460498130346
+consumer,T1,all 41,Persistence,2022H2,246,-1.6833696829549676
+consumer,T1,all 41,Persistence,2023H1,246,-2.469766930917473
+consumer,T1,all 41,Persistence,2023H2,245,-1.4665349959748952
+consumer,T1,all 41,Persistence,2024H1,240,-1.9273775748801962
+consumer,T1,all 41,Persistence,2024H2,238,-1.5167908754901607
+consumer,T1,all 41,Persistence,2025H1,228,-1.4076688820108827
+consumer,T1,all 41,Persistence,2025H2,188,-1.5807811670370708
+consumer,T1,all 41,Own lag (AR(1)),2021H1,246,0.060554413205853974
+consumer,T1,all 41,Own lag (AR(1)),2021H2,246,0.040524181363580714
+consumer,T1,all 41,Own lag (AR(1)),2022H1,246,0.11510660874852441
+consumer,T1,all 41,Own lag (AR(1)),2022H2,246,0.14364962304667372
+consumer,T1,all 41,Own lag (AR(1)),2023H1,246,0.26566901304429735
+consumer,T1,all 41,Own lag (AR(1)),2023H2,245,0.09177256983689219
+consumer,T1,all 41,Own lag (AR(1)),2024H1,240,0.19461656297924868
+consumer,T1,all 41,Own lag (AR(1)),2024H2,238,0.09082437954563027
+consumer,T1,all 41,Own lag (AR(1)),2025H1,228,-0.012732610095315344
+consumer,T1,all 41,Own lag (AR(1)),2025H2,188,0.08656943667241457
+consumer,T1,all 41,"Own lags 1, 12 (AR(1,12))",2021H1,246,0.11861653250922533
+consumer,T1,all 41,"Own lags 1, 12 (AR(1,12))",2021H2,246,0.13941103936563715
+consumer,T1,all 41,"Own lags 1, 12 (AR(1,12))",2022H1,246,0.2387271334341825
+consumer,T1,all 41,"Own lags 1, 12 (AR(1,12))",2022H2,246,0.17258788205171793
+consumer,T1,all 41,"Own lags 1, 12 (AR(1,12))",2023H1,246,0.3436405263661456
+consumer,T1,all 41,"Own lags 1, 12 (AR(1,12))",2023H2,245,0.2116025654050755
+consumer,T1,all 41,"Own lags 1, 12 (AR(1,12))",2024H1,240,0.1968783928135267
+consumer,T1,all 41,"Own lags 1, 12 (AR(1,12))",2024H2,238,0.21467707541335135
+consumer,T1,all 41,"Own lags 1, 12 (AR(1,12))",2025H1,228,0.09377857451426208
+consumer,T1,all 41,"Own lags 1, 12 (AR(1,12))",2025H2,188,0.20823010808570785
+consumer,T1,all 41,Trade proxies only,2021H1,246,0.14420164171222638
+consumer,T1,all 41,Trade proxies only,2021H2,246,-0.007938789321358275
+consumer,T1,all 41,Trade proxies only,2022H1,246,0.16801732346928522
+consumer,T1,all 41,Trade proxies only,2022H2,246,0.10408298593587129
+consumer,T1,all 41,Trade proxies only,2023H1,246,0.20551496995601448
+consumer,T1,all 41,Trade proxies only,2023H2,245,0.1318261996801413
+consumer,T1,all 41,Trade proxies only,2024H1,240,0.188299792073655
+consumer,T1,all 41,Trade proxies only,2024H2,238,0.21110840689007937
+consumer,T1,all 41,Trade proxies only,2025H1,228,-0.013732798306331118
+consumer,T1,all 41,Trade proxies only,2025H2,188,0.03545307193259839
+consumer,T1,all 41,Exogenous only,2021H1,246,-0.1851014243343303
+consumer,T1,all 41,Exogenous only,2021H2,246,-0.07445693214104909
+consumer,T1,all 41,Exogenous only,2022H1,246,-0.08343782273634326
+consumer,T1,all 41,Exogenous only,2022H2,246,0.016173153276052954
+consumer,T1,all 41,Exogenous only,2023H1,246,-0.04794414709053596
+consumer,T1,all 41,Exogenous only,2023H2,245,-0.012953666808944275
+consumer,T1,all 41,Exogenous only,2024H1,240,-0.01092996211504138
+consumer,T1,all 41,Exogenous only,2024H2,238,0.009288604004570211
+consumer,T1,all 41,Exogenous only,2025H1,228,-0.02477087237429565
+consumer,T1,all 41,Exogenous only,2025H2,188,-0.01262275345659325
+consumer,T1,all 41,All seven features,2021H1,246,-0.037606216854640495
+consumer,T1,all 41,All seven features,2021H2,246,0.014126957802091611
+consumer,T1,all 41,All seven features,2022H1,246,-0.03472032922325696
+consumer,T1,all 41,All seven features,2022H2,246,0.10292578191008261
+consumer,T1,all 41,All seven features,2023H1,246,0.13465665725146858
+consumer,T1,all 41,All seven features,2023H2,245,0.05766984189462432
+consumer,T1,all 41,All seven features,2024H1,240,0.17928153885291964
+consumer,T1,all 41,All seven features,2024H2,238,0.2149753333832234
+consumer,T1,all 41,All seven features,2025H1,228,-0.035263297476815225
+consumer,T1,all 41,All seven features,2025H2,188,0.020645882980631858
+consumer,T1,all 41,"AR(1,12) + exogenous",2021H1,246,-0.09234500581602423
+consumer,T1,all 41,"AR(1,12) + exogenous",2021H2,246,0.12846018276518112
+consumer,T1,all 41,"AR(1,12) + exogenous",2022H1,246,0.16169571418395323
+consumer,T1,all 41,"AR(1,12) + exogenous",2022H2,246,0.19540582333927514
+consumer,T1,all 41,"AR(1,12) + exogenous",2023H1,246,0.29438483014217276
+consumer,T1,all 41,"AR(1,12) + exogenous",2023H2,245,0.198601709701263
+consumer,T1,all 41,"AR(1,12) + exogenous",2024H1,240,0.1888418617247286
+consumer,T1,all 41,"AR(1,12) + exogenous",2024H2,238,0.22221912571834002
+consumer,T1,all 41,"AR(1,12) + exogenous",2025H1,228,0.07746246740626828
+consumer,T1,all 41,"AR(1,12) + exogenous",2025H2,188,0.19917303884008086
+consumer,T1,all 41,All seven + own lags,2021H1,246,0.002041636534124147
+consumer,T1,all 41,All seven + own lags,2021H2,246,0.1187897660282633
+consumer,T1,all 41,All seven + own lags,2022H1,246,0.12593585856318867
+consumer,T1,all 41,All seven + own lags,2022H2,246,0.17812177714145727
+consumer,T1,all 41,All seven + own lags,2023H1,246,0.27113543498990067
+consumer,T1,all 41,All seven + own lags,2023H2,245,0.19004175861714745
+consumer,T1,all 41,All seven + own lags,2024H1,240,0.21756831233978913
+consumer,T1,all 41,All seven + own lags,2024H2,238,0.29313798408915426
+consumer,T1,all 41,All seven + own lags,2025H1,228,0.05646405679432143
+consumer,T1,all 41,All seven + own lags,2025H2,188,0.16647100984483343
+consumer,T0,all 41,Persistence,2021H1,246,-0.3980338380613897
+consumer,T0,all 41,Persistence,2021H2,246,-0.21688985531699356
+consumer,T0,all 41,Persistence,2022H1,246,-0.4875006374523141
+consumer,T0,all 41,Persistence,2022H2,246,-0.2806978663160391
+consumer,T0,all 41,Persistence,2023H1,246,-0.057437373055815755
+consumer,T0,all 41,Persistence,2023H2,246,-0.28325088056532466
+consumer,T0,all 41,Persistence,2024H1,246,0.3428287949512727
+consumer,T0,all 41,Persistence,2024H2,240,-0.23376114817230786
+consumer,T0,all 41,Persistence,2025H1,240,0.6675188347250238
+consumer,T0,all 41,Persistence,2025H2,190,-0.6562506918202602
+consumer,T0,all 41,Own lag (AR(1)),2021H1,246,-0.04754538154008392
+consumer,T0,all 41,Own lag (AR(1)),2021H2,246,0.08337925017210313
+consumer,T0,all 41,Own lag (AR(1)),2022H1,246,-0.10269341527814535
+consumer,T0,all 41,Own lag (AR(1)),2022H2,246,0.09380657230498268
+consumer,T0,all 41,Own lag (AR(1)),2023H1,246,0.08945953821088859
+consumer,T0,all 41,Own lag (AR(1)),2023H2,246,0.05380735034893158
+consumer,T0,all 41,Own lag (AR(1)),2024H1,246,0.403549848308664
+consumer,T0,all 41,Own lag (AR(1)),2024H2,240,0.07036575168881498
+consumer,T0,all 41,Own lag (AR(1)),2025H1,240,0.5800351824801713
+consumer,T0,all 41,Own lag (AR(1)),2025H2,190,-0.11299090838705483
+consumer,T0,all 41,"Own lags 1, 12 (AR(1,12))",2021H1,246,-0.15469026950970255
+consumer,T0,all 41,"Own lags 1, 12 (AR(1,12))",2021H2,246,0.14733209215045207
+consumer,T0,all 41,"Own lags 1, 12 (AR(1,12))",2022H1,246,-0.0342023466377841
+consumer,T0,all 41,"Own lags 1, 12 (AR(1,12))",2022H2,246,0.014759194901466044
+consumer,T0,all 41,"Own lags 1, 12 (AR(1,12))",2023H1,246,0.13889702812494464
+consumer,T0,all 41,"Own lags 1, 12 (AR(1,12))",2023H2,246,0.10275239364331767
+consumer,T0,all 41,"Own lags 1, 12 (AR(1,12))",2024H1,246,0.4443365473677269
+consumer,T0,all 41,"Own lags 1, 12 (AR(1,12))",2024H2,240,0.10181472027023752
+consumer,T0,all 41,"Own lags 1, 12 (AR(1,12))",2025H1,240,0.5645744863493063
+consumer,T0,all 41,"Own lags 1, 12 (AR(1,12))",2025H2,190,-0.05056212530896054
+consumer,T0,all 41,Trade proxies only,2021H1,246,-0.22795523589151445
+consumer,T0,all 41,Trade proxies only,2021H2,246,0.0468723155822659
+consumer,T0,all 41,Trade proxies only,2022H1,246,-0.27464516034457187
+consumer,T0,all 41,Trade proxies only,2022H2,246,-0.011861238909423921
+consumer,T0,all 41,Trade proxies only,2023H1,246,-0.44286352966429865
+consumer,T0,all 41,Trade proxies only,2023H2,246,0.09233585561678415
+consumer,T0,all 41,Trade proxies only,2024H1,246,0.18656429113047002
+consumer,T0,all 41,Trade proxies only,2024H2,240,-0.0740297763224047
+consumer,T0,all 41,Trade proxies only,2025H1,240,0.21552399168161407
+consumer,T0,all 41,Trade proxies only,2025H2,190,-0.3049460858288606
+consumer,T0,all 41,Exogenous only,2021H1,246,-0.17883803440159562
+consumer,T0,all 41,Exogenous only,2021H2,246,-0.5342296080993665
+consumer,T0,all 41,Exogenous only,2022H1,246,-0.27148674363866476
+consumer,T0,all 41,Exogenous only,2022H2,246,-0.03424465114953468
+consumer,T0,all 41,Exogenous only,2023H1,246,-0.5123862710096398
+consumer,T0,all 41,Exogenous only,2023H2,246,-0.1273497523768894
+consumer,T0,all 41,Exogenous only,2024H1,246,0.00039335886042068946
+consumer,T0,all 41,Exogenous only,2024H2,240,-0.1289848910578264
+consumer,T0,all 41,Exogenous only,2025H1,240,-0.002962021961694372
+consumer,T0,all 41,Exogenous only,2025H2,190,-0.4103567435988891
+consumer,T0,all 41,All seven features,2021H1,246,-0.22287779421130893
+consumer,T0,all 41,All seven features,2021H2,246,-0.3062206187679848
+consumer,T0,all 41,All seven features,2022H1,246,-0.26659025010174076
+consumer,T0,all 41,All seven features,2022H2,246,-0.04523787993536321
+consumer,T0,all 41,All seven features,2023H1,246,-0.5007667174609896
+consumer,T0,all 41,All seven features,2023H2,246,0.048617983446404445
+consumer,T0,all 41,All seven features,2024H1,246,0.20492455231088358
+consumer,T0,all 41,All seven features,2024H2,240,-0.09238040834605687
+consumer,T0,all 41,All seven features,2025H1,240,0.21107328168912953
+consumer,T0,all 41,All seven features,2025H2,190,-0.30292733590895593
+consumer,T0,all 41,"AR(1,12) + exogenous",2021H1,246,-0.30917539834928354
+consumer,T0,all 41,"AR(1,12) + exogenous",2021H2,246,0.15076228336484243
+consumer,T0,all 41,"AR(1,12) + exogenous",2022H1,246,-0.05401573044274599
+consumer,T0,all 41,"AR(1,12) + exogenous",2022H2,246,0.005740715689299236
+consumer,T0,all 41,"AR(1,12) + exogenous",2023H1,246,0.16034430428555013
+consumer,T0,all 41,"AR(1,12) + exogenous",2023H2,246,0.0788792405160349
+consumer,T0,all 41,"AR(1,12) + exogenous",2024H1,246,0.43976773637490396
+consumer,T0,all 41,"AR(1,12) + exogenous",2024H2,240,0.10481746978116924
+consumer,T0,all 41,"AR(1,12) + exogenous",2025H1,240,0.5633747612986706
+consumer,T0,all 41,"AR(1,12) + exogenous",2025H2,190,-0.05572669547685871
+consumer,T0,all 41,All seven + own lags,2021H1,246,-0.2919051339056038
+consumer,T0,all 41,All seven + own lags,2021H2,246,0.1311635005495847
+consumer,T0,all 41,All seven + own lags,2022H1,246,-0.05115602372022088
+consumer,T0,all 41,All seven + own lags,2022H2,246,0.007230535992586273
+consumer,T0,all 41,All seven + own lags,2023H1,246,0.18235303851233153
+consumer,T0,all 41,All seven + own lags,2023H2,246,0.06595235686443912
+consumer,T0,all 41,All seven + own lags,2024H1,246,0.4237814329873332
+consumer,T0,all 41,All seven + own lags,2024H2,240,0.1175988173581668
+consumer,T0,all 41,All seven + own lags,2025H1,240,0.5531094024495635
+consumer,T0,all 41,All seven + own lags,2025H2,190,-0.06807621856905444
+consumer,T0,excl. Myanmar,Persistence,2021H1,240,-1.0594520677509571
+consumer,T0,excl. Myanmar,Persistence,2021H2,240,-0.18694032496938195
+consumer,T0,excl. Myanmar,Persistence,2022H1,240,-0.4785943417732319
+consumer,T0,excl. Myanmar,Persistence,2022H2,240,-0.3337886397249761
+consumer,T0,excl. Myanmar,Persistence,2023H1,240,-0.05325707545853153
+consumer,T0,excl. Myanmar,Persistence,2023H2,240,-0.3034345374102181
+consumer,T0,excl. Myanmar,Persistence,2024H1,240,0.431532370341809
+consumer,T0,excl. Myanmar,Persistence,2024H2,234,-0.28810673241701923
+consumer,T0,excl. Myanmar,Persistence,2025H1,234,0.5148628333893235
+consumer,T0,excl. Myanmar,Persistence,2025H2,185,-0.44079511021496387
+consumer,T0,excl. Myanmar,Own lag (AR(1)),2021H1,240,-0.43626312521030797
+consumer,T0,excl. Myanmar,Own lag (AR(1)),2021H2,240,0.0726307405126776
+consumer,T0,excl. Myanmar,Own lag (AR(1)),2022H1,240,-0.09925169257815214
+consumer,T0,excl. Myanmar,Own lag (AR(1)),2022H2,240,0.0636226150081971
+consumer,T0,excl. Myanmar,Own lag (AR(1)),2023H1,240,0.08549467697759383
+consumer,T0,excl. Myanmar,Own lag (AR(1)),2023H2,240,0.047066024380142735
+consumer,T0,excl. Myanmar,Own lag (AR(1)),2024H1,240,0.45188050152138304
+consumer,T0,excl. Myanmar,Own lag (AR(1)),2024H2,234,0.022177016567565433
+consumer,T0,excl. Myanmar,Own lag (AR(1)),2025H1,234,0.5168559744057954
+consumer,T0,excl. Myanmar,Own lag (AR(1)),2025H2,185,-0.09731283611030928
+consumer,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2021H1,240,-0.6668779397651603
+consumer,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2021H2,240,0.1870643737912362
+consumer,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2022H1,240,-0.016445404514921824
+consumer,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2022H2,240,-0.03375419652874023
+consumer,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2023H1,240,0.14644913422576789
+consumer,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2023H2,240,0.10854750256480683
+consumer,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2024H1,240,0.4982031997305606
+consumer,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2024H2,234,0.05927392748634175
+consumer,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2025H1,234,0.5311036215147789
+consumer,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2025H2,185,-0.012222421020522622
+consumer,T0,excl. Myanmar,Trade proxies only,2021H1,240,-0.41586413061862504
+consumer,T0,excl. Myanmar,Trade proxies only,2021H2,240,0.05901144960026672
+consumer,T0,excl. Myanmar,Trade proxies only,2022H1,240,-0.28115920063974875
+consumer,T0,excl. Myanmar,Trade proxies only,2022H2,240,-0.011688884052170723
+consumer,T0,excl. Myanmar,Trade proxies only,2023H1,240,-0.4440692213564579
+consumer,T0,excl. Myanmar,Trade proxies only,2023H2,240,0.07120774120128093
+consumer,T0,excl. Myanmar,Trade proxies only,2024H1,240,0.23302290234640344
+consumer,T0,excl. Myanmar,Trade proxies only,2024H2,234,-0.10260486747331998
+consumer,T0,excl. Myanmar,Trade proxies only,2025H1,234,0.41923234854527414
+consumer,T0,excl. Myanmar,Trade proxies only,2025H2,185,-0.22328271070780326
+consumer,T0,excl. Myanmar,Exogenous only,2021H1,240,-0.10994398711001208
+consumer,T0,excl. Myanmar,Exogenous only,2021H2,240,-0.5891846594206407
+consumer,T0,excl. Myanmar,Exogenous only,2022H1,240,-0.29752691806128295
+consumer,T0,excl. Myanmar,Exogenous only,2022H2,240,-0.02104253717684168
+consumer,T0,excl. Myanmar,Exogenous only,2023H1,240,-0.4951425493912567
+consumer,T0,excl. Myanmar,Exogenous only,2023H2,240,-0.13469461066739963
+consumer,T0,excl. Myanmar,Exogenous only,2024H1,240,0.008742500015869292
+consumer,T0,excl. Myanmar,Exogenous only,2024H2,234,-0.15929626803904262
+consumer,T0,excl. Myanmar,Exogenous only,2025H1,234,-0.026481812137345573
+consumer,T0,excl. Myanmar,Exogenous only,2025H2,185,-0.48043141068682194
+consumer,T0,excl. Myanmar,All seven features,2021H1,240,-0.39605215784993253
+consumer,T0,excl. Myanmar,All seven features,2021H2,240,-0.299817648106111
+consumer,T0,excl. Myanmar,All seven features,2022H1,240,-0.2568039549311054
+consumer,T0,excl. Myanmar,All seven features,2022H2,240,-0.033741278478915504
+consumer,T0,excl. Myanmar,All seven features,2023H1,240,-0.4552883755479251
+consumer,T0,excl. Myanmar,All seven features,2023H2,240,0.02104223974268482
+consumer,T0,excl. Myanmar,All seven features,2024H1,240,0.24742395580019516
+consumer,T0,excl. Myanmar,All seven features,2024H2,234,-0.11732164779095755
+consumer,T0,excl. Myanmar,All seven features,2025H1,234,0.41311292816033685
+consumer,T0,excl. Myanmar,All seven features,2025H2,185,-0.23976248573090597
+consumer,T0,excl. Myanmar,"AR(1,12) + exogenous",2021H1,240,-0.9191863511741585
+consumer,T0,excl. Myanmar,"AR(1,12) + exogenous",2021H2,240,0.1906950298048007
+consumer,T0,excl. Myanmar,"AR(1,12) + exogenous",2022H1,240,-0.033610229675608005
+consumer,T0,excl. Myanmar,"AR(1,12) + exogenous",2022H2,240,-0.05068530146520467
+consumer,T0,excl. Myanmar,"AR(1,12) + exogenous",2023H1,240,0.1630831887924562
+consumer,T0,excl. Myanmar,"AR(1,12) + exogenous",2023H2,240,0.08193414625799145
+consumer,T0,excl. Myanmar,"AR(1,12) + exogenous",2024H1,240,0.4905622703031207
+consumer,T0,excl. Myanmar,"AR(1,12) + exogenous",2024H2,234,0.06424020290493537
+consumer,T0,excl. Myanmar,"AR(1,12) + exogenous",2025H1,234,0.5223416283972748
+consumer,T0,excl. Myanmar,"AR(1,12) + exogenous",2025H2,185,-0.014611409988805057
+consumer,T0,excl. Myanmar,All seven + own lags,2021H1,240,-0.8828961598234908
+consumer,T0,excl. Myanmar,All seven + own lags,2021H2,240,0.17302235536353872
+consumer,T0,excl. Myanmar,All seven + own lags,2022H1,240,-0.027520798871492058
+consumer,T0,excl. Myanmar,All seven + own lags,2022H2,240,-0.05262519806772237
+consumer,T0,excl. Myanmar,All seven + own lags,2023H1,240,0.17146680008829962
+consumer,T0,excl. Myanmar,All seven + own lags,2023H2,240,0.07271082418253061
+consumer,T0,excl. Myanmar,All seven + own lags,2024H1,240,0.45162058843096964
+consumer,T0,excl. Myanmar,All seven + own lags,2024H2,234,0.06338884835100056
+consumer,T0,excl. Myanmar,All seven + own lags,2025H1,234,0.5406157058177221
+consumer,T0,excl. Myanmar,All seven + own lags,2025H2,185,-0.027302851217766877
+both baskets,T1,all 41,Persistence,2021H1,492,-1.4937522969844488
+both baskets,T1,all 41,Persistence,2021H2,492,-2.139687440214193
+both baskets,T1,all 41,Persistence,2022H1,492,-1.5993069038879533
+both baskets,T1,all 41,Persistence,2022H2,492,-1.85106539880901
+both baskets,T1,all 41,Persistence,2023H1,492,-2.0441296261666073
+both baskets,T1,all 41,Persistence,2023H2,490,-1.486428929230195
+both baskets,T1,all 41,Persistence,2024H1,480,-1.8776039492978662
+both baskets,T1,all 41,Persistence,2024H2,476,-1.5248392558587982
+both baskets,T1,all 41,Persistence,2025H1,456,-1.686812685490454
+both baskets,T1,all 41,Persistence,2025H2,376,-1.774707200703244
+both baskets,T1,all 41,Own lag (AR(1)),2021H1,492,0.04456662156925484
+both baskets,T1,all 41,Own lag (AR(1)),2021H2,492,0.28902659730650104
+both baskets,T1,all 41,Own lag (AR(1)),2022H1,492,0.02272073441449718
+both baskets,T1,all 41,Own lag (AR(1)),2022H2,492,0.19901504792773073
+both baskets,T1,all 41,Own lag (AR(1)),2023H1,492,0.19109862868331418
+both baskets,T1,all 41,Own lag (AR(1)),2023H2,490,0.011050072717524784
+both baskets,T1,all 41,Own lag (AR(1)),2024H1,480,0.1788352567600947
+both baskets,T1,all 41,Own lag (AR(1)),2024H2,476,0.13165735913278953
+both baskets,T1,all 41,Own lag (AR(1)),2025H1,456,0.10611033280206006
+both baskets,T1,all 41,Own lag (AR(1)),2025H2,376,0.11998187769760182
+both baskets,T1,all 41,"Own lags 1, 12 (AR(1,12))",2021H1,492,0.06426550459280111
+both baskets,T1,all 41,"Own lags 1, 12 (AR(1,12))",2021H2,492,0.3009744151076895
+both baskets,T1,all 41,"Own lags 1, 12 (AR(1,12))",2022H1,492,0.04533356379526521
+both baskets,T1,all 41,"Own lags 1, 12 (AR(1,12))",2022H2,492,0.26132645921757347
+both baskets,T1,all 41,"Own lags 1, 12 (AR(1,12))",2023H1,492,0.24686861589436326
+both baskets,T1,all 41,"Own lags 1, 12 (AR(1,12))",2023H2,490,0.0279802243231706
+both baskets,T1,all 41,"Own lags 1, 12 (AR(1,12))",2024H1,480,0.21519651225215264
+both baskets,T1,all 41,"Own lags 1, 12 (AR(1,12))",2024H2,476,0.14698783733641863
+both baskets,T1,all 41,"Own lags 1, 12 (AR(1,12))",2025H1,456,0.14105360490190133
+both baskets,T1,all 41,"Own lags 1, 12 (AR(1,12))",2025H2,376,0.20898251331851447
+both baskets,T1,all 41,Trade proxies only,2021H1,492,0.08241121482695468
+both baskets,T1,all 41,Trade proxies only,2021H2,492,0.15770801161561998
+both baskets,T1,all 41,Trade proxies only,2022H1,492,0.10769401390002209
+both baskets,T1,all 41,Trade proxies only,2022H2,492,0.15608400893011654
+both baskets,T1,all 41,Trade proxies only,2023H1,492,0.17156832080108897
+both baskets,T1,all 41,Trade proxies only,2023H2,490,-0.03221764374914016
+both baskets,T1,all 41,Trade proxies only,2024H1,480,0.13084209929966362
+both baskets,T1,all 41,Trade proxies only,2024H2,476,0.16813970190052696
+both baskets,T1,all 41,Trade proxies only,2025H1,456,0.0958511143152525
+both baskets,T1,all 41,Trade proxies only,2025H2,376,0.13527973768297263
+both baskets,T1,all 41,Exogenous only,2021H1,492,-0.05247443145969655
+both baskets,T1,all 41,Exogenous only,2021H2,492,-0.024946242874189783
+both baskets,T1,all 41,Exogenous only,2022H1,492,-0.008476555168227096
+both baskets,T1,all 41,Exogenous only,2022H2,492,0.003907504329537681
+both baskets,T1,all 41,Exogenous only,2023H1,492,-0.009052931983254853
+both baskets,T1,all 41,Exogenous only,2023H2,490,-0.004703881279259026
+both baskets,T1,all 41,Exogenous only,2024H1,480,-0.006761478910277896
+both baskets,T1,all 41,Exogenous only,2024H2,476,0.0067455278758896675
+both baskets,T1,all 41,Exogenous only,2025H1,456,-0.011858235836370579
+both baskets,T1,all 41,Exogenous only,2025H2,376,-0.008828920869408563
+both baskets,T1,all 41,All seven features,2021H1,492,0.030205984907687555
+both baskets,T1,all 41,All seven features,2021H2,492,0.15711737305471263
+both baskets,T1,all 41,All seven features,2022H1,492,0.0423803043939619
+both baskets,T1,all 41,All seven features,2022H2,492,0.1767357092999272
+both baskets,T1,all 41,All seven features,2023H1,492,0.14872179198597213
+both baskets,T1,all 41,All seven features,2023H2,490,-0.005818445326545296
+both baskets,T1,all 41,All seven features,2024H1,480,0.12145460761573068
+both baskets,T1,all 41,All seven features,2024H2,476,0.1727293858629413
+both baskets,T1,all 41,All seven features,2025H1,456,0.08162296025316662
+both baskets,T1,all 41,All seven features,2025H2,376,0.11643858620764835
+both baskets,T1,all 41,"AR(1,12) + exogenous",2021H1,492,-0.013074243616541859
+both baskets,T1,all 41,"AR(1,12) + exogenous",2021H2,492,0.28408968042825367
+both baskets,T1,all 41,"AR(1,12) + exogenous",2022H1,492,0.00791160975238614
+both baskets,T1,all 41,"AR(1,12) + exogenous",2022H2,492,0.27440511704150805
+both baskets,T1,all 41,"AR(1,12) + exogenous",2023H1,492,0.24063964872894805
+both baskets,T1,all 41,"AR(1,12) + exogenous",2023H2,490,0.049756481287345
+both baskets,T1,all 41,"AR(1,12) + exogenous",2024H1,480,0.20912881622189783
+both baskets,T1,all 41,"AR(1,12) + exogenous",2024H2,476,0.15254011545094792
+both baskets,T1,all 41,"AR(1,12) + exogenous",2025H1,456,0.12944492440288613
+both baskets,T1,all 41,"AR(1,12) + exogenous",2025H2,376,0.19572624824164253
+both baskets,T1,all 41,All seven + own lags,2021H1,492,0.0015814609371301858
+both baskets,T1,all 41,All seven + own lags,2021H2,492,0.2768014461613092
+both baskets,T1,all 41,All seven + own lags,2022H1,492,0.030920831746315547
+both baskets,T1,all 41,All seven + own lags,2022H2,492,0.2984564980880092
+both baskets,T1,all 41,All seven + own lags,2023H1,492,0.24057732701768697
+both baskets,T1,all 41,All seven + own lags,2023H2,490,0.009509884238047883
+both baskets,T1,all 41,All seven + own lags,2024H1,480,0.2106884468839043
+both baskets,T1,all 41,All seven + own lags,2024H2,476,0.1785527138899572
+both baskets,T1,all 41,All seven + own lags,2025H1,456,0.14738337889928266
+both baskets,T1,all 41,All seven + own lags,2025H2,376,0.19852697128046115
+both baskets,T0,all 41,Persistence,2021H1,492,0.48078292555773205
+both baskets,T0,all 41,Persistence,2021H2,492,-0.7575008715276044
+both baskets,T0,all 41,Persistence,2022H1,492,-0.18354768886845307
+both baskets,T0,all 41,Persistence,2022H2,492,-0.11889684079987273
+both baskets,T0,all 41,Persistence,2023H1,492,0.17629054868421346
+both baskets,T0,all 41,Persistence,2023H2,492,0.15149649355450578
+both baskets,T0,all 41,Persistence,2024H1,492,0.3997747757241161
+both baskets,T0,all 41,Persistence,2024H2,480,-0.02425661074646368
+both baskets,T0,all 41,Persistence,2025H1,480,0.5137573981460888
+both baskets,T0,all 41,Persistence,2025H2,380,-0.5974995698137435
+both baskets,T0,all 41,Own lag (AR(1)),2021H1,492,0.36499048240281573
+both baskets,T0,all 41,Own lag (AR(1)),2021H2,492,-0.4310900794613446
+both baskets,T0,all 41,Own lag (AR(1)),2022H1,492,0.006083282271527435
+both baskets,T0,all 41,Own lag (AR(1)),2022H2,492,0.1443403291888783
+both baskets,T0,all 41,Own lag (AR(1)),2023H1,492,-0.2190048526925059
+both baskets,T0,all 41,Own lag (AR(1)),2023H2,492,-0.5735389574670691
+both baskets,T0,all 41,Own lag (AR(1)),2024H1,492,-0.05266970031680174
+both baskets,T0,all 41,Own lag (AR(1)),2024H2,480,-0.04394227025808539
+both baskets,T0,all 41,Own lag (AR(1)),2025H1,480,0.4562895195475458
+both baskets,T0,all 41,Own lag (AR(1)),2025H2,380,-0.0012991455424924414
+both baskets,T0,all 41,"Own lags 1, 12 (AR(1,12))",2021H1,492,0.3682124642101742
+both baskets,T0,all 41,"Own lags 1, 12 (AR(1,12))",2021H2,492,-0.43586824884853326
+both baskets,T0,all 41,"Own lags 1, 12 (AR(1,12))",2022H1,492,0.005336486005020014
+both baskets,T0,all 41,"Own lags 1, 12 (AR(1,12))",2022H2,492,0.14361067127284943
+both baskets,T0,all 41,"Own lags 1, 12 (AR(1,12))",2023H1,492,-0.22660056319776922
+both baskets,T0,all 41,"Own lags 1, 12 (AR(1,12))",2023H2,492,-0.577819492844321
+both baskets,T0,all 41,"Own lags 1, 12 (AR(1,12))",2024H1,492,-0.05970643008322041
+both baskets,T0,all 41,"Own lags 1, 12 (AR(1,12))",2024H2,480,-0.04804434348057929
+both baskets,T0,all 41,"Own lags 1, 12 (AR(1,12))",2025H1,480,0.4563092574971048
+both baskets,T0,all 41,"Own lags 1, 12 (AR(1,12))",2025H2,380,-0.0037616175592334322
+both baskets,T0,all 41,Trade proxies only,2021H1,492,-2.6352203311341005
+both baskets,T0,all 41,Trade proxies only,2021H2,492,-7.163147538317711
+both baskets,T0,all 41,Trade proxies only,2022H1,492,-3.3100438622595263
+both baskets,T0,all 41,Trade proxies only,2022H2,492,-0.025427531014895477
+both baskets,T0,all 41,Trade proxies only,2023H1,492,-5.4784893525770055
+both baskets,T0,all 41,Trade proxies only,2023H2,492,-9.130344031673967
+both baskets,T0,all 41,Trade proxies only,2024H1,492,-16.07444744832831
+both baskets,T0,all 41,Trade proxies only,2024H2,480,-1.7309509190440626
+both baskets,T0,all 41,Trade proxies only,2025H1,480,-0.19896947704386436
+both baskets,T0,all 41,Trade proxies only,2025H2,380,-1.2437974557354439
+both baskets,T0,all 41,Exogenous only,2021H1,492,-0.25575908528230085
+both baskets,T0,all 41,Exogenous only,2021H2,492,-2.737188986937685
+both baskets,T0,all 41,Exogenous only,2022H1,492,-0.3280822655873896
+both baskets,T0,all 41,Exogenous only,2022H2,492,-0.4191777443364233
+both baskets,T0,all 41,Exogenous only,2023H1,492,-8.518107212421238
+both baskets,T0,all 41,Exogenous only,2023H2,492,-5.027122052768748
+both baskets,T0,all 41,Exogenous only,2024H1,492,-2.030560523527376
+both baskets,T0,all 41,Exogenous only,2024H2,480,-0.8395830842256056
+both baskets,T0,all 41,Exogenous only,2025H1,480,0.006993155404845353
+both baskets,T0,all 41,Exogenous only,2025H2,380,-0.3217966198587865
+both baskets,T0,all 41,All seven features,2021H1,492,-2.8257959576819145
+both baskets,T0,all 41,All seven features,2021H2,492,-9.52072281134215
+both baskets,T0,all 41,All seven features,2022H1,492,-2.8692599962642755
+both baskets,T0,all 41,All seven features,2022H2,492,-0.14861834822217168
+both baskets,T0,all 41,All seven features,2023H1,492,-9.096327924140358
+both baskets,T0,all 41,All seven features,2023H2,492,-10.843931962491856
+both baskets,T0,all 41,All seven features,2024H1,492,-16.43854558512026
+both baskets,T0,all 41,All seven features,2024H2,480,-1.7974151995164562
+both baskets,T0,all 41,All seven features,2025H1,480,-0.18275989797751713
+both baskets,T0,all 41,All seven features,2025H2,380,-1.266212136300643
+both baskets,T0,all 41,"AR(1,12) + exogenous",2021H1,492,0.3661255359278899
+both baskets,T0,all 41,"AR(1,12) + exogenous",2021H2,492,-1.37600121500763
+both baskets,T0,all 41,"AR(1,12) + exogenous",2022H1,492,0.0029186768649190897
+both baskets,T0,all 41,"AR(1,12) + exogenous",2022H2,492,0.010468957779288024
+both baskets,T0,all 41,"AR(1,12) + exogenous",2023H1,492,-3.1360097779194094
+both baskets,T0,all 41,"AR(1,12) + exogenous",2023H2,492,-1.5957069419752776
+both baskets,T0,all 41,"AR(1,12) + exogenous",2024H1,492,-0.28231116299104975
+both baskets,T0,all 41,"AR(1,12) + exogenous",2024H2,480,-0.15017606833284214
+both baskets,T0,all 41,"AR(1,12) + exogenous",2025H1,480,0.45959692450730794
+both baskets,T0,all 41,"AR(1,12) + exogenous",2025H2,380,-0.01927239625129684
+both baskets,T0,all 41,All seven + own lags,2021H1,492,-1.3897081836947391
+both baskets,T0,all 41,All seven + own lags,2021H2,492,-3.645493577669745
+both baskets,T0,all 41,All seven + own lags,2022H1,492,-2.0229954182580476
+both baskets,T0,all 41,All seven + own lags,2022H2,492,-0.0012406251216932063
+both baskets,T0,all 41,All seven + own lags,2023H1,492,-4.253262645990075
+both baskets,T0,all 41,All seven + own lags,2023H2,492,-7.038118179400318
+both baskets,T0,all 41,All seven + own lags,2024H1,492,-8.416074808151837
+both baskets,T0,all 41,All seven + own lags,2024H2,480,-0.8403697486284814
+both baskets,T0,all 41,All seven + own lags,2025H1,480,0.08890631543518812
+both baskets,T0,all 41,All seven + own lags,2025H2,380,-0.2518411554096096
+both baskets,T0,excl. Myanmar,Persistence,2021H1,480,0.48283733355880865
+both baskets,T0,excl. Myanmar,Persistence,2021H2,480,-0.6985662094380223
+both baskets,T0,excl. Myanmar,Persistence,2022H1,480,0.24689619155207332
+both baskets,T0,excl. Myanmar,Persistence,2022H2,480,0.296383231079401
+both baskets,T0,excl. Myanmar,Persistence,2023H1,480,0.039311823111554234
+both baskets,T0,excl. Myanmar,Persistence,2023H2,480,0.09652250696321663
+both baskets,T0,excl. Myanmar,Persistence,2024H1,480,0.4898483535011009
+both baskets,T0,excl. Myanmar,Persistence,2024H2,468,-0.1909355643118169
+both baskets,T0,excl. Myanmar,Persistence,2025H1,468,0.34955718022178306
+both baskets,T0,excl. Myanmar,Persistence,2025H2,370,-0.4510881308943342
+both baskets,T0,excl. Myanmar,Own lag (AR(1)),2021H1,480,0.3731862827789999
+both baskets,T0,excl. Myanmar,Own lag (AR(1)),2021H2,480,-0.45074118056405066
+both baskets,T0,excl. Myanmar,Own lag (AR(1)),2022H1,480,-0.1477116313624276
+both baskets,T0,excl. Myanmar,Own lag (AR(1)),2022H2,480,-0.19998649362627985
+both baskets,T0,excl. Myanmar,Own lag (AR(1)),2023H1,480,-1.0161846911751908
+both baskets,T0,excl. Myanmar,Own lag (AR(1)),2023H2,480,-0.586163453985665
+both baskets,T0,excl. Myanmar,Own lag (AR(1)),2024H1,480,-0.006445636823128931
+both baskets,T0,excl. Myanmar,Own lag (AR(1)),2024H2,468,-0.17356132920701284
+both baskets,T0,excl. Myanmar,Own lag (AR(1)),2025H1,468,0.2647596814824599
+both baskets,T0,excl. Myanmar,Own lag (AR(1)),2025H2,370,-0.043363235932641464
+both baskets,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2021H1,480,0.37666209322280697
+both baskets,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2021H2,480,-0.45652319561822763
+both baskets,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2022H1,480,-0.1510979110833084
+both baskets,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2022H2,480,-0.20420725739631718
+both baskets,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2023H1,480,-1.0271702783478038
+both baskets,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2023H2,480,-0.5959091080801826
+both baskets,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2024H1,480,-0.013465253847197989
+both baskets,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2024H2,468,-0.1791900902650727
+both baskets,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2025H1,468,0.2626834297830073
+both baskets,T0,excl. Myanmar,"Own lags 1, 12 (AR(1,12))",2025H2,370,-0.04548085780502786
+both baskets,T0,excl. Myanmar,Trade proxies only,2021H1,480,-1.568854361530314
+both baskets,T0,excl. Myanmar,Trade proxies only,2021H2,480,-5.663799336011367
+both baskets,T0,excl. Myanmar,Trade proxies only,2022H1,480,-10.72015502866548
+both baskets,T0,excl. Myanmar,Trade proxies only,2022H2,480,-5.738435210815433
+both baskets,T0,excl. Myanmar,Trade proxies only,2023H1,480,-15.977163729952828
+both baskets,T0,excl. Myanmar,Trade proxies only,2023H2,480,-10.659269275698891
+both baskets,T0,excl. Myanmar,Trade proxies only,2024H1,480,-19.39078609546766
+both baskets,T0,excl. Myanmar,Trade proxies only,2024H2,468,-2.5836308383757363
+both baskets,T0,excl. Myanmar,Trade proxies only,2025H1,468,-9.866568701324166
+both baskets,T0,excl. Myanmar,Trade proxies only,2025H2,370,-1.3761302550114265
+both baskets,T0,excl. Myanmar,Exogenous only,2021H1,480,-0.2510272080085656
+both baskets,T0,excl. Myanmar,Exogenous only,2021H2,480,-2.957858975396031
+both baskets,T0,excl. Myanmar,Exogenous only,2022H1,480,-1.057370820294175
+both baskets,T0,excl. Myanmar,Exogenous only,2022H2,480,-3.9442806771275034
+both baskets,T0,excl. Myanmar,Exogenous only,2023H1,480,-19.14162466939986
+both baskets,T0,excl. Myanmar,Exogenous only,2023H2,480,-5.132285185890089
+both baskets,T0,excl. Myanmar,Exogenous only,2024H1,480,-2.041074387200886
+both baskets,T0,excl. Myanmar,Exogenous only,2024H2,468,-1.0776741262740543
+both baskets,T0,excl. Myanmar,Exogenous only,2025H1,468,-0.4302619365050391
+both baskets,T0,excl. Myanmar,Exogenous only,2025H2,370,-0.3035739219688762
+both baskets,T0,excl. Myanmar,All seven features,2021H1,480,-1.8408746973101717
+both baskets,T0,excl. Myanmar,All seven features,2021H2,480,-8.346624939755742
+both baskets,T0,excl. Myanmar,All seven features,2022H1,480,-9.568143557587728
+both baskets,T0,excl. Myanmar,All seven features,2022H2,480,-6.308387819886216
+both baskets,T0,excl. Myanmar,All seven features,2023H1,480,-22.59047431226805
+both baskets,T0,excl. Myanmar,All seven features,2023H2,480,-12.407584535225553
+both baskets,T0,excl. Myanmar,All seven features,2024H1,480,-19.698868003972873
+both baskets,T0,excl. Myanmar,All seven features,2024H2,468,-2.7648176836644436
+both baskets,T0,excl. Myanmar,All seven features,2025H1,468,-9.762247452758327
+both baskets,T0,excl. Myanmar,All seven features,2025H2,370,-1.417163886691934
+both baskets,T0,excl. Myanmar,"AR(1,12) + exogenous",2021H1,480,0.3664814769989134
+both baskets,T0,excl. Myanmar,"AR(1,12) + exogenous",2021H2,480,-1.4676412197305662
+both baskets,T0,excl. Myanmar,"AR(1,12) + exogenous",2022H1,480,-0.13957054609507957
+both baskets,T0,excl. Myanmar,"AR(1,12) + exogenous",2022H2,480,-1.2538698251591271
+both baskets,T0,excl. Myanmar,"AR(1,12) + exogenous",2023H1,480,-7.468454950303318
+both baskets,T0,excl. Myanmar,"AR(1,12) + exogenous",2023H2,480,-1.6977643529312827
+both baskets,T0,excl. Myanmar,"AR(1,12) + exogenous",2024H1,480,-0.24827036476833997
+both baskets,T0,excl. Myanmar,"AR(1,12) + exogenous",2024H2,468,-0.31419385504633746
+both baskets,T0,excl. Myanmar,"AR(1,12) + exogenous",2025H1,468,0.2297971734080252
+both baskets,T0,excl. Myanmar,"AR(1,12) + exogenous",2025H2,370,-0.05229405437397894
+both baskets,T0,excl. Myanmar,All seven + own lags,2021H1,480,-0.6876044010482889
+both baskets,T0,excl. Myanmar,All seven + own lags,2021H2,480,-4.500828044346236
+both baskets,T0,excl. Myanmar,All seven + own lags,2022H1,480,-6.492978863889703
+both baskets,T0,excl. Myanmar,All seven + own lags,2022H2,480,-4.214385909236261
+both baskets,T0,excl. Myanmar,All seven + own lags,2023H1,480,-11.901400570692326
+both baskets,T0,excl. Myanmar,All seven + own lags,2023H2,480,-7.823548868529906
+both baskets,T0,excl. Myanmar,All seven + own lags,2024H1,480,-10.601797177555381
+both baskets,T0,excl. Myanmar,All seven + own lags,2024H2,468,-1.2295334407357905
+both baskets,T0,excl. Myanmar,All seven + own lags,2025H1,468,-4.7218940930773226
+both baskets,T0,excl. Myanmar,All seven + own lags,2025H2,370,-0.2680598061238726

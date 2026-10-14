@@ -131,7 +131,12 @@ Heavy / generated (do not “clean up” unless asked):
 - 18 countries, 48 months (2021-01 … 2024-12), **864 rows**
 - `config.yaml` acquisition set is **20** countries; two drop out of the fused table
 - Reporter: India, Comtrade code **699**, inbound (`flow_code = M`)
-- HS-4 basket: `8517, 8471, 8528, 8516, 8507, 9403, 6109, 6203, 6204, 9503, 3304`
+- HS-4 basket **actually in the panel: `8541, 8542`** (semiconductors; verified 2026-10-01 by
+  rebuilding `inbound_flow_usd` from `processed/comtrade.csv`, see `dataset/rev21_generalisation.py`).
+  `config.yaml` lists `8517, 8471, 8528, 8516, 8507, 9403, 6109, 6203, 6204, 9503, 3304`, but that list
+  was not used to build the panel. Inbound = imports whose partner is also a panel country (incl.
+  re-imports); Taiwan ("Other Asia, n.e.s.", 30% of downloaded value) is excluded. `paper.tex` and
+  `artifact/DATASHEET.md` still state the consumer basket (erratum pending; not edited).
 - Features on the row (seven-feature schema):
   `inventory_days_proxy`, `trade_delay_proxy`, `news_vol_7d`, `neg_tone_frac_3d`,
   `strike_flag_7d`, `weather_anomaly_7d`, `global_risk`
@@ -308,6 +313,13 @@ Data Availability must not claim a hosted URL until one exists.
 - Serving TGN: `backend/models/tgn_model.py` loads `backend/tgn_model.pth` or
   falls back to `orchestrator/utils/scoring.py` `weighted_risk`
 - **If APIs fail, `/analyze` returns a mock** (`main.py`). Demos can look “successful” without keys.
+- `GET /forecast?country=&month=` (added 2026-10-01, paper-21 revision): serves the offline-evaluated
+  ridge models from `backend/models/serving/bundle.json` on the fused published-series features
+  (`models/parity_model.py`); `backend/test_serving_parity.py` checks served == offline predictions.
+- 2026-10-01 live-path fixes: LLM calls run via `asyncio.to_thread` (`llm_generate_async`), per-agent
+  timeout + guard in `graph/nodes.py` (`AGENT_NODE_TIMEOUT_SECONDS`, `agent_status` in state),
+  GSCPI agent reads the published table first, inventory oriented in `scoring.normalize_features`,
+  weather cache wired.
 - Config: `backend/config/settings.py`, secrets in `backend/.env`
 
 **Port mismatch (known):** root `README.md` says backend **8007** / frontend **5175**.

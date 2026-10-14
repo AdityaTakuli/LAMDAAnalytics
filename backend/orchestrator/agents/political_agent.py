@@ -14,7 +14,7 @@ Be conservative; if uncertain, sanction_flag=0 and risk_score near 0.3.
 """
     model = get_gemini()
     try:
-        resp = model.generate_content(prompt)
+        resp = await model.agenerate_content(prompt)
         import json, re
         s = (resp.text or "{}")
         s = re.sub(r"```json|```", "", s).strip()
