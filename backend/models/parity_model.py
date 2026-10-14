@@ -1,7 +1,7 @@
 """Serve the offline-evaluated models on the published-series features.
 
 ``models/serving/bundle.json`` and ``models/serving/published_features.csv``
-are written by ``dataset/rev21_export_serving_model.py``. This module applies
+are written by ``dataset/export_serving_model.py``. This module applies
 the bundle with plain Python arithmetic (no scikit-learn at serving time):
 
     x_raw   = row[features], NaN -> 0, protective features negated

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Paper-21 revision: are the live LLM extractors right, and does decomposition help?
+"""are the live LLM extractors right, and does decomposition help?
 
 Ground truth is the fused panel built from published series
 (dataset/.../processed/nodes_monthly.csv): Comtrade-derived trade proxies,
@@ -23,7 +23,7 @@ Scored:
 
 Usage (needs a valid GROQ_API_KEY in backend/.env):
   backend/.venv/bin/python evidence/extraction_alignment_study.py [--limit N]
-Writes results/paper21_revision/extraction_alignment_{calls.csv,summary.csv}.
+Writes results/benchmark/extraction_alignment_{calls.csv,summary.csv}.
 """
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "backend"))
 os.chdir(ROOT / "backend")
 
-OUT = ROOT / "results" / "paper21_revision"
+OUT = ROOT / "results" / "benchmark"
 PANEL = ROOT / "dataset/data/four_year_2021_2024/processed/nodes_monthly.csv"
 UNIVERSE = ROOT / "dataset/data/four_year_2021_2024/processed/country_universe.csv"
 NODE = {"CHN": "country_cn", "KOR": "country_kr", "HKG": "country_344", "SGP": "country_sg",

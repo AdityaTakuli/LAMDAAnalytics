@@ -1,7 +1,7 @@
 """Served /forecast predictions must equal the offline evaluated predictions.
 
-The offline side is results/paper21_revision/serving_parity_offline.csv,
-written by dataset/rev21_export_serving_model.py with scikit-learn. The served
+The offline side is results/benchmark/serving_parity_offline.csv,
+written by dataset/export_serving_model.py with scikit-learn. The served
 side is models/parity_model.py, both called directly and through the FastAPI
 route. Run: backend/.venv/bin/python backend/test_serving_parity.py
 """
@@ -18,7 +18,7 @@ os.environ.setdefault("SERP_API_KEY", "test")
 os.environ.setdefault("WEATHER_API_KEY", "test")
 os.environ.setdefault("GROQ_API_KEY", "test")
 
-OFFLINE = Path(__file__).resolve().parents[1] / "results" / "paper21_revision" / "serving_parity_offline.csv"
+OFFLINE = Path(__file__).resolve().parents[1] / "results" / "benchmark" / "serving_parity_offline.csv"
 TOLERANCE = 1e-9
 
 

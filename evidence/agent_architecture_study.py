@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Paper-21 revision: what does the multi-agent decomposition buy?
+"""what does the multi-agent decomposition buy?
 
 Compares five ways of producing the same seven-feature vector, on the real
 backend code, with the LLM replaced by an instrumented stub so that latency and
@@ -28,7 +28,7 @@ longer monolithic prompt (E's single call uses the same latency distribution,
 so E's latency is a lower bound).
 
 Usage: backend/.venv/bin/python evidence/agent_architecture_study.py
-Writes results/paper21_revision/agent_architecture_study.{csv,json}.
+Writes results/benchmark/agent_architecture_study.{csv,json}.
 """
 from __future__ import annotations
 
@@ -48,7 +48,7 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "results" / "paper21_revision"
+OUT = ROOT / "results" / "benchmark"
 SCALE = 0.05
 GRAPH_TIMEOUT = 90.0
 NODE_TIMEOUT = 30.0

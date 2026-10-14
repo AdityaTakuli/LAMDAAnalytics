@@ -33,8 +33,8 @@ extended panels have 41 countries and two product baskets. Out-of-sample R² on 
 - Unreported Comtrade months are treated as missing, not as zero imports. See
   [Unreported months](#unreported-months).
 
-Per-result tables are in `results/paper21_revision/`. The checks behind each extended-panel number
-are in `results/paper21_revision/NUMBERS_REVIEW.md`.
+Per-result tables are in `results/benchmark/`. The checks behind each extended-panel number
+are in `results/benchmark/NUMBERS_REVIEW.md`.
 
 ## Repository layout
 
@@ -71,21 +71,21 @@ sha256sum -c SHA256SUMS          # verify the data files
 ## Reproducing the results
 
 Run from `dataset/` with `PY=../backend/.venv/bin/python`. Each script prints its tables and writes
-CSV files under `results/paper21_revision/`. Times are for one laptop CPU.
+CSV files under `results/benchmark/`. Times are for one laptop CPU.
 
 | Result | Command | Time |
 |---|---|---|
-| Benchmark on the original panel (unreported months treated as missing), tests, ablation, rolling origins | `$PY rev21_r2_corrected.py` | ~10 min |
-| Every model with and without the unreported-month rows | `$PY rev21_r2_missing.py` | 1 min |
-| Corrected benchmark figure | `$PY rev21_r2_figure.py` (writes `round2/figures/`) | seconds |
-| Non-overlapping target, rolling origins, refit | `$PY rev21_tabular.py` | 1 min |
-| Extended panels, 2021–2024 | `REV21_PANEL=processed_v3 REV21_OUT=phaseB $PY rev21_consumer_analyses.py` | minutes |
-| Seven-year evaluation, ten half-year blocks | `$PY rev21_phaseD_analyses.py` | ~20 min |
-| Graph models on the extended panels | `./rev21_run_graph_queue.sh`, then `$PY rev21_extended_graph_summary.py` | ~3 h |
-| Graph hyperparameter sensitivity | `./rev21_run_graph_tune.sh`, then `$PY rev21_graph_tune_summary.py` | ~5 h |
-| Other metrics, ridge strength, lag choice | `$PY rev21_extended_metrics.py` | ~15 min |
-| Missing data, choice of countries and products, statistical assumptions | `REV21_WILD_REPS=1999 $PY rev21_r2_checks.py A` (and `B`, `C`) | ~1 h each for A and B |
-| Bilateral diagnostics | `$PY rev21_bilateral.py` | minutes |
+| Benchmark on the original panel (unreported months treated as missing), tests, ablation, rolling origins | `$PY benchmark_corrected.py` | ~10 min |
+| Every model with and without the unreported-month rows | `$PY unreported_months.py` | 1 min |
+| Corrected benchmark figure | `$PY benchmark_figure.py` (writes `corrected/figures/`) | seconds |
+| Non-overlapping target, rolling origins, refit | `$PY tabular_analyses.py` | 1 min |
+| Extended panels, 2021–2024 | `LAMDA_PANEL=processed_v3 LAMDA_OUT=extended_2021_2024 $PY basket_analyses.py` | minutes |
+| Seven-year evaluation, ten half-year blocks | `$PY extended_rolling_blocks.py` | ~20 min |
+| Graph models on the extended panels | `./run_graph_extended.sh`, then `$PY graph_extended_summary.py` | ~3 h |
+| Graph hyperparameter sensitivity | `./run_graph_tuning.sh`, then `$PY graph_tuning_summary.py` | ~5 h |
+| Other metrics, ridge strength, lag choice | `$PY extended_metrics.py` | ~15 min |
+| Missing data, choice of countries and products, statistical assumptions | `LAMDA_WILD_REPS=1999 $PY robustness_checks.py A` (and `B`, `C`) | ~1 h each for A and B |
+| Bilateral diagnostics | `$PY bilateral_diagnostics.py` | minutes |
 
 The graph queues skip runs that are already finished, so they can be restarted after an interruption.
 
@@ -146,7 +146,7 @@ backend/.venv/bin/python tests/test_full_orchestrator.py                # live p
 
 The raw Comtrade replies (about 20 GB) and raw GDELT event files (about 24 GB) are not included. The
 download and build scripts in `dataset/` rebuild them (`ingest_*.py` and `fuse_dataset.py` for the
-original panel; `rev21_download_*.py` and `rev21_build_*_panel.py` for the extended ones). Comtrade
+original panel; `download_*.py` and `build_*_panel.py` for the extended ones). Comtrade
 requests need a key in `dataset/.env` (see `dataset/.env.example`). Use of the Comtrade-derived tables
 is subject to the UN Comtrade terms of use. India's partner ranking, used to choose the countries, is in
 `dataset/data/four_year_2021_2024/cache/comtrade/india_partner_ranking/`.

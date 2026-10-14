@@ -1,17 +1,17 @@
-fastapi==0.115.0
-uvicorn[standard]==0.30.6
-pydantic==2.9.2
-pydantic-settings==2.5.2
-httpx==0.27.2
-tenacity==9.0.0
-python-dotenv==1.0.1
-groq>=1.1.0
-google-search-results==2.4.2   # serpapi client
-beautifulsoup4==4.12.3
-lxml==5.3.0
-torch>=2.6.0                   # compatible with Python 3.13
-numpy>=1.26.0
-orjson==3.10.7
-cachetools==5.5.0
-langgraph>=0.2.0
-langchain-core>=0.3.0
+# Service dependencies, pinned to the versions used for every result (Python 3.12.3, CPU).
+fastapi==0.141.1
+uvicorn[standard]==0.52.1
+pydantic==2.13.4
+pydantic-settings==2.15.0
+httpx==0.28.1
+tenacity==9.1.4
+python-dotenv==1.2.2
+groq==1.6.0
+beautifulsoup4==4.15.0
+lxml==6.1.1
+cachetools==7.1.7
+langgraph==1.2.10
+langchain-core==1.5.3
+numpy==2.5.1
+# optional: loads the TGN checkpoint; without it the scorer uses its weighted fallback
+torch==2.13.0
