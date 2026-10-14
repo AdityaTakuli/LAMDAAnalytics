@@ -15,13 +15,14 @@ with a multi-agent risk-scoring service and a React dashboard. It has three part
 
 ## Main findings
 
-The target is next month's change in a country's imports. Out-of-sample R² on the one-month log change:
+The target is next month's change in a country's imports. The original panel has 18 countries; the
+extended panels have 41 countries and two product baskets. Out-of-sample R² on the one-month log change:
 
 | Evaluation | Own lags | Seven fused features | Graph models (GCN, TGN) | News, weather, GSCPI only |
 |---|---|---|---|---|
-| Original panel: 18 countries, semiconductors, test 2024 | **0.215** | −0.250 | −0.089 to 0.055 | −0.260 |
-| Ten half-year blocks, 2021–2025, 41 countries, two product baskets (4,738 rows) | **0.173** (positive in 10 of 10) | 0.108 | not run on blocks | −0.012 |
-| Seven-year panel, test 2024–2025 (1,788 rows) | **0.185** | 0.098 | 0.094 to 0.118 | — |
+| Original panel: 18 countries, semiconductors, 2021–2024, test 2024 (187 rows) | **0.215** | −0.250 | −0.089 to 0.055 | −0.260 |
+| Extended panel: 41 countries, semiconductors and consumer goods, 2019–2025; ten half-year test blocks, 2021–2025 (4,738 rows) | **0.173** (positive in 10 of 10) | 0.108 | not run on blocks | −0.012 |
+| Extended panel: 41 countries, both baskets, 2019–2025; test 2024–2025 (1,788 rows) | **0.185** | 0.098 | 0.094 to 0.118 | — |
 
 - The target's own history is the best predictor in these evaluations. News, weather and GSCPI add at
   most about 0.001 R². No graph hyperparameter setting tested reaches own lags on the seven-year panel.
