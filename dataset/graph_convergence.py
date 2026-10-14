@@ -5,7 +5,7 @@ Usage: graph_convergence.py {T0|T1}
 Matched budget across GCN / TGN / TGN-no-memory: 80 epochs, patience 15, 5 seeds,
 best-val-epoch test R2, improved feature set. This is the SINGLE SOURCE for every
 graph number in the paper (both targets), superseding the 40-epoch/single-seed rows
-in changes.md 0.3.
+in docs/LAB_NOTES.md 0.3.
 
 Outputs (results/phase07/):
   graph_convergence_{target}.csv    mean, sd, per-seed test R2

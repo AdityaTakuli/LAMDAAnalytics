@@ -6,7 +6,7 @@ Full LangGraph orchestrator test — complete multi-agent network:
 3. TGN risk prediction (or weighted fallback)
 4. Reporter concise + comprehensive output
 
-Run from project root: python test_full_orchestrator.py
+Run from the project root: python tests/test_full_orchestrator.py
 """
 
 import asyncio
@@ -15,7 +15,8 @@ import os
 from datetime import datetime
 
 # Add backend to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backend'))
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+sys.path[:0] = [os.path.join(ROOT, 'backend'), ROOT]
 
 from backend.orchestrator.utils.schema import AnalyzeRequest
 from backend.orchestrator.orchestrator import run_analysis
@@ -130,7 +131,7 @@ if __name__ == "__main__":
     print("\n" + "="*60)
     
     # Check if .env file exists and has real keys
-    env_path = os.path.join("backend", ".env")
+    env_path = os.path.join(ROOT, "backend", ".env")
     if not os.path.exists(env_path):
         print("❌ backend/.env file not found!")
         print("   Please create it with your API keys.")

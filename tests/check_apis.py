@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Quick test of all API keys — Weather, SERP, Mappls (OAuth2), Groq"""
 import asyncio, sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backend'))
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+sys.path[:0] = [os.path.join(ROOT, 'backend'), ROOT]
 from config.settings import settings
 import httpx
 

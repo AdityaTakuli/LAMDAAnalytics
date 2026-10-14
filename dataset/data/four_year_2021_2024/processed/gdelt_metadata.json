@@ -1,0 +1,83 @@
+{
+  "source": "GDELT Event Database",
+  "official_url_template": "https://data.gdeltproject.org/events/{date}.export.CSV.zip",
+  "start_date": "2021-01-01",
+  "end_date": "2024-12-31",
+  "download_timestamp": "2026-09-11T18:33:58.844383+00:00",
+  "countries": [
+    "CHN",
+    "CZE",
+    "DEU",
+    "FRA",
+    "GBR",
+    "HKG",
+    "IND",
+    "IRL",
+    "ITA",
+    "JPN",
+    "KOR",
+    "MEX",
+    "MYS",
+    "PHL",
+    "SGP",
+    "THA",
+    "USA",
+    "VNM"
+  ],
+  "country_selection": "Comtrade country_universe.csv when available, otherwise configured ISO3 list",
+  "event_filter": {
+    "supply_chain_event_roots": [
+      "14",
+      "16",
+      "17",
+      "18",
+      "19"
+    ],
+    "labor_unrest_event_roots": [
+      "14"
+    ]
+  },
+  "negative_tone_threshold": -2.0,
+  "feature_definitions": {
+    "news_vol_7d": "count of supply-chain-relevant event-country rows by DATEADDED in trailing 7 calendar days, inclusive",
+    "neg_tone_frac_3d": "fraction of relevant event-country rows by DATEADDED in trailing 3 calendar days with AvgTone <= configured threshold",
+    "strike_flag_7d": "1 when any configured labor-unrest root event by DATEADDED occurs in trailing 7 calendar days, otherwise 0",
+    "monthly_alignment": "use the daily feature row at UTC month end; no future event/reference/availability timestamp is used"
+  },
+  "retained_event_columns": [
+    "event_id",
+    "event_date",
+    "reference_date",
+    "published_at",
+    "available_at",
+    "country",
+    "actor1_country",
+    "actor2_country",
+    "event_code",
+    "event_base_code",
+    "event_root_code",
+    "avg_tone",
+    "source_url",
+    "is_labor_unrest",
+    "is_supply_chain_relevant",
+    "source_file_date",
+    "source",
+    "vintage_date"
+  ],
+  "file_count": 1459,
+  "downloaded_file_count": 0,
+  "reused_file_count": 1459,
+  "failed_file_count": 2,
+  "download_workers": 16,
+  "raw_event_country_row_count": 77947687,
+  "event_count": 77947687,
+  "relevant_event_count": 10776791,
+  "labor_unrest_event_count": 614334,
+  "country_count": 18,
+  "date_coverage": {
+    "first_event_date": "2011-01-04 00:00:00+00:00",
+    "last_event_date": "2024-12-31 00:00:00+00:00"
+  },
+  "validation_report": "/home/aditya/Desktop/ARiES/LAMDAAnalytics/dataset/data/four_year_2021_2024/processed/gdelt_validation.json",
+  "test_mode": false
+}

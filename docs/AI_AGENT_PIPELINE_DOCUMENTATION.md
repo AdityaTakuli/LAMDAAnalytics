@@ -134,7 +134,7 @@ See `backend/.env.example`.
 | Script | Purpose |
 |--------|---------|
 | `backend/test_langgraph_network.py` | Mocked LangGraph E2E (no APIs) |
-| `test_full_orchestrator.py` | Live full graph with real APIs |
+| `tests/test_full_orchestrator.py` | Live full graph with real APIs |
 | `test_simple_orchestrator.py` | Live simplified demo |
 | `test_orchestrator.py` | Basic orchestrator call |
 | `test_google_api.py` / `test_api_keys.py` | API connectivity |
@@ -171,4 +171,4 @@ Same `AnalyzeResponse` schema as before (`features`, `tgn_result`, `concise`, `c
 
 ---
 
-For implementation detail, see `ORCHESTRATOR_README.md`, `AI_AGENT_PIPELINE.md`, and `backend/orchestrator/graph/`.
+For implementation detail, see `ORCHESTRATOR_README.md`, `AI_AGENT_PIPELINE.md` (both in `docs/`), and `backend/orchestrator/graph/`.

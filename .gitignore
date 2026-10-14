@@ -318,7 +318,19 @@ cache/
 # Processed tables and caches can be many gigabytes; rebuild from dataset/README.md.
 # Final experiment results under data/**/results/ are tracked for GitHub.
 dataset/data/**/cache/
-dataset/data/**/processed/
+dataset/data/**/processed/*
+# Original panel: the fused files are published; raw GDELT event files stay local
+!dataset/data/four_year_2021_2024/processed/comtrade.csv
+!dataset/data/four_year_2021_2024/processed/country_universe.csv
+!dataset/data/four_year_2021_2024/processed/edges_monthly.csv
+!dataset/data/four_year_2021_2024/processed/gdelt_features.csv
+!dataset/data/four_year_2021_2024/processed/gdelt_metadata.json
+!dataset/data/four_year_2021_2024/processed/gdelt_monthly_features.csv
+!dataset/data/four_year_2021_2024/processed/gdelt_validation.json
+!dataset/data/four_year_2021_2024/processed/graph.json
+!dataset/data/four_year_2021_2024/processed/gscpi_monthly.csv
+!dataset/data/four_year_2021_2024/processed/nodes_monthly.csv
+!dataset/data/four_year_2021_2024/processed/weather_daily.csv
 dataset/data/**/checkpoints/
 dataset/cache/
 dataset/.venv/
@@ -326,3 +338,12 @@ dataset/.venv/
 # Temporary files
 *.tmp
 *.temp
+
+# Local-only files
+CLAUDE.md
+CODEBASE.md
+.claude/
+.cursor/
+.cursorrules
+ca.psiphon.PsiphonTunnel.tunnel-core/
+dataset/pilot_nowcast/

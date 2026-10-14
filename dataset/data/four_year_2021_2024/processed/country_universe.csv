@@ -1,0 +1,19 @@
+rank,country_name,comtrade_code,iso3,trade_value_usd,selection_reason
+1,India,699,IND,93839477822.143,fixed_focal_country
+2,China,156,CHN,47007454717.017,top_partner_with_reporter_data
+3,South Korea,410,KOR,9899594473.222,top_partner_with_reporter_data
+4,Hong Kong,344,HKG,8649410803.262,top_partner_with_reporter_data
+5,Singapore,702,SGP,4500815462.052,top_partner_with_reporter_data
+6,Vietnam,704,VNM,2420157040.729,top_partner_with_reporter_data
+7,Malaysia,458,MYS,2351475915.712,top_partner_with_reporter_data
+8,Japan,392,JPN,2317196591.367,top_partner_with_reporter_data
+9,Thailand,764,THA,1111536768.806,top_partner_with_reporter_data
+10,Ireland,372,IRL,922710842.102,top_partner_with_reporter_data
+11,United States,842,USA,875913182.394,top_partner_with_reporter_data
+12,Mexico,484,MEX,668089241.087,top_partner_with_reporter_data
+13,Philippines,608,PHL,551618756.277,top_partner_with_reporter_data
+14,Germany,276,DEU,406816161.017,top_partner_with_reporter_data
+15,United Kingdom,826,GBR,120923313.59,top_partner_with_reporter_data
+16,France,251,FRA,107059958.353,top_partner_with_reporter_data
+17,Italy,380,ITA,23070082.334,top_partner_with_reporter_data
+18,Czechia,203,CZE,8305339.09,top_partner_with_reporter_data

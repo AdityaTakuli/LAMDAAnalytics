@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Verify the LangGraph orchestrator entry point.
-Run from project root: python test_orchestrator.py
+Run from the project root: python tests/test_orchestrator.py
 """
 
 import asyncio
@@ -9,7 +9,8 @@ import sys
 import os
 
 # Add backend to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backend'))
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+sys.path[:0] = [os.path.join(ROOT, 'backend'), ROOT]
 
 from backend.orchestrator.utils.schema import AnalyzeRequest
 from backend.orchestrator.orchestrator import run_analysis

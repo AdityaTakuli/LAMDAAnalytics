@@ -97,7 +97,7 @@ cp .env.example .env              # MAPPLS / SERP / WEATHER / GROQ keys
 PYTHONPATH=. python test_langgraph_network.py
 
 # Live end-to-end (needs valid API keys)
-python ../test_full_orchestrator.py
+python ../tests/test_full_orchestrator.py
 ```
 
 ### API

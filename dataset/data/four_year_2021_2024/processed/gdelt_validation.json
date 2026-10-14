@@ -1,0 +1,17 @@
+{
+  "coverage": {
+    "start_date": "2021-01-01",
+    "end_date": "2024-12-31"
+  },
+  "missing_dates_without_failed_file": [],
+  "failed_dates": [
+    "2022-11-10",
+    "2023-03-23"
+  ],
+  "duplicate_event_country_rows": 0,
+  "invalid_country_codes": 0,
+  "invalid_tone_values": 0,
+  "required_columns_missing": [],
+  "configured_country_count": 18,
+  "status": "PASS"
+}
