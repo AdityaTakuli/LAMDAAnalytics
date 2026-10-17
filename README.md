@@ -86,6 +86,9 @@ CSV files under `results/benchmark/`. Times are for one laptop CPU.
 | Other metrics, ridge strength, lag choice | `$PY extended_metrics.py` | ~15 min |
 | Missing data, choice of countries and products, statistical assumptions | `LAMDA_WILD_REPS=1999 $PY robustness_checks.py A` (and `B`, `C`) | ~1 h each for A and B |
 | Bilateral diagnostics | `$PY bilateral_diagnostics.py` | minutes |
+| Two-way (country × month) clustered tests of every model comparison | `$PY two_way_tests.py` | ~5 min |
+| Missing versus zero: every stored zero checked against the raw Comtrade replies, in every panel, basket and year (needs the raw replies; see "Data" below) | `$PY data_validation_audit.py` | ~5 min |
+| Sensitivity of the ten-block evaluation to revisions of the most recent month | `$PY revision_sensitivity.py` | ~5 min |
 
 The graph queues skip runs that are already finished, so they can be restarted after an interruption.
 

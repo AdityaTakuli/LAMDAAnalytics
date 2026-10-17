@@ -1,0 +1,149 @@
+panel,basket,country,reporter,month,records_this_basket,records_any_basket,requested,median_records_in_reported_months,classification
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-01,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-02,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-03,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-04,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-05,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-06,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-07,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-08,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-09,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-10,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-11,0,0,True,208.0,unreported
+"original, 18 countries, 2021-2024",semiconductor,country_vn,704,2024-12,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-01,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-02,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-03,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-04,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-05,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-06,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-07,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-08,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-09,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-10,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-11,0,0,True,208.0,unreported
+"consumer basket, 18 countries, 2021-2024",consumer,country_vn,704,2024-12,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-01,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-02,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-03,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-04,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-05,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-06,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-07,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-08,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-09,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-10,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-11,0,0,True,208.0,unreported
+"41 countries, 2021-2024",semiconductor,country_vn,704,2024-12,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-01,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-02,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-03,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-04,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-05,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-06,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-07,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-08,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-09,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-10,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-11,0,0,True,208.0,unreported
+"41 countries, 2021-2024",consumer,country_vn,704,2024-12,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-01,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-02,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-03,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-04,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-05,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-06,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-07,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-08,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-09,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-10,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-11,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_116,116,2025-12,0,0,True,131.5,unreported
+"41 countries, 2019-2025",semiconductor,country_233,233,2019-12,0,0,True,229.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-01,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-02,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-03,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-04,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-05,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-06,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-07,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-08,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-09,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-10,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-11,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_cn,156,2025-12,0,0,True,247.0,unreported
+"41 countries, 2019-2025",semiconductor,country_ph,608,2025-10,0,0,True,223.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-01,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-02,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-03,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-04,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-05,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-06,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-07,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-08,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-09,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-10,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-11,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2024-12,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-01,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-02,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-03,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-04,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-05,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-06,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-07,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-08,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-09,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-10,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-11,0,0,True,208.0,unreported
+"41 countries, 2019-2025",semiconductor,country_vn,704,2025-12,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-01,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-02,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-03,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-04,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-05,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-06,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-07,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-08,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-09,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-10,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-11,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_116,116,2025-12,0,0,True,131.5,unreported
+"41 countries, 2019-2025",consumer,country_233,233,2019-12,0,0,True,229.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-01,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-02,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-03,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-04,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-05,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-06,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-07,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-08,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-09,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-10,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-11,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_cn,156,2025-12,0,0,True,247.0,unreported
+"41 countries, 2019-2025",consumer,country_ph,608,2025-10,0,0,True,223.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-01,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-02,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-03,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-04,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-05,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-06,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-07,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-08,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-09,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-10,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-11,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2024-12,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-01,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-02,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-03,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-04,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-05,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-06,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-07,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-08,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-09,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-10,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-11,0,0,True,208.0,unreported
+"41 countries, 2019-2025",consumer,country_vn,704,2025-12,0,0,True,208.0,unreported

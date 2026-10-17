@@ -1,0 +1,17 @@
+predictions,panel,target,files,scored_rows,rows_touching_a_gap
+benchmark_default,processed,T0,40,16360,280
+graph_t1,processed,T1,25,10050,0
+graph_rolling/T0,processed,T0,60,9375,165
+graph_rolling/T1,processed,T1,60,9210,0
+consumer/benchmark_default,processed_v2/consumer,T0,40,16360,280
+consumer/graph_t1,processed_v2/consumer,T1,25,10050,0
+consumer/graph_rolling/T0,processed_v2/consumer,T0,3,486,0
+consumer/graph_rolling/T1,processed_v2/consumer,T1,3,486,0
+extended_2021_2024/semiconductor/benchmark_default,processed_v3/semiconductor,T0,40,37520,280
+extended_2021_2024/semiconductor/graph_t1,processed_v3/semiconductor,T1,25,23275,0
+extended_2019_2025/semiconductor/graph_t1,processed_v4/semiconductor,T1,25,34625,0
+extended_2019_2025/semiconductor/graph_tune,processed_v4/semiconductor,T1,105,145425,0
+extended_2021_2024/consumer/benchmark_default,processed_v3/consumer,T0,40,37520,280
+extended_2021_2024/consumer/graph_t1,processed_v3/consumer,T1,25,23275,0
+extended_2019_2025/consumer/graph_t1,processed_v4/consumer,T1,25,34625,0
+extended_2019_2025/consumer/graph_tune,processed_v4/consumer,T1,105,145425,0

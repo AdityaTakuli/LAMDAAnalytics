@@ -1,0 +1,31 @@
+panel,basket,year,country_months,countries,stored_zeros,unreported,true_zeros,rows_touching_a_gap,log_change_finite_on_gap_rows,log_change_infinite_anywhere,partial_months
+"original, 18 countries, 2021-2024",semiconductor,2021,216,18,0,0,0,0,0,0,0
+"original, 18 countries, 2021-2024",semiconductor,2022,216,18,0,0,0,0,0,0,0
+"original, 18 countries, 2021-2024",semiconductor,2023,216,18,0,0,0,1,0,0,0
+"original, 18 countries, 2021-2024",semiconductor,2024,216,18,12,12,0,12,0,0,0
+"consumer basket, 18 countries, 2021-2024",consumer,2021,216,18,0,0,0,0,0,0,0
+"consumer basket, 18 countries, 2021-2024",consumer,2022,216,18,0,0,0,0,0,0,0
+"consumer basket, 18 countries, 2021-2024",consumer,2023,216,18,0,0,0,1,0,0,0
+"consumer basket, 18 countries, 2021-2024",consumer,2024,216,18,12,12,0,12,0,0,0
+"41 countries, 2021-2024",semiconductor,2021,492,41,0,0,0,0,0,0,0
+"41 countries, 2021-2024",semiconductor,2022,492,41,0,0,0,0,0,0,0
+"41 countries, 2021-2024",semiconductor,2023,492,41,0,0,0,1,0,0,0
+"41 countries, 2021-2024",semiconductor,2024,492,41,12,12,0,12,0,0,0
+"41 countries, 2021-2024",consumer,2021,492,41,0,0,0,0,0,0,0
+"41 countries, 2021-2024",consumer,2022,492,41,0,0,0,0,0,0,0
+"41 countries, 2021-2024",consumer,2023,492,41,0,0,0,1,0,0,0
+"41 countries, 2021-2024",consumer,2024,492,41,12,12,0,12,0,0,0
+"41 countries, 2019-2025",semiconductor,2019,492,41,1,1,0,2,0,0,12
+"41 countries, 2019-2025",semiconductor,2020,492,41,0,0,0,0,0,0,0
+"41 countries, 2019-2025",semiconductor,2021,492,41,0,0,0,0,0,0,0
+"41 countries, 2019-2025",semiconductor,2022,492,41,0,0,0,0,0,0,0
+"41 countries, 2019-2025",semiconductor,2023,492,41,0,0,0,1,0,0,0
+"41 countries, 2019-2025",semiconductor,2024,492,41,12,12,0,14,0,0,1
+"41 countries, 2019-2025",semiconductor,2025,492,41,37,37,0,38,0,0,0
+"41 countries, 2019-2025",consumer,2019,492,41,1,1,0,2,0,0,6
+"41 countries, 2019-2025",consumer,2020,492,41,0,0,0,0,0,0,0
+"41 countries, 2019-2025",consumer,2021,492,41,0,0,0,0,0,0,0
+"41 countries, 2019-2025",consumer,2022,492,41,0,0,0,0,0,0,0
+"41 countries, 2019-2025",consumer,2023,492,41,0,0,0,1,0,0,0
+"41 countries, 2019-2025",consumer,2024,492,41,12,12,0,14,0,0,0
+"41 countries, 2019-2025",consumer,2025,492,41,37,37,0,38,0,0,0
