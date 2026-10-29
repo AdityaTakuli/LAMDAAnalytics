@@ -1,0 +1,10 @@
+design,model,n,p_country,p_month,p_twoway,r2_T0,r2_new_month,n_new_month
+zero-parameter,zero,187,,,,-0.004052526056122385,-0.3446660562045121,187.0
+zero-parameter,known part (no change),187,,,,0.29544342402161994,-2.8189937036238177e-05,187.0
+zero-parameter,persistence,187,,,,0.24703397556465057,-0.0876216241937855,187.0
+direct,3-feature ridge,187,,,,0.39688347780648126,0.1563019944633206,187.0
+direct,7-feature ridge,187,,,,-0.041339147456161296,-0.3937397914666054,187.0
+new part,known part + AR(1),187,,,,0.398352982715214,0.171217061255738,187.0
+new part,"known part + AR(1,12)",187,,,,0.4221157474110644,0.21499687480643292,187.0
+TEST,"known part + AR(1,12) vs 3-feature ridge",187,0.5998,0.6253,0.6225364366568821,,,
+TEST,known part (no change) vs persistence,187,0.0024,0.1138,0.012685072962953486,,,

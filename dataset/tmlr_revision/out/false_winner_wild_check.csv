@@ -1,0 +1,5 @@
+features,target,design,reps,boot,reject_month_analytic,reject_month_wild
+independent,H12,direct,1000,399,0.099,0.102
+independent,H12,new part,1000,399,0.076,0.079
+global AR,H12,direct,1000,399,0.372,0.38
+global AR,H1,direct,1000,399,0.183,0.194

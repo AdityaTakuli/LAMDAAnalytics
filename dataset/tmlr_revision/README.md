@@ -5,7 +5,7 @@ Everything is in this folder; deleting it removes the revision analyses. Nothing
 under `results/` or `figures/` is overwritten. Graph models are not retrained:
 their saved five-seed predictions in `results/phase07/` are re-scored.
 
-Run from the repository root: `dataset/tmlr_revision/run.sh` (about 15 minutes,
+Run from the repository root: `dataset/tmlr_revision/run.sh` (about 30 minutes,
 most of it bootstrap loops; `force` reruns, `status` lists outputs).
 
 | Script | Reviewer point | Outputs (`out/`) |
@@ -14,6 +14,8 @@ most of it bootstrap loops; `force` reruns, `status` lists outputs).
 | `missing_and_timing.py --extras` | 6 | `t0_origin_mean.csv`, `figures/graph_seeds_corrected.pdf`, `figures/rank_inversion_T4_T1.pdf` |
 | `dependence_tests.py` | 4 | `dependence_tests.csv`: wild bootstrap by country and by month, two-way cluster-robust t, DM on month means, Holm |
 | `selection_checks.py` | 7 | `selection_loco.csv`, `selection_focal.csv`, `selection_focal_members.csv` |
+| `known_part.py` | extension (F6) | `known_part.csv` (every model scored on the window H_k and on the new month it implies; exact identity checked), `known_part_t0.csv`, `known_part_tests.csv`, `known_part_periods.csv` (free R2 by period), `known_part_rolling.csv`, `figures/known_part.pdf` |
+| `false_winner_sim.py --wild-check` | extension (F7) | Monte Carlo calibrated to the panel: `false_winner_summary.csv`, `false_winner_calibration.csv`, `false_winner_components.csv`, `false_winner_wild_check.csv`; per-replication files in `false_winner/` (17 MB, not committed; `run.sh` rebuilds them in about 4 minutes; delete a file to rerun that scenario) |
 
 The correction: Comtrade had published no 2024 month for Vietnam when the panel
 was downloaded (2026-08-31); the fusion stored those months as zero imports, which

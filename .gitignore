@@ -347,3 +347,6 @@ CODEBASE.md
 .cursorrules
 ca.psiphon.PsiphonTunnel.tunnel-core/
 dataset/pilot_nowcast/
+
+# TMLR revision: per-replication simulation caches (rebuilt by run.sh)
+dataset/tmlr_revision/out/false_winner/
