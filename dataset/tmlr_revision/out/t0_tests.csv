@@ -1,0 +1,7 @@
+version,pair,target,model_a,model_b,n,n_clusters,r2_a,r2_b,dm_p,pairs_p,wild_p,verdict
+submitted,T0: persistence vs gcn (ensemble),T0,persistence,gcn,193,18,0.6476144933678263,0.5946439412710149,0.28506282555577034,0.5774,0.7776,tie
+submitted,T0: persistence vs ar_ridge,T0,persistence,ar_ridge,193,18,0.6476144933678263,0.5716675856989484,0.26106567455796026,0.6206,0.9862,tie
+submitted,T0: ar1_only vs persistence,T0,ar1_only,persistence,193,18,0.5665917178207858,0.6476144933678263,0.21202591829815143,0.6122,0.9549,tie
+corrected,T0: persistence vs gcn (ensemble),T0,persistence,gcn,187,17,0.24703397556465057,0.31183259300740174,0.38767685294238197,0.443,0.4639,tie
+corrected,T0: persistence vs ar_ridge,T0,persistence,ar_ridge,187,17,0.24703397556465057,0.39688347780648126,0.024482253154242795,0.015,0.0266,ar_ridge
+corrected,T0: ar1_only vs persistence,T0,ar1_only,persistence,187,17,0.3703375109366426,0.24703397556465057,0.06672058211419074,0.0706,0.0949,tie

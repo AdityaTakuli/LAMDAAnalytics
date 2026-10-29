@@ -1,0 +1,155 @@
+panel,rank,country
+"India (published rule, rebuilt)",0,country_203
+"India (published rule, rebuilt)",1,country_344
+"India (published rule, rebuilt)",2,country_372
+"India (published rule, rebuilt)",3,country_380
+"India (published rule, rebuilt)",4,country_cn
+"India (published rule, rebuilt)",5,country_de
+"India (published rule, rebuilt)",6,country_fr
+"India (published rule, rebuilt)",7,country_gb
+"India (published rule, rebuilt)",8,country_in
+"India (published rule, rebuilt)",9,country_jp
+"India (published rule, rebuilt)",10,country_kr
+"India (published rule, rebuilt)",11,country_mx
+"India (published rule, rebuilt)",12,country_my
+"India (published rule, rebuilt)",13,country_ph
+"India (published rule, rebuilt)",14,country_sg
+"India (published rule, rebuilt)",15,country_th
+"India (published rule, rebuilt)",16,country_us
+"India (published rule, rebuilt)",17,country_vn
+China: + its 17 largest export markets,0,country_cn
+China: + its 17 largest export markets,1,country_344
+China: + its 17 largest export markets,2,country_kr
+China: + its 17 largest export markets,3,country_in
+China: + its 17 largest export markets,4,country_my
+China: + its 17 largest export markets,5,country_sg
+China: + its 17 largest export markets,6,country_vn
+China: + its 17 largest export markets,7,country_de
+China: + its 17 largest export markets,8,country_br
+China: + its 17 largest export markets,9,country_mx
+China: + its 17 largest export markets,10,country_jp
+China: + its 17 largest export markets,11,country_th
+China: + its 17 largest export markets,12,country_nl
+China: + its 17 largest export markets,13,country_us
+China: + its 17 largest export markets,14,country_724
+China: + its 17 largest export markets,15,country_ph
+China: + its 17 largest export markets,16,country_616
+China: + its 17 largest export markets,17,country_fr
+United States: + its 17 largest export markets,0,country_us
+United States: + its 17 largest export markets,1,country_cn
+United States: + its 17 largest export markets,2,country_my
+United States: + its 17 largest export markets,3,country_344
+United States: + its 17 largest export markets,4,country_vn
+United States: + its 17 largest export markets,5,country_kr
+United States: + its 17 largest export markets,6,country_jp
+United States: + its 17 largest export markets,7,country_de
+United States: + its 17 largest export markets,8,country_ph
+United States: + its 17 largest export markets,9,country_mx
+United States: + its 17 largest export markets,10,country_sg
+United States: + its 17 largest export markets,11,country_th
+United States: + its 17 largest export markets,12,country_372
+United States: + its 17 largest export markets,13,country_376
+United States: + its 17 largest export markets,14,country_fr
+United States: + its 17 largest export markets,15,country_nl
+United States: + its 17 largest export markets,16,country_124
+United States: + its 17 largest export markets,17,country_gb
+Germany: + its 17 largest export markets,0,country_de
+Germany: + its 17 largest export markets,1,country_cn
+Germany: + its 17 largest export markets,2,country_348
+Germany: + its 17 largest export markets,3,country_sg
+Germany: + its 17 largest export markets,4,country_my
+Germany: + its 17 largest export markets,5,country_nl
+Germany: + its 17 largest export markets,6,country_380
+Germany: + its 17 largest export markets,7,country_344
+Germany: + its 17 largest export markets,8,country_kr
+Germany: + its 17 largest export markets,9,country_us
+Germany: + its 17 largest export markets,10,country_fr
+Germany: + its 17 largest export markets,11,country_jp
+Germany: + its 17 largest export markets,12,country_724
+Germany: + its 17 largest export markets,13,country_56
+Germany: + its 17 largest export markets,14,country_ph
+Germany: + its 17 largest export markets,15,country_616
+Germany: + its 17 largest export markets,16,country_mx
+Germany: + its 17 largest export markets,17,country_203
+Japan: + its 17 largest export markets,0,country_jp
+Japan: + its 17 largest export markets,1,country_cn
+Japan: + its 17 largest export markets,2,country_344
+Japan: + its 17 largest export markets,3,country_kr
+Japan: + its 17 largest export markets,4,country_sg
+Japan: + its 17 largest export markets,5,country_vn
+Japan: + its 17 largest export markets,6,country_my
+Japan: + its 17 largest export markets,7,country_th
+Japan: + its 17 largest export markets,8,country_us
+Japan: + its 17 largest export markets,9,country_ph
+Japan: + its 17 largest export markets,10,country_de
+Japan: + its 17 largest export markets,11,country_mx
+Japan: + its 17 largest export markets,12,country_in
+Japan: + its 17 largest export markets,13,country_id
+Japan: + its 17 largest export markets,14,country_nl
+Japan: + its 17 largest export markets,15,country_fr
+Japan: + its 17 largest export markets,16,country_56
+Japan: + its 17 largest export markets,17,country_br
+The 23 added reporters only,0,country_104
+The 23 added reporters only,1,country_116
+The 23 added reporters only,2,country_124
+The 23 added reporters only,3,country_208
+The 23 added reporters only,4,country_233
+The 23 added reporters only,5,country_246
+The 23 added reporters only,6,country_348
+The 23 added reporters only,7,country_376
+The 23 added reporters only,8,country_428
+The 23 added reporters only,9,country_440
+The 23 added reporters only,10,country_470
+The 23 added reporters only,11,country_56
+The 23 added reporters only,12,country_579
+The 23 added reporters only,13,country_616
+The 23 added reporters only,14,country_703
+The 23 added reporters only,15,country_724
+The 23 added reporters only,16,country_752
+The 23 added reporters only,17,country_757
+The 23 added reporters only,18,country_792
+The 23 added reporters only,19,country_au
+The 23 added reporters only,20,country_br
+The 23 added reporters only,21,country_id
+The 23 added reporters only,22,country_nl
+All 41 reporters,0,country_104
+All 41 reporters,1,country_116
+All 41 reporters,2,country_124
+All 41 reporters,3,country_203
+All 41 reporters,4,country_208
+All 41 reporters,5,country_233
+All 41 reporters,6,country_246
+All 41 reporters,7,country_344
+All 41 reporters,8,country_348
+All 41 reporters,9,country_372
+All 41 reporters,10,country_376
+All 41 reporters,11,country_380
+All 41 reporters,12,country_428
+All 41 reporters,13,country_440
+All 41 reporters,14,country_470
+All 41 reporters,15,country_56
+All 41 reporters,16,country_579
+All 41 reporters,17,country_616
+All 41 reporters,18,country_703
+All 41 reporters,19,country_724
+All 41 reporters,20,country_752
+All 41 reporters,21,country_757
+All 41 reporters,22,country_792
+All 41 reporters,23,country_au
+All 41 reporters,24,country_br
+All 41 reporters,25,country_cn
+All 41 reporters,26,country_de
+All 41 reporters,27,country_fr
+All 41 reporters,28,country_gb
+All 41 reporters,29,country_id
+All 41 reporters,30,country_in
+All 41 reporters,31,country_jp
+All 41 reporters,32,country_kr
+All 41 reporters,33,country_mx
+All 41 reporters,34,country_my
+All 41 reporters,35,country_nl
+All 41 reporters,36,country_ph
+All 41 reporters,37,country_sg
+All 41 reporters,38,country_th
+All 41 reporters,39,country_us
+All 41 reporters,40,country_vn
